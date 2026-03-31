@@ -1,0 +1,79 @@
+.star-border-container {
+  display: inline-block;
+  position: relative;
+  border-radius: 20px;
+  background: transparent;
+  padding: 0;
+  border: none;
+  cursor: pointer;
+  outline: none;
+}
+
+/* Static thin border */
+.star-border-container::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Rotating comet layer */
+.star-border-glow {
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.star-border-glow::before {
+  content: '';
+  position: absolute;
+  width: 200%;
+  height: 200%;
+  top: -50%;
+  left: -50%;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    transparent 310deg,
+    transparent 315deg,
+    var(--star-color, #fff) 340deg,
+    var(--star-color, #fff) 355deg,
+    transparent 360deg
+  );
+  animation: star-border-rotate linear infinite;
+  animation-duration: var(--speed, 6s);
+}
+
+/* Mask so only the border edge shows the comet */
+.star-border-glow::after {
+  content: '';
+  position: absolute;
+  inset: 2px;
+  border-radius: inherit;
+  background: rgba(10, 10, 15, 0.85);
+}
+
+.inner-content {
+  position: relative;
+  background: rgba(10, 10, 15, 0.85);
+  color: white;
+  font-size: 16px;
+  text-align: center;
+  padding: 10px 22px;
+  border-radius: inherit;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@keyframes star-border-rotate {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}

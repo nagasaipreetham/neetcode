@@ -1,0 +1,195 @@
+.hero-section {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 160px 2rem 4rem;
+  gap: 4rem;
+}
+
+/* LEFT */
+.hero-left {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  flex: 1;
+  max-width: 560px;
+}
+
+.hero-brand {
+  font-size: clamp(3.5rem, 7vw, 6rem);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  background: linear-gradient(135deg, #7c3aed, #a855f7, #c084fc, #e879f9);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 40px rgba(168, 85, 247, 0.45));
+}
+
+.hero-caption {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 500;
+  color: #e2e8f0;
+  min-height: 2.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.hero-description {
+  font-size: clamp(1.05rem, 1.8vw, 1.2rem);
+  color: #94a3b8;
+  line-height: 1.7;
+  max-width: 480px;
+}
+
+/* BUTTONS */
+.hero-buttons {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+/* Get Pro — uses StarBorder component */
+.hero-btn-pro {
+  border-radius: 100px;
+}
+
+.hero-btn-pro .star-border-glow::after {
+  background: linear-gradient(135deg, #6d28d9, #a855f7, #d946ef);
+}
+
+.hero-btn-pro .inner-content {
+  background: linear-gradient(135deg, #6d28d9, #a855f7, #d946ef);
+  padding: 10px 26px;
+  font-size: 0.95rem;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 600;
+  border-radius: 100px;
+  color: #fff;
+}
+
+/* Start Free — fade bg via pseudo-element */
+.hero-btn-free {
+  position: relative;
+  padding: 12px 28px;
+  font-size: 0.95rem;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 600;
+  border-radius: 100px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.07);
+}
+
+/* green gradient layer that fades in on hover */
+.hero-btn-free-bg {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(135deg, #16a34a, #22c55e, #4ade80);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.hero-btn-free:hover .hero-btn-free-bg {
+  opacity: 1;
+}
+
+.hero-btn-free:hover {
+  border-color: transparent;
+}
+
+/* keep text above the bg layer */
+.hero-btn-free > span:last-child,
+.hero-btn-free > *:not(.hero-btn-free-bg) {
+  position: relative;
+  z-index: 1;
+}
+
+@keyframes star-border-rotate {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* STATS */
+.hero-stats {
+  display: flex;
+  gap: 2.5rem;
+  margin-top: 0.5rem;
+}
+
+.hero-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.hero-stat-number {
+  font-size: clamp(1.75rem, 3vw, 2.25rem);
+  font-weight: 800;
+  line-height: 1;
+}
+
+/* used only for CountUp (plain span, no color override conflict) */
+.gradient-stat-text {
+  background: linear-gradient(135deg, #a855f7, #e879f9, #c084fc);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: clamp(1.75rem, 3vw, 2.25rem);
+  font-weight: 800;
+  display: inline-flex;
+  align-items: center;
+}
+
+/* 1M+ uses BlurText — white, large, bold */
+.stat-blur-text {
+  font-size: clamp(1.75rem, 3vw, 2.25rem) !important;
+  font-weight: 800 !important;
+  color: #fff;
+  line-height: 1;
+}
+
+.hero-stat-caption {
+  font-size: 0.78rem;
+  color: #94a3b8;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 100px;
+  padding: 3px 10px;
+  display: inline-block;
+  width: fit-content;
+}
+
+/* RIGHT placeholder */
+.hero-right {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: 768px) {
+  .hero-section {
+    flex-direction: column;
+    padding: 120px 1.5rem 3rem;
+    gap: 2.5rem;
+  }
+
+  .hero-right {
+    width: 100%;
+  }
+}
