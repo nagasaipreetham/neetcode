@@ -1,0 +1,115 @@
+.hierarchy-flow {
+  position: relative;
+  width: 100%;
+  max-width: 580px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem 0;
+}
+
+.hierarchy-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  overflow: visible;
+}
+
+.hierarchy-level {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.25rem;
+  width: 100%;
+  margin-bottom: 2.25rem;
+  z-index: 1;
+}
+
+.hierarchy-node {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ── Modern button ── */
+.h-node-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 20px;
+  border-radius: 10px;
+  overflow: hidden;
+  cursor: default;
+
+  /* glass base */
+  background: rgba(109, 40, 217, 0.18);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  /* thin purple border */
+  border: 1px solid rgba(139, 92, 246, 0.45);
+
+  /* subtle outer glow */
+  box-shadow:
+    0 0 0 1px rgba(109, 40, 217, 0.15),
+    0 4px 20px rgba(109, 40, 217, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+/* inner radial glow blob */
+.h-node-glow {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    ellipse at 50% 0%,
+    rgba(139, 92, 246, 0.35) 0%,
+    transparent 70%
+  );
+  pointer-events: none;
+}
+
+.h-node-label {
+  position: relative;
+  z-index: 1;
+  color: #e2d9ff;
+  font-size: 0.88rem;
+  font-weight: 600;
+  font-family: 'Outfit', sans-serif;
+  white-space: nowrap;
+  letter-spacing: 0.01em;
+}
+
+/* ── Arrows ── */
+.hierarchy-arrow {
+  fill: none;
+  stroke: rgba(139, 92, 246, 0.55);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.hierarchy-arrow-head {
+  fill: rgba(139, 92, 246, 0.55);
+}
+
+@media (max-width: 768px) {
+  .hierarchy-level {
+    gap: 0.6rem;
+    flex-wrap: wrap;
+  }
+
+  .h-node-btn {
+    padding: 8px 14px;
+  }
+
+  .h-node-label {
+    font-size: 0.78rem;
+  }
+}

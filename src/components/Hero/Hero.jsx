@@ -3,6 +3,7 @@ import TextType from '../TextType/TextType';
 import BlurText from '../BlurText/BlurText';
 import CountUp from '../CountUp/CountUp';
 import StarBorder from '../StarBorder/StarBorder';
+import HierarchyFlow from '../HierarchyFlow/HierarchyFlow';
 import './Hero.css';
 
 export default function Hero() {
@@ -96,8 +97,10 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Right side — placeholder for next task */}
-      <div className="hero-right" />
+      {/* Right side — Hierarchy Flow */}
+      <div className="hero-right">
+        <HierarchyFlow />
+      </div>
     </section>
   );
 }

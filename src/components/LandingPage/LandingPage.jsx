@@ -1,5 +1,7 @@
 import Navbar from '../Navbar/Navbar';
 import Hero from '../Hero/Hero';
+import CompanyOrbit from '../CompanyOrbit/CompanyOrbit';
+import Reviews from '../Reviews/Reviews';
 import PixelSnow from '../PixelSnow/PixelSnow';
 import './LandingPage.css';
 
@@ -8,6 +10,8 @@ export default function LandingPage() {
     <div className="landing-page">
       <Navbar />
       <Hero />
+      <CompanyOrbit />
+      <Reviews />
       <div className="background-container">
         <PixelSnow 
           color="#ffffff"
