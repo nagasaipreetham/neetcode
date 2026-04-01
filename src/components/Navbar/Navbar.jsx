@@ -16,7 +16,7 @@ export default function Navbar() {
           </ul>
         </div>
         <div className="navbar-right">
-          <StarBorder as="button" className="navbar-btn" color="#ff00ff" speed="5s">Go Pro</StarBorder>
+          <Link to="/pro"><StarBorder as="button" className="navbar-btn" color="#ff00ff" speed="5s">Go Pro</StarBorder></Link>
           <StarBorder as="button" className="navbar-btn" color="#153be2ff" speed="5s">Sign In</StarBorder>
         </div>
       </div>

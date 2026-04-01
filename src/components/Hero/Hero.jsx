@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import TextType from '../TextType/TextType';
 import BlurText from '../BlurText/BlurText';
 import CountUp from '../CountUp/CountUp';
@@ -39,14 +40,16 @@ export default function Hero() {
 
         {/* 4. Buttons */}
         <div className="hero-buttons">
-          <StarBorder
-            as="button"
-            className="hero-btn-pro"
-            color="#c084fc"
-            speed="3s"
-          >
-            Get Pro
-          </StarBorder>
+          <Link to="/pro" style={{ textDecoration: 'none' }}>
+            <StarBorder
+              as="div"
+              className="hero-btn-pro"
+              color="#c084fc"
+              speed="3s"
+            >
+              Get Pro
+            </StarBorder>
+          </Link>
           <a href="https://neetcode.io/practice/practice/neetcode150" target="_blank" rel="noreferrer">
             <button className="hero-btn-free">
               Start Free
