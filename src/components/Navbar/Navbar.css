@@ -12,8 +12,7 @@
 
 .navbar-glass {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  flex-direction: column;
   width: 100%;
   padding: 0.75rem 1.5rem;
   background: rgba(0, 0, 0, 0.4);
@@ -22,12 +21,20 @@
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 100px;
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  /* no overflow:hidden — lets popup escape */
+}
+
+.navbar-top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
 }
 
 .navbar-left {
   display: flex;
   align-items: center;
-  gap: 2rem;
+  gap: 1rem;
 }
 
 .logo {
@@ -49,7 +56,6 @@
   font-family: 'Outfit', sans-serif;
   font-weight: 400;
   font-size: 1rem;
-  transition: opacity 0.2s ease;
   text-transform: capitalize;
   background: linear-gradient(to right, #5227FF, #FF9FFC, #B19EEF);
   background-size: 200% 100%;
@@ -71,10 +77,55 @@
   gap: 1rem;
 }
 
-/* StarBorder adjustments for navbar */
-.navbar-btn {
-  border-radius: 100px;
+/* Hamburger — hidden on desktop, shows on mobile */
+.navbar-hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 1px;
+  outline: none;
+  flex-shrink: 0;
 }
+
+.hamburger-line {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: #fff;
+  border-radius: 2px;
+  transition: transform 0.3s ease;
+  transform-origin: center;
+}
+
+.hamburger-line--top-open { transform: translateY(3.5px) rotate(45deg); }
+.hamburger-line--bot-open { transform: translateY(-3.5px) rotate(-45deg); }
+
+/* Mobile clip — contains the expanding menu without clipping the popup */
+.navbar-mobile-clip {
+  overflow: hidden;
+}
+
+/* Mobile expanded menu — single row */
+.navbar-mobile-menu {
+  display: none;
+  flex-direction: row;
+  gap: 1.5rem;
+  padding: 0.75rem 0.25rem 0.25rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  margin-top: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.mobile-nav-link {
+  font-size: 0.95rem;
+  padding: 0.2rem 0;
+}
+
+/* StarBorder adjustments for navbar */
+.navbar-btn { border-radius: 100px; }
 
 .navbar-btn .inner-content {
   padding: 8px 18px;
@@ -85,9 +136,69 @@
 }
 
 @media (max-width: 768px) {
-  .nav-links {
-    display: none;
-  }
+  .nav-links { display: none; }
+  .navbar-hamburger { display: flex; }
+}
+
+/* ── Sign In popup ── */
+.signin-wrap {
+  position: relative;
+}
+
+.signin-popup {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  min-width: 180px;
+  background: rgba(10, 10, 20, 0.95);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+  padding: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  z-index: 2000;
+  animation: popup-in 0.18s ease;
+}
+
+@keyframes popup-in {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.signin-popup-label {
+  font-size: 0.72rem;
+  color: rgba(255, 255, 255, 0.4);
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin: 0 0 0.2rem 0.25rem;
+}
+
+.signin-option {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  width: 100%;
+  padding: 0.6rem 0.75rem;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  background: rgba(255, 255, 255, 0.04);
+  color: #fff;
+  font-size: 0.875rem;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease;
+  text-align: left;
+}
+
+.signin-option:hover {
+  background: rgba(255, 255, 255, 0.09);
+  border-color: rgba(255, 255, 255, 0.18);
 }
 
 .navbar-signin-btn {
@@ -103,6 +214,4 @@
   transition: border-color 0.2s ease;
 }
 
-.navbar-signin-btn:hover {
-  border-color: rgba(255, 255, 255, 0.45);
-}
+.navbar-signin-btn:hover { border-color: rgba(255, 255, 255, 0.45); }
