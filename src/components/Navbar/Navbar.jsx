@@ -10,8 +10,8 @@ export default function Navbar() {
           <img src={viteLogo} className="logo" alt="Vite logo" />
           <ul className="nav-links">
             <li><a href="#" className="nav-link">courses</a></li>
-            <li><a href="#" className="nav-link">practice</a></li>
-            <li><a href="#" className="nav-link">roadmap</a></li>
+            <li><a href="https://neetcode.io/practice/practice/neetcode250" target="_blank" className="nav-link">practice</a></li>
+            <li><a href="https://neetcode.io/roadmap" target="_blank" className="nav-link">roadmap</a></li>
           </ul>
         </div>
         

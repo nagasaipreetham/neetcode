@@ -1,3 +1,4 @@
+import { a } from 'framer-motion/client';
 import BorderGlow from '../BorderGlow/BorderGlow';
 import './CourseCard.css';
 
@@ -75,7 +76,7 @@ function Grid6Images({ images }) {
   );
 }
 
-export default function CourseCard({ title, description, hours, difficulty, images = [], variant = 'duo' }) {
+export default function CourseCard({ title, description, hours, difficulty, images = [], variant = 'duo', link }) {
   const renderImages = () => {
     if (!images.length) return null;
     switch (variant) {
@@ -87,7 +88,13 @@ export default function CourseCard({ title, description, hours, difficulty, imag
   };
 
   return (
-    <div className="course-card">
+    <a
+      href={link}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="course-card-link"
+    >
+      <div className="course-card">
       <BorderGlow
         borderRadius={16}
         backgroundColor="rgba(0, 0, 0, 0.4)"
@@ -113,5 +120,6 @@ export default function CourseCard({ title, description, hours, difficulty, imag
         </div>
       </BorderGlow>
     </div>
+    </a>
   );
 }

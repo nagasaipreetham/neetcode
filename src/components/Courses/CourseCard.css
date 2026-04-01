@@ -3,6 +3,12 @@
   flex-shrink: 0;
 }
 
+.course-card-link {
+  text-decoration: none; /* remove underline */
+  color: inherit;
+  display: block;
+}
+
 .course-card-inner {
   display: flex;
   flex-direction: column;

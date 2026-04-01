@@ -10,13 +10,13 @@ import claudeLogo from '../../assets/claude.png';
 import './CompanyOrbit.css';
 
 const companies = [
-  { name: 'Google', logo: googleLogo },
-  { name: 'Meta', logo: metaLogo },
-  { name: 'Amazon', logo: amazonLogo },
-  { name: 'Microsoft', logo: microsoftLogo },
-  { name: 'Netflix', logo: netflixLogo },
-  { name: 'ChatGPT', logo: chatgptLogo },
-  { name: 'Claude', logo: claudeLogo }
+  { name: 'Google', logo: googleLogo, link: 'https://neetcode.io/practice/company/Googlem' },
+  { name: 'Meta', logo: metaLogo, link: 'https://neetcode.io/practice/company/Meta' },
+  { name: 'Amazon', logo: amazonLogo, link: 'https://neetcode.io/practice/company/Amazon' },
+  { name: 'Microsoft', logo: microsoftLogo, link: 'https://neetcode.io/practice/company/Microsoft' },
+  { name: 'Netflix', logo: netflixLogo, link: 'https://neetcode.io/practice/company/Netflix' },
+  { name: 'ChatGPT', logo: chatgptLogo, link: 'https://neetcode.io/practice/company/OpenAI' },
+  { name: 'Claude', logo: claudeLogo, link: 'https://neetcode.io/practice/company/Anthropic' }
 ];
 
 const RADIUS = 260; // orbit radius in px
@@ -120,9 +120,14 @@ export default function CompanyOrbit() {
                   transform: `translate3d(${x}px, 0, ${z}px) rotateY(${angle}deg)`
                 }}
               >
-                <div className="company-logo-btn">
+                <a
+                  href={company.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="company-logo-btn"
+                >
                   <img src={company.logo} alt={company.name} />
-                </div>
+                </a>
               </div>
             );
           })}
