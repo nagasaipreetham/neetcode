@@ -96,6 +96,3 @@
 @media (max-width: 600px) {
   .gift-page-content { padding: 7rem 1.25rem 4rem; }
 }
-
-/* Reuse ProPage pricing card styles */
-@import './ProPage.css';

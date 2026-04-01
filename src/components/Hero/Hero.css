@@ -198,11 +198,15 @@
 }
 
 .hierarchy-node .star-border-glow::after {
-  background: linear-gradient(135deg, #4f46e5, #6366f1, #818cf8);
+  background: rgba(30, 27, 75, 0.55);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
 }
 
 .hierarchy-node .inner-content {
-  background: linear-gradient(135deg, #4f46e5, #6366f1, #818cf8);
+  background: rgba(30, 27, 75, 0.55);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   padding: 12px 20px;
   border-radius: 12px;
 }

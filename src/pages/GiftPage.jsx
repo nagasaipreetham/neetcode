@@ -7,6 +7,7 @@ import SpotlightCard from '../components/SpotlightCard/SpotlightCard';
 import globeIcon from '../assets/globe.svg';
 import giftIcon from '../assets/gift.svg';
 import './GiftPage.css';
+import './ProPage.css';
 
 // ── Reused pricing card components (same UI as ProPage, no shared state) ──
 
