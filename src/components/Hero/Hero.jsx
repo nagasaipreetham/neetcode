@@ -47,9 +47,11 @@ export default function Hero() {
           >
             Get Pro
           </StarBorder>
-          <button className="hero-btn-free">
-            Start Free
-          </button>
+          <a href="https://neetcode.io/practice/practice/neetcode150" target="_blank" rel="noreferrer">
+            <button className="hero-btn-free">
+              Start Free
+            </button>
+          </a>
         </div>
 
         {/* 5. Stats */}
@@ -97,10 +99,12 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Right side — Hierarchy Flow */}
-      <div className="hero-right">
-        <HierarchyFlow />
-      </div>
+      {/* Right side — Hierarchy Flow → roadmap */}
+      <a href="https://neetcode.io/roadmap" target="_blank" rel="noreferrer" className="hero-right-link">
+        <div className="hero-right">
+          <HierarchyFlow />
+        </div>
+      </a>
     </section>
   );
 }

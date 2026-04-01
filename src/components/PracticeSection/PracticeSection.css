@@ -255,3 +255,22 @@
 @media (max-width: 600px) {
   .practice-section { padding: 4rem 1.25rem; }
 }
+
+/* Link wrappers — reset anchor styles */
+.practice-link-wrap,
+.practice-card-badge-link,
+.practice-card-title-link,
+.practice-progress-link {
+  text-decoration: none;
+  color: inherit;
+  display: contents;
+}
+
+.practice-progress-link {
+  display: block;
+  cursor: pointer;
+}
+
+.practice-progress-link:hover .practice-progress-bar {
+  opacity: 0.85;
+}

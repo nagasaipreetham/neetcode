@@ -4,6 +4,8 @@ import CompanyOrbit from '../CompanyOrbit/CompanyOrbit';
 import Reviews from '../Reviews/Reviews';
 import Courses from '../Courses/Courses';
 import PracticeSection from '../PracticeSection/PracticeSection';
+import AboutSection from '../AboutSection/AboutSection';
+import Footer from '../Footer/Footer';
 import PixelSnow from '../PixelSnow/PixelSnow';
 import './LandingPage.css';
 
@@ -16,6 +18,8 @@ export default function LandingPage() {
       <Reviews />
       <Courses />
       <PracticeSection />
+      <AboutSection />
+      <Footer />
       <div className="background-container">
         <PixelSnow 
           color="#ffffff"

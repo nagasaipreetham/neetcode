@@ -1,0 +1,77 @@
+.policy-page {
+  min-height: 100vh;
+  background: #000;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.policy-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.policy-content {
+  flex: 1;
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 8rem 2rem 6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.policy-main-heading {
+  font-size: clamp(2.2rem, 5vw, 3.2rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  text-align: center;
+  margin: 0;
+}
+
+.policy-card {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.policy-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.policy-subheading {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #a855f7;
+  margin: 0;
+}
+
+.policy-text {
+  font-size: 0.95rem;
+  color: #fff;
+  line-height: 1.75;
+  margin: 0;
+}
+
+@media (max-width: 600px) {
+  .policy-content {
+    padding: 7rem 1.25rem 4rem;
+  }
+}
+
+/* Ensure navbar and footer sit above the pixel snow bg */
+.policy-page > nav,
+.policy-page > footer {
+  position: relative;
+  z-index: 1;
+}
