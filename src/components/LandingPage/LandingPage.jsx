@@ -3,6 +3,7 @@ import Hero from '../Hero/Hero';
 import CompanyOrbit from '../CompanyOrbit/CompanyOrbit';
 import Reviews from '../Reviews/Reviews';
 import Courses from '../Courses/Courses';
+import PracticeSection from '../PracticeSection/PracticeSection';
 import PixelSnow from '../PixelSnow/PixelSnow';
 import './LandingPage.css';
 
@@ -14,6 +15,7 @@ export default function LandingPage() {
       <CompanyOrbit />
       <Reviews />
       <Courses />
+      <PracticeSection />
       <div className="background-container">
         <PixelSnow 
           color="#ffffff"

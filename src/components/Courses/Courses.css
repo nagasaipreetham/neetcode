@@ -36,16 +36,16 @@
 }
 
 .course-block-title {
-  font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+  font-size: clamp(1.4rem, 2.8vw, 1.8rem);
   font-weight: 600;
   color: #fff;
   letter-spacing: -0.01em;
 }
 
 .course-block-desc {
-  font-size: clamp(0.85rem, 1.5vw, 0.95rem);
+  font-size: clamp(0.9rem, 1.5vw, 1rem);
   font-weight: 400;
-  color: #64748b;
+  color: #fff;
   max-width: 720px;
   line-height: 1.6;
 }

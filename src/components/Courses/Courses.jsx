@@ -1,4 +1,5 @@
 import CourseCard from './CourseCard';
+import GradientText from '../GradientText/GradientText';
 import './Courses.css';
 
 import dataStructureImg from '../../assets/data_structure.png';
@@ -75,7 +76,15 @@ const courses = [
 export default function Courses() {
   return (
     <section className="courses-section">
-      <h2 className="courses-main-heading">Courses</h2>
+      <h2 className="courses-main-heading">
+        <GradientText
+          colors={["#7c3aed", "#a855f7", "#c084fc", "#e879f9"]}
+          animationSpeed={8}
+          style={{ fontSize: 'inherit', fontWeight: 'inherit', letterSpacing: 'inherit' }}
+        >
+          Courses
+        </GradientText>
+      </h2>
 
       {courses.map(course => (
         <div key={course.id} className="course-block">
