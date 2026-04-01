@@ -4,6 +4,7 @@ import PrivacyPolicy from './pages/PrivacyPolicy';
 import Terms from './pages/Terms';
 import CoursesPage from './pages/CoursesPage';
 import ProPage from './pages/ProPage';
+import GiftPage from './pages/GiftPage';
 import ScrollToTop from './components/ScrollToTop/ScrollToTop';
 import './App.css';
 
@@ -17,7 +18,7 @@ function App() {
         <Route path="/terms" element={<Terms />} />
         <Route path="/courses" element={<CoursesPage />} />
         <Route path="/pro" element={<ProPage />} />
-        <Route path="/gift" element={<div style={{color:'#fff',padding:'4rem',textAlign:'center'}}>Gift page coming soon.</div>} />
+        <Route path="/gift" element={<GiftPage />} />
       </Routes>
     </BrowserRouter>
   );
