@@ -1,0 +1,15 @@
+.lessons-section {
+  width: 100%;
+  padding: 0;
+}
+
+.lessons-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  justify-content: center;
+}
+
+@media (max-width: 768px) {
+  .lessons-grid { gap: 1rem; }
+}

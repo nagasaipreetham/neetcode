@@ -73,23 +73,35 @@ const courses = [
   }
 ];
 
-export default function Courses() {
+export default function Courses({ showHeading = true, gradientTitles = false }) {
   return (
     <section className="courses-section">
-      <h2 className="courses-main-heading">
-        <GradientText
-          colors={["#7c3aed", "#a855f7", "#c084fc", "#e879f9"]}
-          animationSpeed={8}
-          style={{ fontSize: 'inherit', fontWeight: 'inherit', letterSpacing: 'inherit' }}
-        >
-          Courses
-        </GradientText>
-      </h2>
+      {showHeading && (
+        <h2 className="courses-main-heading">
+          <GradientText
+            colors={["#7c3aed", "#a855f7", "#c084fc", "#e879f9"]}
+            animationSpeed={8}
+            style={{ fontSize: 'inherit', fontWeight: 'inherit', letterSpacing: 'inherit' }}
+          >
+            Courses
+          </GradientText>
+        </h2>
+      )}
 
       {courses.map(course => (
         <div key={course.id} className="course-block">
           <div className="course-block-header">
-            <h3 className="course-block-title">{course.title}</h3>
+            <h3 className="course-block-title">
+              {gradientTitles ? (
+                <GradientText
+                  colors={["#7c3aed", "#a855f7", "#c084fc", "#e879f9"]}
+                  animationSpeed={8}
+                  style={{ fontSize: 'inherit', fontWeight: 'inherit', letterSpacing: 'inherit' }}
+                >
+                  {course.title}
+                </GradientText>
+              ) : course.title}
+            </h3>
             <p className="course-block-desc">{course.description}</p>
           </div>
           <div className="course-cards-row">

@@ -1,0 +1,102 @@
+.courses-page {
+  min-height: 100vh;
+  background: #000;
+  display: flex;
+  flex-direction: column;
+}
+
+.courses-page-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.courses-page-content {
+  flex: 1;
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 9rem 2rem 4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3rem;
+}
+
+/* ── Toggle ── */
+.courses-page-toggle {
+  display: inline-flex;
+  border: 2px solid #7c3aed;
+  border-radius: 100px;
+  padding: 4px;
+  gap: 2px;
+}
+
+.toggle-btn {
+  padding: 8px 28px;
+  border-radius: 100px;
+  border: none;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 600;
+  transition: background 0.25s ease, color 0.25s ease;
+  outline: none;
+}
+
+.toggle-btn--active {
+  background: linear-gradient(135deg, #6d28d9, #a855f7, #d946ef);
+  color: #fff;
+}
+
+.toggle-btn--inactive {
+  background: transparent;
+  /* gradient text for inactive */
+  background-image: linear-gradient(135deg, #7c3aed, #a855f7, #e879f9);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ── Tab content ── */
+.courses-page-tab {
+  width: 100%;
+}
+
+.courses-page-lessons-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+  color: #475569;
+  font-size: 1rem;
+  font-family: 'Outfit', sans-serif;
+}
+
+/* Ensure footer above bg */
+.courses-page > footer {
+  position: relative;
+  z-index: 1;
+}
+
+@media (max-width: 600px) {
+  .courses-page-content {
+    padding: 7rem 1.25rem 4rem;
+  }
+
+  .toggle-btn {
+    padding: 8px 20px;
+    font-size: 0.85rem;
+  }
+}
+
+/* Remove top padding from Courses when embedded in this page */
+.courses-page-tab .courses-section {
+  padding-top: 0;
+}

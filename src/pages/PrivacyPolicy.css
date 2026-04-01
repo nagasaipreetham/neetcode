@@ -3,7 +3,6 @@
   background: #000;
   display: flex;
   flex-direction: column;
-  position: relative;
 }
 
 .policy-bg {
@@ -23,7 +22,7 @@
   width: 100%;
   max-width: 1000px;
   margin: 0 auto;
-  padding: 4em 2rem 6rem;
+  padding: 9em 2rem 6rem;
   display: flex;
   flex-direction: column;
   gap: 2.5rem;
@@ -70,7 +69,6 @@
 }
 
 /* Ensure navbar and footer sit above the pixel snow bg */
-.policy-page > nav,
 .policy-page > footer {
   position: relative;
   z-index: 1;
