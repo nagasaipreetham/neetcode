@@ -14,34 +14,49 @@
   position: relative;
   z-index: 1;
   width: 100%;
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border-top: 0.2px solid rgba(255, 255, 255, 0.1);
+  background: rgba(10, 10, 15, 0.4);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+  isolation: isolate;
 }
 
 .footer::before {
   content: '';
   position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(255, 255, 255, 0.8),
+    rgba(255, 255, 255, 0.2),
     transparent
   );
   pointer-events: none;
+  z-index: 2;
 }
 
 .footer::after {
   content: '';
   position: absolute;
+  top: 0;
+  left: 0;
+  width: 1px;
+  height: 100%;
   background: linear-gradient(
     180deg,
-    rgba(255, 255, 255, 0.8),
+    rgba(255, 255, 255, 0.25),
     transparent,
-    rgba(255, 255, 255, 0.3)
+    rgba(255, 255, 255, 0.1)
   );
   pointer-events: none;
+  z-index: 2;
 }
 
 .footer-inner {
