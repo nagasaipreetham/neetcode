@@ -273,3 +273,10 @@
 .practice-progress-link:hover .practice-progress-bar {
   opacity: 0.85;
 }
+
+/* Selected topic button */
+.practice-topic-btn--active {
+  border-color: rgba(74, 222, 128, 0.5) !important;
+  background: rgba(74, 222, 128, 0.12) !important;
+  color: #4ade80 !important;
+}

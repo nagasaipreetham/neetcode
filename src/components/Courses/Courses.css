@@ -67,3 +67,104 @@
     gap: 1rem;
   }
 }
+
+/* ── Page layout — elegant horizontal split ── */
+.courses-section--page {
+  gap: 3rem;
+  padding-top: 1rem;
+}
+
+.course-block--page {
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 2.5rem;
+  padding: 2rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  text-align: left;
+}
+
+.course-block--page:last-child {
+  border-bottom: none;
+}
+
+.course-block--page .course-block-header {
+  align-items: flex-start;
+  text-align: left;
+  flex-shrink: 0;
+  width: 240px;
+  position: sticky;
+  top: 6rem;
+}
+
+.course-block--page .course-block-desc {
+  color: #fff;
+  font-size: 0.82rem;
+}
+
+.course-cards-row--page {
+  flex: 1;
+  justify-content: flex-start;
+  gap: 1rem;
+}
+
+@media (max-width: 900px) {
+  .course-block--page {
+    flex-direction: column;
+  }
+
+  .course-block--page .course-block-header {
+    width: 100%;
+    position: static;
+  }
+}
+
+/* ── Landing layout — horizontal split with better spacing ── */
+.course-block--landing {
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 3rem;
+  padding: 2.5rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  text-align: left;
+}
+
+.course-block--landing:last-child {
+  border-bottom: none;
+}
+
+.course-block--landing .course-block-header {
+  align-items: flex-start;
+  text-align: left;
+  flex-shrink: 0;
+  width: 280px;
+  position: sticky;
+  top: 7rem;
+}
+
+.course-block--landing .course-block-title {
+  font-size: clamp(1.5rem, 3vw, 1.9rem);
+}
+
+.course-block--landing .course-block-desc {
+  color: #fff;
+  font-size: 0.88rem;
+  line-height: 1.7;
+}
+
+.course-cards-row--landing {
+  flex: 1;
+  justify-content: flex-start;
+  gap: 1.25rem;
+}
+
+@media (max-width: 900px) {
+  .course-block--landing {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .course-block--landing .course-block-header {
+    width: 100%;
+    position: static;
+  }
+}

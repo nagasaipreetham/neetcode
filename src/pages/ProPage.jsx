@@ -196,6 +196,12 @@ function LifetimeCard() {
               Lifetime
             </GradientText>
           </span>
+          <div className="best-value-badge">
+            <GradientText colors={["#7c3aed","#a855f7","#e879f9"]} animationSpeed={8}
+              style={{ fontSize: 'inherit', fontWeight: 'inherit' }}>
+              Best Value
+            </GradientText>
+          </div>
         </div>
 
         {/* Price */}
@@ -351,16 +357,25 @@ export default function ProPage() {
           </h2>
           <div className="success-grid">
             {visible.map((s, i) => (
-              <SpotlightCard key={i} spotlightColor="rgba(139, 92, 246, 0.2)" className="success-card-inner">
-                <div className="success-card-top">
-                  <img src={s.logo} alt={s.company} className="success-card-logo" />
-                  <div className="success-card-meta">
-                    <span className="success-card-company">{s.company}</span>
-                    <span className="success-card-position">{s.position}</span>
+              <div 
+                key={i} 
+                className={`success-card-wrapper${i >= COLS * ROWS ? ' success-card-wrapper--extra' : ''}`}
+                style={{
+                  animation: i >= COLS * ROWS && showAll ? 'fadeInScale 0.4s ease forwards' : 'none',
+                  animationDelay: i >= COLS * ROWS ? `${(i - COLS * ROWS) * 0.05}s` : '0s'
+                }}
+              >
+                <SpotlightCard spotlightColor="rgba(139, 92, 246, 0.2)" className="success-card-inner">
+                  <div className="success-card-top">
+                    <img src={s.logo} alt={s.company} className="success-card-logo" />
+                    <div className="success-card-meta">
+                      <span className="success-card-company">{s.company}</span>
+                      <span className="success-card-position">{s.position}</span>
+                    </div>
                   </div>
-                </div>
-                <p className="success-card-desc">{s.description}</p>
-              </SpotlightCard>
+                  <p className="success-card-desc">{s.description}</p>
+                </SpotlightCard>
+              </div>
             ))}
           </div>
           <button className="success-toggle-btn" onClick={() => setShowAll(v => !v)}>

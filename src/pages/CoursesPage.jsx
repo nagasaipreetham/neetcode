@@ -1,34 +1,41 @@
 import { useSearchParams } from 'react-router-dom';
+import { useEffect, useRef } from 'react';
 import Navbar from '../components/Navbar/Navbar';
 import Footer from '../components/Footer/Footer';
-import PixelSnow from '../components/PixelSnow/PixelSnow';
+import PixelSnowBg from '../components/PixelSnow/PixelSnowBg';
 import Courses from '../components/Courses/Courses';
 import Lessons from '../components/Lessons/Lessons';
 import './CoursesPage.css';
 
+function useScrollReveal() {
+  const ref = useRef(null);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) { el.classList.add('revealed'); observer.unobserve(el); } },
+      { threshold: 0.08, rootMargin: '0px 0px -30px 0px' }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+  return ref;
+}
+
+function RevealSection({ children }) {
+  const ref = useScrollReveal();
+  return <div ref={ref} className="scroll-reveal">{children}</div>;
+}
+
 export default function CoursesPage() {
   const [searchParams, setSearchParams] = useSearchParams();
   const tab = searchParams.get('tab') || 'courses';
-
   const setTab = (t) => setSearchParams({ tab: t });
 
   return (
     <div className="courses-page">
       <div className="courses-page-bg">
-        <PixelSnow
-          color="#ffffff"
-          flakeSize={0.01}
-          minFlakeSize={1.25}
-          pixelResolution={200}
-          speed={1.25}
-          density={0.3}
-          direction={125}
-          brightness={1}
-          depthFade={8}
-          farPlane={20}
-          gamma={0.4545}
-          variant="square"
-        />
+        <PixelSnowBg />
       </div>
 
       <Navbar />
@@ -38,9 +45,7 @@ export default function CoursesPage() {
         <div className="courses-page-toggle">
           <div
             className="toggle-slider"
-            style={{
-              transform: `translateX(${tab === 'courses' ? '0' : '100%'})`
-            }}
+            style={{ transform: `translateX(${tab === 'lessons' ? '100%' : '0'})` }}
           />
           <button
             className={`toggle-btn ${tab === 'courses' ? 'toggle-btn--active' : 'toggle-btn--inactive'}`}
@@ -58,8 +63,16 @@ export default function CoursesPage() {
 
         {/* Tab content */}
         <div className="courses-page-tab">
-          {tab === 'courses' && <Courses showHeading={false} gradientTitles />}
-          {tab === 'lessons' && <Lessons />}
+          {tab === 'courses' && (
+            <RevealSection>
+              <Courses showHeading={false} gradientTitles layout="page" />
+            </RevealSection>
+          )}
+          {tab === 'lessons' && (
+            <RevealSection>
+              <Lessons />
+            </RevealSection>
+          )}
         </div>
       </div>
 

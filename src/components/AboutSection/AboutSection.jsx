@@ -3,6 +3,8 @@ import navneetImg from '../../assets/navneet.png';
 import googleImg from '../../assets/google.png';
 import amazonImg from '../../assets/amazon.png';
 import captialoneImg from '../../assets/captialone.png';
+import youtubeLogo from '../../assets/youtube.svg';
+import linkedinLogo from '../../assets/linkedin.svg';
 import './AboutSection.css';
 
 export default function AboutSection() {
@@ -19,10 +21,7 @@ export default function AboutSection() {
 
         {/* RIGHT — spotlight card */}
         <div className="about-right">
-          <SpotlightCard
-            spotlightColor="rgba(139, 92, 246, 0.25)"
-            className="about-spotlight"
-          >
+          <SpotlightCard spotlightColor="rgba(139, 92, 246, 0.25)" className="about-spotlight">
             <div className="about-content">
               <h2 className="about-heading">Hi, I'm Navi</h2>
 
@@ -39,14 +38,40 @@ export default function AboutSection() {
                 About a year later I managed to get a job at Google.
               </p>
 
-              <div className="about-prev">
-                <span className="about-prev-label">Previously at:</span>
-                <div className="about-prev-logos">
-                  <img src={googleImg}    alt="Google"      className="about-prev-logo" />
-                  <img src={amazonImg}    alt="Amazon"      className="about-prev-logo" />
-                  <img src={captialoneImg} alt="Capital One" className="about-prev-logo" />
+              {/* Social stats */}
+              <div className="about-stats">
+                <div className="about-stat">
+                  <img src={youtubeLogo} alt="YouTube" className="about-stat-icon about-stat-icon--yt" />
+                  <div className="about-stat-text">
+                    <span className="about-stat-number">1M+</span>
+                    <span className="about-stat-label">YouTube Subscribers</span>
+                  </div>
+                </div>
+                <div className="about-stat">
+                  <img src={linkedinLogo} alt="LinkedIn" className="about-stat-icon about-stat-icon--li" />
+                  <div className="about-stat-text">
+                    <span className="about-stat-number">201K+</span>
+                    <span className="about-stat-label">LinkedIn Followers</span>
+                  </div>
                 </div>
               </div>
+
+              {/* Founder + Previously at */}
+              <div className="about-bottom-row">
+                <div className="about-founder">
+                  <span className="about-founder-name">Navi</span>
+                  <span className="about-founder-title">Founder of NeetCode</span>
+                </div>
+                <div className="about-prev">
+                  <span className="about-prev-label">Previously at:</span>
+                  <div className="about-prev-logos">
+                    <img src={googleImg}     alt="Google"      className="about-prev-logo" />
+                    <img src={amazonImg}     alt="Amazon"      className="about-prev-logo" />
+                    <img src={captialoneImg} alt="Capital One" className="about-prev-logo" />
+                  </div>
+                </div>
+              </div>
+
             </div>
           </SpotlightCard>
         </div>

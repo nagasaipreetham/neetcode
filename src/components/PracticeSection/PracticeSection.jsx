@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import BorderGlow from '../BorderGlow/BorderGlow';
 import StarBorder from '../StarBorder/StarBorder';
 import GradientText from '../GradientText/GradientText';
@@ -15,9 +16,34 @@ const features = [
   'Join our public Discord community',
 ];
 
-const topics = ['Arrays & Hashing', 'Two Pointers', 'Sliding Window', 'Trees', 'Linked List', 'Tries', 'Backtracking', '+10 more'];
+const ALL_TOPICS = [
+  'Arrays & Hashing', 'Two Pointers', 'Sliding Window',
+  'Stack', 'Binary Search', 'Linked List',
+  'Trees', 'Tries', 'Heap / Priority Queue',
+  'Backtracking', 'Graphs', 'Advanced Graphs',
+  'Dynamic Programming', 'Greedy', 'Intervals',
+  'Math & Geometry', '+1 more'
+];
+
+// Default 3 selected
+const DEFAULT_SELECTED = new Set(['Arrays & Hashing', 'Two Pointers', 'Sliding Window']);
 
 export default function PracticeSection() {
+  const [selected, setSelected] = useState(DEFAULT_SELECTED);
+
+  const toggle = (topic) => {
+    setSelected(prev => {
+      const next = new Set(prev);
+      if (next.has(topic)) next.delete(topic);
+      else next.add(topic);
+      return next;
+    });
+  };
+
+  const total = ALL_TOPICS.length;
+  const count = selected.size;
+  const pct = Math.round((count / total) * 100);
+
   return (
     <section className="practice-section">
       <div className="practice-inner">
@@ -45,22 +71,18 @@ export default function PracticeSection() {
           </div>
 
           <div className="practice-buttons">
-            {/* Start Practicing → NC150 */}
             <a href={NC150} target="_blank" rel="noreferrer" className="practice-link-wrap">
               <StarBorder as="div" className="practice-btn-pro" color="#c084fc" speed="3s">
                 Start Practicing
               </StarBorder>
             </a>
-
-            {/* View Roadmap → roadmap */}
             <a href={ROADMAP} target="_blank" rel="noreferrer">
               <button className="practice-btn-free">View Roadmap</button>
             </a>
           </div>
 
-          {/* Join Discord */}
           <div>
-            <a href={DISCORD} target="_blank" rel="noreferrer" style={{ textDecoration: "none" }}>
+            <a href={DISCORD} target="_blank" rel="noreferrer" style={{ textDecoration: 'none' }}>
               <button className="practice-btn-discord">
                 <img src={discordIcon} alt="Discord" className="discord-icon" />
                 Join Discord
@@ -83,7 +105,7 @@ export default function PracticeSection() {
               colors={['#38bdf8', '#818cf8', '#60a5fa']}
             >
               <div className="practice-card-inner">
-                {/* Header — badge + title both link to NC150 */}
+                {/* Header */}
                 <div className="practice-card-header">
                   <a href={NC150} target="_blank" rel="noreferrer" className="practice-card-badge-link">
                     <span className="practice-card-badge">Free</span>
@@ -93,20 +115,25 @@ export default function PracticeSection() {
                   </a>
                 </div>
 
-                {/* Progress bar → NC150 */}
-                <a href={NC150} target="_blank" rel="noreferrer" className="practice-progress-link">
-                  <div className="practice-progress-wrap">
-                    <div className="practice-progress-bar">
-                      <div className="practice-progress-fill" />
-                    </div>
-                    <span className="practice-progress-label">67 / 150 completed</span>
+                {/* Interactive progress bar */}
+                <div className="practice-progress-wrap">
+                  <div className="practice-progress-bar">
+                    <div
+                      className="practice-progress-fill"
+                      style={{ width: `${pct}%`, transition: 'width 0.4s ease' }}
+                    />
                   </div>
-                </a>
+                  <span className="practice-progress-label">{pct}% completed ({count} / {total})</span>
+                </div>
 
-                {/* Topics */}
+                {/* Clickable topic buttons */}
                 <div className="practice-topics">
-                  {topics.map((t, i) => (
-                    <button key={i} className={`practice-topic-btn${t.startsWith('+') ? ' practice-topic-btn--more' : ''}`}>
+                  {ALL_TOPICS.map((t, i) => (
+                    <button
+                      key={i}
+                      onClick={() => toggle(t)}
+                      className={`practice-topic-btn${selected.has(t) ? ' practice-topic-btn--active' : ''}${t.startsWith('+') ? ' practice-topic-btn--more' : ''}`}
+                    >
                       {t}
                     </button>
                   ))}

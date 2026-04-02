@@ -73,9 +73,9 @@ const courses = [
   }
 ];
 
-export default function Courses({ showHeading = true, gradientTitles = false }) {
+export default function Courses({ showHeading = true, gradientTitles = false, layout = 'landing' }) {
   return (
-    <section className="courses-section">
+    <section className={`courses-section${layout === 'page' ? ' courses-section--page' : ''}`}>
       {showHeading && (
         <h2 className="courses-main-heading">
           <GradientText
@@ -89,22 +89,20 @@ export default function Courses({ showHeading = true, gradientTitles = false }) 
       )}
 
       {courses.map(course => (
-        <div key={course.id} className="course-block">
+        <div key={course.id} className={`course-block${layout === 'page' ? ' course-block--page' : ' course-block--landing'}`}>
           <div className="course-block-header">
             <h3 className="course-block-title">
-              {gradientTitles ? (
-                <GradientText
-                  colors={["#7c3aed", "#a855f7", "#c084fc", "#e879f9"]}
-                  animationSpeed={8}
-                  style={{ fontSize: 'inherit', fontWeight: 'inherit', letterSpacing: 'inherit' }}
-                >
-                  {course.title}
-                </GradientText>
-              ) : course.title}
+              <GradientText
+                colors={["#7c3aed", "#a855f7", "#c084fc", "#e879f9"]}
+                animationSpeed={8}
+                style={{ fontSize: 'inherit', fontWeight: 'inherit', letterSpacing: 'inherit' }}
+              >
+                {course.title}
+              </GradientText>
             </h3>
             <p className="course-block-desc">{course.description}</p>
           </div>
-          <div className="course-cards-row">
+          <div className={`course-cards-row${layout === 'page' ? ' course-cards-row--page' : ' course-cards-row--landing'}`}>
             {course.cards.map(card => (
               <CourseCard key={card.title} {...card} />
             ))}

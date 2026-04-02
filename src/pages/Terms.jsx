@@ -2,7 +2,7 @@ import Navbar from '../components/Navbar/Navbar';
 import Footer from '../components/Footer/Footer';
 import SpotlightCard from '../components/SpotlightCard/SpotlightCard';
 import GradientText from '../components/GradientText/GradientText';
-import PixelSnow from '../components/PixelSnow/PixelSnow';
+import PixelSnowBg from '../components/PixelSnow/PixelSnowBg';
 import './PrivacyPolicy.css';
 
 export default function Terms() {
@@ -10,20 +10,7 @@ export default function Terms() {
     <div className="policy-page">
       {/* Background */}
       <div className="policy-bg">
-        <PixelSnow
-          color="#ffffff"
-          flakeSize={0.01}
-          minFlakeSize={1.25}
-          pixelResolution={200}
-          speed={1.25}
-          density={0.3}
-          direction={125}
-          brightness={1}
-          depthFade={8}
-          farPlane={20}
-          gamma={0.4545}
-          variant="square"
-        />
+        <PixelSnowBg />
       </div>
 
       <Navbar />

@@ -33,6 +33,12 @@ function LifetimeCard() {
               Lifetime
             </GradientText>
           </span>
+          <div className="best-value-badge">
+            <GradientText colors={["#7c3aed","#a855f7","#e879f9"]} animationSpeed={8}
+              style={{ fontSize: 'inherit', fontWeight: 'inherit' }}>
+              Best Value
+            </GradientText>
+          </div>
         </div>
 
         <div className="pricing-price-row">

@@ -96,6 +96,7 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  flex-wrap: wrap;
 }
 
 .pricing-icon {
@@ -112,6 +113,18 @@
 .pricing-label {
   font-size: 1rem;
   font-weight: 600;
+}
+
+/* Best Value Badge */
+.best-value-badge {
+  margin-left: auto;
+  padding: 4px 12px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, rgba(124, 58, 237, 0.15), rgba(168, 85, 247, 0.15), rgba(232, 121, 249, 0.15));
+  border: 1px solid rgba(168, 85, 247, 0.4);
+  font-size: 0.75rem;
+  font-weight: 600;
+  white-space: nowrap;
 }
 
 /* ── Price row ── */
@@ -233,16 +246,18 @@
 }
 
 .success-grid {
-  column-count: 3;
-  column-gap: 1.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
   width: 100%;
-  align-items: start;
+  align-items: stretch;
 }
 
 .success-card-inner {
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  height: 100%;
 }
 
 .success-card-top {
@@ -287,14 +302,14 @@
 }
 
 @media (max-width: 860px) {
-  .success-grid {
-    column-count: 2;
+  .success-card-wrapper {
+    flex: 1 1 calc(50% - 0.625rem);
   }
 }
 
 @media (max-width: 540px) {
-  .success-grid {
-    column-count: 1;
+  .success-card-wrapper {
+    flex: 1 1 100%;
   }
 }
 
@@ -322,9 +337,37 @@
 
 /* Success cards height follows content */
 .success-grid .spotlight-card {
-  display: inline-block;
+  display: flex;
   width: 100%;
-  margin-bottom: 1rem;
+  border: 2px solid rgba(132, 0, 255, 0.3);
+}
+
+/* Success card wrapper for animations */
+.success-card-wrapper {
+  flex: 1 1 calc(33.333% - 1rem);
+  min-width: 280px;
+  display: flex;
+}
+
+.success-card-wrapper--extra {
+  opacity: 0;
+  transform: scale(0.95);
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.success-card-wrapper .spotlight-card {
+  display: flex;
+  width: 100%;
   border: 2px solid rgba(132, 0, 255, 0.3);
 }
 

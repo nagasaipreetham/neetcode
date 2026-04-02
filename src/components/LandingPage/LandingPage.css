@@ -2,10 +2,10 @@
   position: relative;
   width: 100%;
   min-height: 100vh;
-  overflow: hidden;
   background: #000;
 }
 
+/* PixelSnow sits at the very bottom of the stack */
 .background-container {
   position: fixed;
   top: 0;
@@ -14,4 +14,12 @@
   height: 100%;
   z-index: 0;
   pointer-events: none;
+}
+
+/* Every section that sits above the pixel snow */
+.scroll-reveal,
+.scroll-reveal-left,
+.scroll-reveal-right {
+  position: relative;
+  z-index: 1;
 }
