@@ -1,5 +1,6 @@
 import { useSearchParams } from 'react-router-dom';
 import { useEffect, useRef } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
 import Navbar from '../components/Navbar/Navbar';
 import Footer from '../components/Footer/Footer';
 import PixelSnowBg from '../components/PixelSnow/PixelSnowBg';
@@ -27,10 +28,31 @@ function RevealSection({ children }) {
   return <div ref={ref} className="scroll-reveal">{children}</div>;
 }
 
+const tabVariants = {
+  enter: (direction) => ({
+    x: direction > 0 ? 50 : -50,
+    opacity: 0
+  }),
+  center: {
+    x: 0,
+    opacity: 1
+  },
+  exit: (direction) => ({
+    x: direction < 0 ? 50 : -50,
+    opacity: 0
+  })
+};
+
 export default function CoursesPage() {
   const [searchParams, setSearchParams] = useSearchParams();
   const tab = searchParams.get('tab') || 'courses';
-  const setTab = (t) => setSearchParams({ tab: t });
+  const prevTab = useRef(tab);
+  const direction = tab === 'lessons' ? 1 : -1;
+  
+  const setTab = (t) => {
+    prevTab.current = tab;
+    setSearchParams({ tab: t });
+  };
 
   return (
     <div className="courses-page">
@@ -61,18 +83,40 @@ export default function CoursesPage() {
           </button>
         </div>
 
-        {/* Tab content */}
+        {/* Tab content with AnimatePresence */}
         <div className="courses-page-tab">
-          {tab === 'courses' && (
-            <RevealSection>
-              <Courses showHeading={false} gradientTitles layout="page" />
-            </RevealSection>
-          )}
-          {tab === 'lessons' && (
-            <RevealSection>
-              <Lessons />
-            </RevealSection>
-          )}
+          <AnimatePresence mode="wait" custom={direction}>
+            {tab === 'courses' && (
+              <motion.div
+                key="courses"
+                custom={direction}
+                variants={tabVariants}
+                initial="enter"
+                animate="center"
+                exit="exit"
+                transition={{ duration: 0.3, ease: 'easeInOut' }}
+              >
+                <RevealSection>
+                  <Courses showHeading={false} gradientTitles layout="page" />
+                </RevealSection>
+              </motion.div>
+            )}
+            {tab === 'lessons' && (
+              <motion.div
+                key="lessons"
+                custom={direction}
+                variants={tabVariants}
+                initial="enter"
+                animate="center"
+                exit="exit"
+                transition={{ duration: 0.3, ease: 'easeInOut' }}
+              >
+                <RevealSection>
+                  <Lessons />
+                </RevealSection>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       </div>
 

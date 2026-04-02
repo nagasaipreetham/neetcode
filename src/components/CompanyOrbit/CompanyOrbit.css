@@ -70,11 +70,31 @@
   transition: transform 0.25s ease, box-shadow 0.25s ease;
   text-decoration: none;
   color: inherit;
+  position: relative;
+}
+
+.company-logo-btn::after {
+  content: '';
+  position: absolute;
+  bottom: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  height: 8px;
+  background: radial-gradient(ellipse at center, rgba(168, 85, 247, 0.3) 0%, transparent 70%);
+  border-radius: 50%;
+  opacity: 0.6;
+  transition: opacity 0.25s ease, transform 0.25s ease;
 }
 
 .company-logo-btn:hover {
   transform: scale(1.18);
   box-shadow: 0 10px 32px rgba(0, 0, 0, 0.55);
+}
+
+.company-logo-btn:hover::after {
+  opacity: 0.9;
+  transform: translateX(-50%) scale(1.2);
 }
 
 .company-logo-btn img {

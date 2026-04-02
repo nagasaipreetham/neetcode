@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import Navbar from '../components/Navbar/Navbar';
 import Footer from '../components/Footer/Footer';
@@ -275,9 +275,30 @@ function YearCard() {
 
 export default function ProPage() {
   const [showAll, setShowAll] = useState(false);
+  const [isHiding, setIsHiding] = useState(false);
+  const successSectionRef = useRef(null);
   const COLS = 3;
   const ROWS = 2;
   const visible = showAll ? successStories : successStories.slice(0, COLS * ROWS);
+  
+  const handleToggle = () => {
+    if (showAll) {
+      // Hiding - add transition and scroll up
+      setIsHiding(true);
+      setTimeout(() => {
+        setShowAll(false);
+        setIsHiding(false);
+        // Scroll to success section
+        if (successSectionRef.current) {
+          successSectionRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 300);
+    } else {
+      // Showing
+      setShowAll(true);
+    }
+  };
+  
   return (
     <div className="pro-page">
       <div className="pro-page-bg">
@@ -348,7 +369,7 @@ export default function ProPage() {
         <MagicBento glowColor="132, 0, 255" disableAnimations={false} />
 
         {/* Success Stories */}
-        <div className="success-section">
+        <div className="success-section" ref={successSectionRef}>
           <h2 className="pro-page-heading">
             <GradientText colors={["#7c3aed","#a855f7","#c084fc","#e879f9"]} animationSpeed={8}
               style={{ fontSize: 'inherit', fontWeight: 'inherit', letterSpacing: 'inherit' }}>
@@ -359,9 +380,9 @@ export default function ProPage() {
             {visible.map((s, i) => (
               <div 
                 key={i} 
-                className={`success-card-wrapper${i >= COLS * ROWS ? ' success-card-wrapper--extra' : ''}`}
+                className={`success-card-wrapper${i >= COLS * ROWS ? ' success-card-wrapper--extra' : ''}${isHiding && i >= COLS * ROWS ? ' success-card-wrapper--hiding' : ''}`}
                 style={{
-                  animation: i >= COLS * ROWS && showAll ? 'fadeInScale 0.4s ease forwards' : 'none',
+                  animation: i >= COLS * ROWS && showAll && !isHiding ? 'fadeInScale 0.4s ease forwards' : 'none',
                   animationDelay: i >= COLS * ROWS ? `${(i - COLS * ROWS) * 0.05}s` : '0s'
                 }}
               >
@@ -378,7 +399,7 @@ export default function ProPage() {
               </div>
             ))}
           </div>
-          <button className="success-toggle-btn" onClick={() => setShowAll(v => !v)}>
+          <button className="success-toggle-btn" onClick={handleToggle}>
             <GradientText colors={["#7c3aed","#a855f7","#e879f9"]} animationSpeed={8}
               style={{ fontSize: 'inherit', fontWeight: 'inherit' }}>
               {showAll ? 'Show Less ↑' : 'Show More ↓'}

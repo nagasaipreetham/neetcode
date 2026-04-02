@@ -246,11 +246,10 @@
 }
 
 .success-grid {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   gap: 1.25rem;
   width: 100%;
-  align-items: stretch;
 }
 
 .success-card-inner {
@@ -302,12 +301,20 @@
 }
 
 @media (max-width: 860px) {
+  .success-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
   .success-card-wrapper {
     flex: 1 1 calc(50% - 0.625rem);
   }
 }
 
 @media (max-width: 540px) {
+  .success-grid {
+    grid-template-columns: 1fr;
+  }
+  
   .success-card-wrapper {
     flex: 1 1 100%;
   }
@@ -344,12 +351,16 @@
 
 /* Success card wrapper for animations */
 .success-card-wrapper {
-  flex: 1 1 calc(33.333% - 1rem);
-  min-width: 280px;
   display: flex;
+  transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 .success-card-wrapper--extra {
+  opacity: 0;
+  transform: scale(0.95);
+}
+
+.success-card-wrapper--hiding {
   opacity: 0;
   transform: scale(0.95);
 }

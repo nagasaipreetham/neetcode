@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import ProfileCard from '../ProfileCard/ProfileCard';
 import amogImg from '../../assets/Amog_Chandrashekar.png';
 import rodrigoImg from '../../assets/Rodrigo Ramirez.png';
@@ -64,6 +65,28 @@ const reviewers = [
   }
 ];
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1
+    }
+  }
+};
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.5,
+      ease: 'easeOut'
+    }
+  }
+};
+
 export default function Reviews() {
   const row1 = reviewers.slice(0, 3);
   const row2 = reviewers.slice(3);
@@ -71,44 +94,58 @@ export default function Reviews() {
   return (
     <section className="reviews-section">
       <div className="reviews-grid">
-        <div className="reviews-row">
+        <motion.div 
+          className="reviews-row"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+        >
           {row1.map(p => (
-            <ProfileCard
-              key={p.name}
-              name={p.name}
-              title={p.title}
-              handle={p.handle}
-              status={p.status}
-              avatarUrl={p.avatarUrl}
-              avatarStyle={p.avatarStyle}
-              description={p.description}
-              showUserInfo={false}
-              enableTilt={true}
-              behindGlowEnabled={true}
-              behindGlowColor={p.behindGlowColor}
-              innerGradient={p.innerGradient}
-            />
+            <motion.div key={p.name} variants={cardVariants}>
+              <ProfileCard
+                name={p.name}
+                title={p.title}
+                handle={p.handle}
+                status={p.status}
+                avatarUrl={p.avatarUrl}
+                avatarStyle={p.avatarStyle}
+                description={p.description}
+                showUserInfo={false}
+                enableTilt={true}
+                behindGlowEnabled={true}
+                behindGlowColor={p.behindGlowColor}
+                innerGradient={p.innerGradient}
+              />
+            </motion.div>
           ))}
-        </div>
-        <div className="reviews-row reviews-row--center">
+        </motion.div>
+        <motion.div 
+          className="reviews-row reviews-row--center"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+        >
           {row2.map(p => (
-            <ProfileCard
-              key={p.name}
-              name={p.name}
-              title={p.title}
-              handle={p.handle}
-              status={p.status}
-              avatarUrl={p.avatarUrl}
-              avatarStyle={p.avatarStyle}
-              description={p.description}
-              showUserInfo={false}
-              enableTilt={true}
-              behindGlowEnabled={true}
-              behindGlowColor={p.behindGlowColor}
-              innerGradient={p.innerGradient}
-            />
+            <motion.div key={p.name} variants={cardVariants}>
+              <ProfileCard
+                name={p.name}
+                title={p.title}
+                handle={p.handle}
+                status={p.status}
+                avatarUrl={p.avatarUrl}
+                avatarStyle={p.avatarStyle}
+                description={p.description}
+                showUserInfo={false}
+                enableTilt={true}
+                behindGlowEnabled={true}
+                behindGlowColor={p.behindGlowColor}
+                innerGradient={p.innerGradient}
+              />
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

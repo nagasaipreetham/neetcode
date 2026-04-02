@@ -264,6 +264,12 @@
   letter-spacing: 0.01em;
 }
 
+.course-tag-lessons {
+  color: #818cf8;
+  border-color: rgba(129, 140, 248, 0.35);
+  background: rgba(129, 140, 248, 0.1);
+}
+
 .course-tag-hours {
   color: #94a3b8;
   border-color: rgba(148, 163, 184, 0.3);

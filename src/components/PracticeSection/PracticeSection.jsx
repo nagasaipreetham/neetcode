@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
 import BorderGlow from '../BorderGlow/BorderGlow';
 import StarBorder from '../StarBorder/StarBorder';
 import GradientText from '../GradientText/GradientText';
@@ -30,6 +31,8 @@ const DEFAULT_SELECTED = new Set(['Arrays & Hashing', 'Two Pointers', 'Sliding W
 
 export default function PracticeSection() {
   const [selected, setSelected] = useState(DEFAULT_SELECTED);
+  const [prevPct, setPrevPct] = useState(0);
+  const [showCelebration, setShowCelebration] = useState(false);
 
   const toggle = (topic) => {
     setSelected(prev => {
@@ -43,6 +46,19 @@ export default function PracticeSection() {
   const total = ALL_TOPICS.length;
   const count = selected.size;
   const pct = Math.round((count / total) * 100);
+
+  // Celebration milestones
+  useEffect(() => {
+    const milestones = [25, 50, 75, 100];
+    const crossedMilestone = milestones.find(m => prevPct < m && pct >= m);
+    
+    if (crossedMilestone) {
+      setShowCelebration(true);
+      setTimeout(() => setShowCelebration(false), 1000);
+    }
+    
+    setPrevPct(pct);
+  }, [pct, prevPct]);
 
   return (
     <section className="practice-section">
@@ -93,7 +109,23 @@ export default function PracticeSection() {
 
         {/* RIGHT */}
         <div className="practice-right">
-          <div className="practice-card">
+          <div 
+            className="practice-card"
+            onMouseMove={(e) => {
+              const card = e.currentTarget;
+              const rect = card.getBoundingClientRect();
+              const x = e.clientX - rect.left;
+              const y = e.clientY - rect.top;
+              const centerX = rect.width / 2;
+              const centerY = rect.height / 2;
+              const rotateX = ((y - centerY) / centerY) * -5;
+              const rotateY = ((x - centerX) / centerX) * 5;
+              card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+            }}
+          >
             <BorderGlow
               borderRadius={16}
               backgroundColor="rgba(0, 0, 0, 0.4)"
@@ -117,11 +149,18 @@ export default function PracticeSection() {
 
                 {/* Interactive progress bar */}
                 <div className="practice-progress-wrap">
-                  <div className="practice-progress-bar">
+                  <div className={`practice-progress-bar${showCelebration ? ' practice-progress-bar--celebrate' : ''}`}>
                     <div
                       className="practice-progress-fill"
                       style={{ width: `${pct}%`, transition: 'width 0.4s ease' }}
                     />
+                    {showCelebration && (
+                      <div className="progress-sparkles">
+                        {[...Array(8)].map((_, i) => (
+                          <div key={i} className="sparkle" style={{ '--i': i }} />
+                        ))}
+                      </div>
+                    )}
                   </div>
                   <span className="practice-progress-label">{pct}% completed ({count} / {total})</span>
                 </div>
@@ -129,13 +168,26 @@ export default function PracticeSection() {
                 {/* Clickable topic buttons */}
                 <div className="practice-topics">
                   {ALL_TOPICS.map((t, i) => (
-                    <button
+                    <motion.button
                       key={i}
                       onClick={() => toggle(t)}
                       className={`practice-topic-btn${selected.has(t) ? ' practice-topic-btn--active' : ''}${t.startsWith('+') ? ' practice-topic-btn--more' : ''}`}
+                      whileTap={{ scale: 0.95 }}
+                      animate={selected.has(t) ? { scale: [1, 1.1, 1] } : {}}
+                      transition={{ duration: 0.3, ease: 'easeOut' }}
                     >
+                      {selected.has(t) && (
+                        <motion.span
+                          className="topic-checkmark"
+                          initial={{ scale: 0, rotate: -180 }}
+                          animate={{ scale: 1, rotate: 0 }}
+                          transition={{ type: 'spring', stiffness: 500, damping: 15 }}
+                        >
+                          ✓
+                        </motion.span>
+                      )}
                       {t}
-                    </button>
+                    </motion.button>
                   ))}
                 </div>
               </div>

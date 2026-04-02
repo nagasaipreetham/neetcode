@@ -76,7 +76,7 @@ function Grid6Images({ images }) {
   );
 }
 
-export default function CourseCard({ title, description, hours, difficulty, images = [], variant = 'duo', link }) {
+export default function CourseCard({ title, description, hours, difficulty, lessons, images = [], variant = 'duo', link }) {
   const renderImages = () => {
     if (!images.length) return null;
     switch (variant) {
@@ -113,6 +113,7 @@ export default function CourseCard({ title, description, hours, difficulty, imag
             <div className="course-card-title">{title}</div>
             <div className="course-card-desc">{description}</div>
             <div className="course-card-tags">
+              {lessons && <span className="course-tag course-tag-lessons">{lessons} Lessons</span>}
               <span className="course-tag course-tag-hours">{hours}</span>
               <span className={`course-tag ${difficultyClass[difficulty]}`}>{difficulty}</span>
             </div>

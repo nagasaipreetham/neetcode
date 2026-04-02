@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
 import TextType from '../TextType/TextType';
 import BlurText from '../BlurText/BlurText';
 import CountUp from '../CountUp/CountUp';
@@ -8,6 +9,8 @@ import HierarchyFlow from '../HierarchyFlow/HierarchyFlow';
 import './Hero.css';
 
 export default function Hero() {
+  const [countComplete, setCountComplete] = useState(false);
+
   return (
     <section className="hero-section">
       <div className="hero-left">
@@ -84,9 +87,9 @@ export default function Hero() {
 
           {/* 1000+ — count up with purple gradient */}
           <div className="hero-stat">
-            <div className="hero-stat-number">
+            <div className={`hero-stat-number${countComplete ? ' stat-complete' : ''}`}>
               <span className="gradient-stat-text">
-                <CountUp from={0} to={1000} separator="," duration={2.5} />+
+                <CountUp from={0} to={1000} separator="," duration={2.5} onEnd={() => setCountComplete(true)} />+
               </span>
             </div>
             <motion.span
