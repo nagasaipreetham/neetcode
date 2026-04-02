@@ -36,6 +36,12 @@ export default function CoursesPage() {
       <div className="courses-page-content">
         {/* Toggle */}
         <div className="courses-page-toggle">
+          <div 
+            className="toggle-slider" 
+            style={{ 
+              transform: `translateX(${tab === 'courses' ? '0' : '100%'})` 
+            }} 
+          />
           <button
             className={`toggle-btn ${tab === 'courses' ? 'toggle-btn--active' : 'toggle-btn--inactive'}`}
             onClick={() => setTab('courses')}

@@ -24,11 +24,19 @@
     0 8px 32px rgba(0, 0, 0, 0.5),
     inset 0 1px 0 rgba(255, 255, 255, 0.1);
   position: relative;
-  overflow: hidden;
   isolation: isolate;
 }
 
-.navbar-glass::before {
+.navbar-glint-clip {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 2; /* Still above content but below popup */
+}
+
+.navbar-glint-clip::before {
   content: '';
   position: absolute;
   top: 0;
@@ -41,12 +49,11 @@
     rgba(255, 255, 255, 0.15),
     transparent
   );
-  pointer-events: none;
   z-index: 2;
   border-radius: inherit;
 }
 
-.navbar-glass::after {
+.navbar-glint-clip::after {
   content: '';
   position: absolute;
   top: 0;
@@ -59,7 +66,6 @@
     transparent,
     rgba(255, 255, 255, 0.05)
   );
-  pointer-events: none;
   z-index: 2;
   border-radius: inherit;
 }

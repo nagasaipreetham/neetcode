@@ -1,7 +1,7 @@
 import { useState, useRef, useLayoutEffect, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { gsap } from 'gsap';
-import viteLogo from '../../assets/vite.svg';
+import neetcodeLogo from '../../assets/neetcode-io-logo.png';
 import StarBorder from '../StarBorder/StarBorder';
 import './Navbar.css';
 
@@ -76,11 +76,13 @@ export default function Navbar() {
   return (
     <nav className="navbar-container">
       <div ref={glassRef} className="navbar-glass">
+        {/* Isolated glint clipping */}
+        <div className="navbar-glint-clip" />
 
         {/* Top bar */}
         <div className="navbar-top-bar">
           <div className="navbar-left">
-            <Link to="/"><img src={viteLogo} className="logo" alt="NeetCode" /></Link>
+            <Link to="/"><img src={neetcodeLogo} className="logo" alt="NeetCode" /></Link>
             {/* Hamburger — right of logo, mobile only */}
             <button className="navbar-hamburger" onClick={toggleMenu} aria-label="Toggle menu">
               <span className={`hamburger-line${menuOpen ? ' hamburger-line--top-open' : ''}`} />
