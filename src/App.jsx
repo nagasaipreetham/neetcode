@@ -5,6 +5,7 @@ import Terms from './pages/Terms';
 import CoursesPage from './pages/CoursesPage';
 import ProPage from './pages/ProPage';
 import GiftPage from './pages/GiftPage';
+import NotFound from './pages/NotFound';
 import ScrollToTop from './components/ScrollToTop/ScrollToTop';
 import './App.css';
 
@@ -19,6 +20,7 @@ function App() {
         <Route path="/courses" element={<CoursesPage />} />
         <Route path="/pro" element={<ProPage />} />
         <Route path="/gift" element={<GiftPage />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   );
