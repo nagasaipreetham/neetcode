@@ -11,15 +11,14 @@
   isolation: isolate;
   transform: translate3d(0, 0, 0.01px);
   display: grid;
-  background: var(--card-bg, rgba(10, 10, 15, 0.4));
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: var(--card-bg, rgba(0, 0, 0, 0.45));
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  backdrop-filter: saturate(180%) blur(20px);
+  border: 0.5px solid rgba(255, 255, 255, 0.08);
   box-shadow: 
-    0 8px 32px rgba(0, 0, 0, 0.3),
-    inset 0 1px 0 rgba(255, 255, 255, 0.15),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.1);
-  overflow: visible;
+    0 8px 32px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  overflow: hidden;
 }
 
 .border-glow-card::before {
@@ -32,13 +31,12 @@
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(255, 255, 255, 0.25),
+    rgba(255, 255, 255, 0.15),
     transparent
   );
   pointer-events: none;
   z-index: 2;
-  border-top-left-radius: inherit;
-  border-top-right-radius: inherit;
+  border-radius: inherit;
 }
 
 .border-glow-card::after {
@@ -50,14 +48,13 @@
   height: 100%;
   background: linear-gradient(
     180deg,
-    rgba(255, 255, 255, 0.25),
+    rgba(255, 255, 255, 0.15),
     transparent,
-    rgba(255, 255, 255, 0.1)
+    rgba(255, 255, 255, 0.05)
   );
   pointer-events: none;
   z-index: 2;
-  border-top-left-radius: inherit;
-  border-bottom-left-radius: inherit;
+  border-radius: inherit;
 }
 
 /* outer glow layer — only this, no ::before fill */
