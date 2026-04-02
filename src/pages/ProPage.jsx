@@ -6,6 +6,7 @@ import ShapeGrid from '../components/ShapeGrid/ShapeGrid';
 import GradientText from '../components/GradientText/GradientText';
 import SpotlightCard from '../components/SpotlightCard/SpotlightCard';
 import MagicBento from '../components/MagicBento/MagicBento';
+import PageMenu from '../components/PageMenu/PageMenu';
 import globeIcon from '../assets/globe.svg';
 import giftIcon from '../assets/gift.svg';
 import googleLogo from '../assets/google.png';
@@ -24,6 +25,13 @@ import sofiIcon from '../assets/sofi-icon.png';
 import tmobile from '../assets/tmobile.png';
 import zscaler from '../assets/zscaler.png';
 import './ProPage.css';
+
+const PRO_SECTIONS = [
+  { id: 'pro-plans',   label: 'Plans'    },
+  { id: 'pro-features', label: 'Features' },
+  { id: 'pro-stories', label: 'Stories'  },
+  { id: 'pro-faq',     label: 'FAQ'      },
+];
 
 const successStories = [
   {
@@ -314,62 +322,66 @@ export default function ProPage() {
       </div>
 
       <Navbar />
+      <PageMenu sections={PRO_SECTIONS} />
 
       <div className="pro-page-content">
-        <h1 className="pro-page-heading">
-          <GradientText
-            colors={["#7c3aed","#a855f7","#c084fc","#e879f9"]}
-            animationSpeed={8}
-            style={{ fontSize: 'inherit', fontWeight: 'inherit', letterSpacing: 'inherit' }}
-          >
-            Choose Your Plan
-          </GradientText>
-        </h1>
+        <div id="pro-plans">
+          <h1 className="pro-page-heading">
+            <GradientText
+              colors={["#7c3aed","#a855f7","#c084fc","#e879f9"]}
+              animationSpeed={8}
+              style={{ fontSize: 'inherit', fontWeight: 'inherit', letterSpacing: 'inherit' }}
+            >
+              Choose Your Plan
+            </GradientText>
+          </h1>
 
-        {/* Pricing cards */}
-        <div className="pricing-row">
-          <LifetimeCard />
-          <YearCard />
+          {/* Pricing cards */}
+          <div className="pricing-row" style={{ marginTop: '2rem' }}>
+            <LifetimeCard />
+            <YearCard />
+          </div>
+
+          {/* Gift link */}
+          <div style={{ display: 'flex', justifyContent: 'center', marginTop: '1.5rem' }}>
+            <Link to="/gift" className="pricing-gift-link">
+              <svg className="pricing-gift-icon" viewBox="0 0 24 24" fill="none">
+                <defs>
+                  <linearGradient id="giftGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="80%" stopColor="#7c3aed"/>
+                    <stop offset="90%" stopColor="#a855f7"/>
+                    <stop offset="100%" stopColor="#e879f9"/>
+                  </linearGradient>
+                </defs>
+                <path
+                  d="M20 12v8H4v-8M2 7h20v5H2zM12 7v13M7 7c-1.5 0-2.5-1-2.5-2.5S5.5 2 7 2c2 0 5 5 5 5s3-5 5-5c1.5 0 2.5 1 2.5 2.5S18.5 7 17 7"
+                  stroke="url(#giftGrad)"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+              Gift a Friend
+            </Link>
+          </div>
         </div>
 
-        {/* Gift link */}
-        <Link to="/gift" className="pricing-gift-link">
-          <svg className="pricing-gift-icon" viewBox="0 0 24 24" fill="none">
-            <defs>
-              <linearGradient id="giftGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="80%" stopColor="#7c3aed"/>
-                <stop offset="90%" stopColor="#a855f7"/>
-                <stop offset="100%" stopColor="#e879f9"/>
-              </linearGradient>
-            </defs>
-
-            {/* Gift icon path */}
-            <path
-              d="M20 12v8H4v-8M2 7h20v5H2zM12 7v13M7 7c-1.5 0-2.5-1-2.5-2.5S5.5 2 7 2c2 0 5 5 5 5s3-5 5-5c1.5 0 2.5 1 2.5 2.5S18.5 7 17 7"
-              stroke="url(#giftGrad)"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-          Gift a Friend
-        </Link>
-
         {/* Everything You Need section */}
-        <h2 className="pro-page-heading" style={{ marginTop: '2rem' }}>
-          <GradientText
-            colors={["#7c3aed","#a855f7","#c084fc","#e879f9"]}
-            animationSpeed={8}
-            style={{ fontSize: 'inherit', fontWeight: 'inherit', letterSpacing: 'inherit' }}
-          >
-            Everything You Need To Succeed
-          </GradientText>
-        </h2>
-
-        <MagicBento glowColor="132, 0, 255" disableAnimations={false} />
+        <div id="pro-features" style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '2rem', marginTop: '2rem' }}>
+          <h2 className="pro-page-heading">
+            <GradientText
+              colors={["#7c3aed","#a855f7","#c084fc","#e879f9"]}
+              animationSpeed={8}
+              style={{ fontSize: 'inherit', fontWeight: 'inherit', letterSpacing: 'inherit' }}
+            >
+              Everything You Need To Succeed
+            </GradientText>
+          </h2>
+          <MagicBento glowColor="132, 0, 255" disableAnimations={false} />
+        </div>
 
         {/* Success Stories */}
-        <div className="success-section" ref={successSectionRef}>
+        <div className="success-section" id="pro-stories" ref={successSectionRef}>
           <h2 className="pro-page-heading">
             <GradientText colors={["#7c3aed","#a855f7","#c084fc","#e879f9"]} animationSpeed={8}
               style={{ fontSize: 'inherit', fontWeight: 'inherit', letterSpacing: 'inherit' }}>
@@ -408,7 +420,7 @@ export default function ProPage() {
         </div>
 
         {/* Common Questions */}
-        <div className="faq-section">
+        <div className="faq-section" id="pro-faq">
           <h2 className="faq-heading">
             <GradientText colors={["#7c3aed","#a855f7","#c084fc","#e879f9"]} animationSpeed={8}
               style={{ fontSize: 'inherit', fontWeight: 'inherit', letterSpacing: 'inherit' }}>

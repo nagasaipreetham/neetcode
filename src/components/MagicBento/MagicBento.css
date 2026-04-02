@@ -160,7 +160,14 @@
 }
 
 @media (max-width: 540px) {
-  .bento-grid { grid-template-columns: 1fr; }
+  .bento-grid { 
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  
   .bento-card:nth-child(1),
-  .bento-card:nth-child(2) { grid-column: span 1; }
+  .bento-card:nth-child(2),
+  .bento-card:nth-child(n+3) { 
+    grid-column: span 1;
+  }
 }
