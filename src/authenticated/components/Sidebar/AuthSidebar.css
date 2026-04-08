@@ -1,0 +1,150 @@
+/* ════════════════════════
+   Auth Sidebar
+   ════════════════════════ */
+
+.auth-sidebar {
+  background-color: var(--auth-nav-bg);
+  border-right: 1px solid var(--auth-hover-bg);
+  padding: 0;
+  overflow-y: auto;
+  position: sticky;
+  top: 64px;
+  height: calc(100vh - 64px);
+
+  /* hide scrollbar on all browsers */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.auth-sidebar::-webkit-scrollbar { display: none; }
+
+/* ── Tab row ── */
+.sidebar-tab-row {
+  display: flex;
+  gap: 0;
+  padding: 1rem 1rem 0;
+  border-bottom: 1px solid var(--auth-hover-bg);
+  margin-bottom: 0.75rem;
+  position: sticky;
+  top: 0;
+  background: var(--auth-nav-bg);
+  z-index: 1;
+}
+
+.sidebar-tab {
+  flex: 1;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  padding: 0.4rem 0;
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: var(--auth-text-muted);
+  cursor: pointer;
+  font-family: inherit;
+  opacity: 0.5;
+  transition: opacity 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+  margin-bottom: -1px; /* overlap border */
+}
+
+.sidebar-tab--active {
+  color: var(--auth-text);
+  border-bottom-color: #3b82f6;
+  opacity: 1;
+}
+
+.sidebar-tab:hover:not(.sidebar-tab--active) {
+  opacity: 0.75;
+  color: var(--auth-text);
+}
+
+/* ── Tree nav ── */
+.sidebar-tree {
+  padding: 0 0.5rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+/* Parent item */
+.tree-item {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-radius: 8px;
+  padding: 0.48rem 0.6rem;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.84rem;
+  color: var(--auth-text-muted);
+  text-align: left;
+  transition: background 0.12s ease, color 0.12s ease;
+}
+
+.tree-item:hover {
+  background: var(--auth-hover-bg);
+  color: var(--auth-text);
+}
+
+.tree-item--active {
+  background: var(--auth-accent-bg);
+  color: var(--auth-text);
+  font-weight: 600;
+}
+
+.tree-item-icon {
+  flex-shrink: 0;
+  color: var(--auth-text-muted);
+  transition: color 0.12s ease;
+}
+
+.tree-item:hover .tree-item-icon,
+.tree-item--active .tree-item-icon {
+  color: var(--auth-text);
+}
+
+.tree-item-label { flex: 1; }
+
+.tree-chevron {
+  flex-shrink: 0;
+  color: var(--auth-text-muted);
+  transition: transform 0.2s ease;
+}
+
+.tree-chevron--open { transform: rotate(90deg); }
+
+/* Child items */
+.tree-children {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  padding-left: 2.2rem;
+  margin-top: 1px;
+}
+
+.tree-child {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-radius: 6px;
+  padding: 0.32rem 0.6rem;
+  text-align: left;
+  font-size: 0.81rem;
+  color: var(--auth-text-muted);
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.12s ease, color 0.12s ease;
+}
+
+.tree-child:hover {
+  background: var(--auth-hover-bg);
+  color: var(--auth-text);
+}
+
+.tree-child--active {
+  color: var(--auth-text);
+  font-weight: 500;
+  background: var(--auth-hover-bg);
+}

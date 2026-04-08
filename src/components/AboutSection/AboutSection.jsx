@@ -59,7 +59,7 @@ export default function AboutSection() {
               {/* Founder + Previously at */}
               <div className="about-bottom-row">
                 <div className="about-founder">
-                  <span className="about-founder-name">Navi</span>
+                  <span className="about-founder-name">Navdeep Singh</span>
                   <span className="about-founder-title">Founder of NeetCode</span>
                 </div>
                 <div className="about-prev">

@@ -1,0 +1,72 @@
+/* No background, no border — floats inline */
+.prob-dash {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.prob-breakdown {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.prob-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.prob-lbl {
+  font-size: 0.82rem;
+  font-weight: 700;
+  min-width: 2.8rem;
+}
+
+.prob-cnt {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--auth-text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.prob-chart-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.prob-center {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1px;
+  /* nudge to centre of the horseshoe visually */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -55%);
+}
+
+.prob-total {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--auth-text);
+  line-height: 1;
+}
+
+.prob-denom {
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--auth-text-muted);
+}
+
+.prob-sub {
+  font-size: 0.62rem;
+  color: var(--auth-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}

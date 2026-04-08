@@ -1,0 +1,57 @@
+/* 3-column grid used by PracticeLayout */
+.practice-layout {
+  display: grid;
+  grid-template-columns: 220px 1fr 272px;
+  min-height: calc(100vh - 60px);
+}
+
+/* Sidebar and streak expand when navbar hides */
+.auth-sidebar,
+.streak-panel {
+  top: 60px;
+  height: calc(100vh - 60px);
+  transition: top 0.28s ease, height 0.28s ease;
+}
+[data-nav-hidden="true"] .auth-sidebar,
+[data-nav-hidden="true"] .streak-panel { top: 0; height: 100vh; }
+
+/* ── Streak panel ── */
+.streak-panel {
+  background-color: var(--auth-nav-bg);
+  border-left: 1px solid var(--auth-hover-bg);
+  padding: 1.25rem 1rem;
+  overflow-y: auto;
+  position: sticky;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  scrollbar-width: none; -ms-overflow-style: none;
+}
+.streak-panel::-webkit-scrollbar { display: none; }
+
+.streak-section-title {
+  font-size: 0.66rem; font-weight: 700; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--auth-text-muted); margin: 0 0 0.75rem;
+}
+
+.streak-stat-grid    { display: grid; grid-template-columns: 1fr 1fr; gap: 0.55rem; }
+.streak-stat {
+  background: var(--auth-bg); border: 1px solid var(--auth-hover-bg);
+  border-radius: 12px; padding: 0.75rem 0.8rem;
+  display: flex; flex-direction: column; gap: 5px; transition: border-color 0.15s;
+}
+.streak-stat:hover                { border-color: var(--auth-text-muted); }
+.streak-stat--fire                { border-color: rgba(251,146,60,0.3); background: rgba(251,146,60,0.05); }
+.streak-stat--trophy              { border-color: rgba(234,179,8,0.3);  background: rgba(234,179,8,0.05);  }
+.streak-stat-title  { font-size: 0.64rem; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; color: var(--auth-text-muted); }
+.streak-stat-body   { display: flex; align-items: center; gap: 0.4rem; }
+.streak-stat-emoji  { font-size: 1.1rem; line-height: 1; }
+.trophy-icon        { color: #eab308; flex-shrink: 0; }
+.streak-stat-value  { font-size: 1.5rem; font-weight: 800; color: var(--auth-text); line-height: 1; }
+
+/* Responsive */
+@media (max-width: 1150px) { .practice-layout { grid-template-columns: 190px 1fr 248px; } }
+@media (max-width: 900px)  {
+  .practice-layout { grid-template-columns: 1fr; }
+  .streak-panel { display: none; }
+}

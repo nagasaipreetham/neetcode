@@ -1,0 +1,178 @@
+/* ── AuthCalendar ── */
+.auth-calendar {
+  width: 100%;
+}
+
+.auth-calendar .range-calendar {
+  background: transparent;
+  width: 100%;
+  font-family: inherit;
+}
+
+/* ── Header ── */
+.auth-calendar .range-calendar__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--auth-hover-bg);
+  gap: 0.4rem;
+}
+
+.auth-calendar .range-calendar__heading,
+.auth-calendar .calendar-year-picker__trigger {
+  font-size: 0.87rem;
+  font-weight: 600;
+  color: var(--auth-text);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* Live countdown between heading and nav buttons */
+.cal-countdown {
+  font-size: 0.68rem;
+  font-weight: 500;
+  color: #3b82f6;
+  background: rgba(59, 130, 246, 0.1);
+  border-radius: 9999px;
+  padding: 2px 7px;
+  white-space: nowrap;
+  letter-spacing: 0.02em;
+  font-variant-numeric: tabular-nums;
+  flex: 1;
+  text-align: center;
+}
+
+[data-theme="light"] .cal-countdown {
+  background: rgba(37, 99, 235, 0.08);
+  color: #2563eb;
+}
+
+/* Nav group — buttons sit side by side with no gap */
+.cal-nav-group {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  flex-shrink: 0;
+}
+
+.auth-calendar .range-calendar__nav-button {
+  background: transparent;
+  border: none;
+  border-radius: 6px;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--auth-text-muted);
+  transition: background 0.12s ease, color 0.12s ease;
+  font-size: 0.78rem;
+  padding: 0;
+}
+
+.auth-calendar .range-calendar__nav-button:hover {
+  background: var(--auth-hover-bg);
+  color: var(--auth-text);
+}
+
+/* ── Grid ── */
+.auth-calendar .range-calendar__grid {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.auth-calendar .range-calendar__header-cell {
+  font-size: 0.67rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: var(--auth-text-muted);
+  text-align: center;
+  padding: 0 0 5px;
+  text-transform: uppercase;
+}
+
+/* Day cells */
+.auth-calendar .range-calendar__cell {
+  text-align: center;
+  padding: 1px;
+}
+
+.auth-calendar .range-calendar__cell-button {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 0.79rem;
+  color: var(--auth-text);
+  transition: background 0.12s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+}
+
+.auth-calendar .range-calendar__cell-button:hover {
+  background: var(--auth-hover-bg);
+}
+
+/* Today */
+.auth-calendar .range-calendar__cell-button[data-today="true"] {
+  border: 1.5px solid #3b82f6;
+  color: #3b82f6;
+  font-weight: 700;
+}
+
+/* Outside month */
+.auth-calendar .range-calendar__cell-button[data-outside-month="true"] {
+  opacity: 0.3;
+}
+
+/* In-range */
+.auth-calendar .range-calendar__cell[data-selection-in-range="true"] .range-calendar__cell-button {
+  border-radius: 0;
+  background: rgba(59, 130, 246, 0.13);
+}
+
+/* Range start */
+.auth-calendar .range-calendar__cell[data-selection-start="true"] .range-calendar__cell-button {
+  background: #3b82f6;
+  color: #fff;
+  border-radius: 50% 0 0 50%;
+  border: none;
+}
+
+/* Range end */
+.auth-calendar .range-calendar__cell[data-selection-end="true"] .range-calendar__cell-button {
+  background: #3b82f6;
+  color: #fff;
+  border-radius: 0 50% 50% 0;
+  border: none;
+}
+
+/* Single-day selection */
+.auth-calendar .range-calendar__cell[data-selection-start="true"][data-selection-end="true"] .range-calendar__cell-button {
+  border-radius: 50%;
+}
+
+/* Keyboard focus */
+.auth-calendar .range-calendar__cell-button[data-focus-visible="true"] {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+/* Light-mode override for in-range */
+[data-theme="light"] .auth-calendar .range-calendar__cell[data-selection-in-range="true"] .range-calendar__cell-button {
+  background: rgba(37, 99, 235, 0.1);
+}

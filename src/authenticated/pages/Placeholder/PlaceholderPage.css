@@ -1,0 +1,8 @@
+.placeholder-main {
+  display: flex; align-items: center; justify-content: center;
+  padding: 2rem; overflow-y: auto;
+}
+.placeholder-inner { text-align: center; }
+.placeholder-emoji { font-size: 3rem; margin: 0 0 1rem; }
+.placeholder-inner h1 { font-size: 1.75rem; font-weight: 700; color: var(--auth-text); margin: 0 0 0.5rem; }
+.placeholder-sub { color: var(--auth-text-muted); font-size: 0.95rem; }

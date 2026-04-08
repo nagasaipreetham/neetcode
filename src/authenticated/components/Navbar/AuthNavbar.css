@@ -1,0 +1,110 @@
+.auth-navbar {
+  width: 100%;
+  height: 60px;
+  background-color: var(--auth-nav-bg);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1.75rem;
+  border-bottom: 1px solid var(--auth-hover-bg);
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  /* Scroll-hide transition */
+  transform: translateY(0);
+  transition: transform 0.28s ease, background-color 0.3s ease;
+  backdrop-filter: blur(8px);
+}
+
+/* When data-nav-hidden="true" on .auth-root, slide navbar up */
+[data-nav-hidden="true"] .auth-navbar {
+  transform: translateY(-100%);
+}
+
+.auth-navbar-left,
+.auth-navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.auth-navbar-left { gap: 0.1rem; }
+
+.auth-nav-logo-link { display: flex; align-items: center; margin-right: 1rem; }
+
+.auth-nav-logo {
+  height: 26px;
+  cursor: pointer;
+}
+
+[data-theme="light"] .auth-nav-logo { filter: invert(1); }
+
+.auth-nav-links { display: flex; gap: 2px; }
+
+/* Nav text buttons */
+.auth-btn {
+  background: transparent;
+  border: none;
+  border-radius: 9999px;
+  padding: 0.38rem 1rem;
+  color: var(--auth-text-muted);
+  font-size: 0.88rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  letter-spacing: 0.01em;
+}
+
+.auth-btn:hover {
+  color: var(--auth-text);
+  background-color: var(--auth-hover-bg);
+}
+
+.auth-btn.active {
+  background-color: var(--auth-accent-bg);
+  color: var(--auth-accent-text);
+  font-weight: 600;
+}
+
+/* Icon buttons */
+.auth-icon-btn {
+  background: transparent;
+  border: none;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--auth-text-muted);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.auth-icon-btn:hover {
+  background-color: var(--auth-hover-bg);
+  color: var(--auth-text);
+}
+
+/* Go Pro button */
+.auth-pro-btn {
+  background: linear-gradient(135deg, #2563eb, #9333ea);
+  color: #fff;
+  border: none;
+  border-radius: 9999px;
+  padding: 0.38rem 1.1rem;
+  font-size: 0.84rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+  letter-spacing: 0.02em;
+  margin: 0 0.25rem;
+}
+
+.auth-pro-btn:hover { opacity: 0.9; transform: scale(1.03); }
+
+/* Right side grouping */
+.auth-navbar-right { gap: 0; }
