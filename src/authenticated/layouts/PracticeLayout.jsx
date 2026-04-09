@@ -1,6 +1,8 @@
 import { Outlet } from 'react-router-dom';
 import AuthSidebar from '../components/Sidebar/AuthSidebar';
 import StreakCalendar from '../components/Calendar/StreakCalendar';
+import StreakIgnites from '../components/Streak/StreakIgnites';
+import StreakRanking from '../components/Streak/StreakRanking';
 import { Trophy } from 'lucide-react';
 import './PracticeLayout.css';
 
@@ -16,7 +18,6 @@ export default function PracticeLayout() {
       {/* Right: streak panel — always visible */}
       <aside className="streak-panel">
         <div className="streak-calendar-wrap">
-          <p className="streak-section-title">Activity Range</p>
           <StreakCalendar />
         </div>
         <div className="streak-stats-wrap">
@@ -37,6 +38,9 @@ export default function PracticeLayout() {
               </div>
             </div>
           </div>
+
+          <StreakIgnites />
+          <StreakRanking />
         </div>
       </aside>
     </div>

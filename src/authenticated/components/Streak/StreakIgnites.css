@@ -1,0 +1,129 @@
+.streak-ignites {
+  margin-top: 1rem;
+}
+
+.ignites-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.ignites-info-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.info-icon {
+  color: #3b82f6; /* Blue icon */
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+
+.info-icon:hover {
+  opacity: 0.8;
+}
+
+.ignites-tooltip {
+  visibility: hidden;
+  position: absolute;
+  top: 18px;
+  right: 0; /* Adjusted for new position */
+  width: 200px;
+  background: #25262b;
+  color: #fff;
+  padding: 0.75rem;
+  border-radius: 8px;
+  font-size: 0.75rem;
+  line-height: 1.4;
+  z-index: 100;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+  border: 1px solid var(--auth-hover-bg);
+  opacity: 0;
+  transition: opacity 0.2s, visibility 0.2s;
+  pointer-events: none;
+}
+
+.ignites-info-wrap:hover .ignites-tooltip {
+  visibility: visible;
+  opacity: 1;
+}
+
+.ignites-body {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.matchstick-container {
+  position: relative;
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.matchstick-icon {
+  width: 35px;
+  height: 35px;
+  object-fit: contain;
+}
+
+.ignite-badge {
+  position: absolute;
+  bottom: -3px;
+  right: -3px;
+  width: 18px;
+  height: 18px;
+  background: #3b82f6; /* NeetCode blue */
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.65rem;
+  font-weight: 800;
+  border: 2px solid #1a1b1e; /* Match panel background */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.ignites-main-content {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.ignites-progress-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.ignites-progress-bar {
+  width: 100%;
+  height: 6px;
+  background: var(--auth-hover-bg);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.ignites-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #3b82f6, #60a5fa);
+  border-radius: 3px;
+  box-shadow: 0 0 8px rgba(59, 130, 246, 0.4);
+}
+
+.ignites-progress-sub {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.ignites-progress-text {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--auth-text-muted);
+}
