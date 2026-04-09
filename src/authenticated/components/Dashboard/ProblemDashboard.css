@@ -1,72 +1,108 @@
-/* No background, no border — floats inline */
-.prob-dash {
+/* ── Dashboard Container ── */
+.dashboard-container {
   display: flex;
   align-items: center;
-  gap: 0.25rem;
+  gap: 1.5rem;
+  padding: 0.5rem;
 }
 
-.prob-breakdown {
+/* ── Left Sidebar: Stats Breakdown ── */
+.dashboard-stats {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.7rem;
 }
 
-.prob-row {
+.stat-item {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  justify-content: space-between;
+  gap: 0.75rem;
+  width: 100px; /* Ensure labels and values have some breathing room */
 }
 
-.prob-lbl {
-  font-size: 0.82rem;
+.stat-label {
+  font-size: 0.80rem;
   font-weight: 700;
-  min-width: 2.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  opacity: 0.9;
+  min-width: 32px;
 }
 
-.prob-cnt {
-  font-size: 0.82rem;
-  font-weight: 600;
+.stat-value {
+  display: flex;
+  align-items: baseline;
+  gap: 1px;
+}
+
+.stat-solved-count {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--auth-text);
+}
+
+.stat-total-count {
+  font-size: 0.75rem;
+  font-weight: 500;
   color: var(--auth-text-muted);
-  font-variant-numeric: tabular-nums;
 }
 
-.prob-chart-wrap {
+/* ── Right Column: Circle Chart ── */
+.dashboard-arc-wrapper {
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-shrink: 0;
+  width: 140px;
+  height: 140px;
 }
 
-.prob-center {
+.dashboard-svg {
+  filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.2));
+  transform: rotate(-135deg); /* Start segments from the top */
+}
+
+/* ── Central Text ── */
+.dashboard-center-text {
   position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 1px;
-  /* nudge to centre of the horseshoe visually */
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -55%);
+  pointer-events: none;
 }
 
-.prob-total {
-  font-size: 1.3rem;
+.center-solved {
+  font-size: 1.5rem;
   font-weight: 800;
   color: var(--auth-text);
   line-height: 1;
 }
 
-.prob-denom {
-  font-size: 0.78rem;
-  font-weight: 500;
-  color: var(--auth-text-muted);
+.center-divider {
+  width: 24px;
+  height: 2px;
+  background: var(--auth-hover-bg);
+  margin: 5px 0;
+  border-radius: 2px;
 }
 
-.prob-sub {
-  font-size: 0.62rem;
+.center-total {
+  font-size: 1rem;
+  font-weight: 600;
   color: var(--auth-text-muted);
+  line-height: 1;
+}
+
+.center-label {
+  font-size: 0.6rem;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.1em;
+  color: var(--auth-text-muted);
+  margin-top: 5px;
 }
