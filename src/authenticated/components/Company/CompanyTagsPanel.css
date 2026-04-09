@@ -1,0 +1,144 @@
+/* ── Company Tags Panel ── */
+.company-tags-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  width: 340px;
+  flex-shrink: 0;
+  background: var(--auth-accent-bg);
+  border: 1px solid var(--auth-hover-bg);
+  border-radius: 12px;
+  padding: 0.85rem 0.75rem;
+}
+
+/* Search */
+.company-search-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: var(--auth-nav-bg);
+  border: 1px solid var(--auth-hover-bg);
+  border-radius: 8px;
+  padding: 0.3rem 0.65rem;
+  transition: border-color 0.15s;
+}
+.company-search-bar:focus-within { border-color: #3b82f6; }
+.company-search-icon { color: var(--auth-text-muted); flex-shrink: 0; }
+.company-search-input {
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 0.78rem;
+  color: var(--auth-text);
+  width: 100%;
+  font-family: inherit;
+}
+.company-search-input::placeholder { color: var(--auth-text-muted); }
+
+/* Panel header */
+.company-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.company-panel-title {
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--auth-text-muted);
+}
+.company-panel-nav {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+.company-nav-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 1px solid var(--auth-hover-bg);
+  border-radius: 4px;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  color: var(--auth-text-muted);
+  transition: all 0.12s;
+}
+.company-nav-btn:hover:not(:disabled) { background: var(--auth-hover-bg); color: var(--auth-text); }
+.company-nav-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+.company-nav-page {
+  font-size: 0.65rem;
+  color: var(--auth-text-muted);
+  width: 30px;
+  text-align: center;
+}
+
+/* ── Sliding chips container ── */
+.company-chips-container {
+  height: 200px;
+  overflow: hidden; /* clips the inner wrapper */
+  position: relative;
+}
+
+/* Inner renders ALL chips; we translate it to "page" through them */
+.company-chips-inner {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 5px;
+  align-content: flex-start;
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Chip: dynamic width, fits content */
+.company-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.25rem 0.5rem;
+  background: var(--auth-nav-bg);
+  border: 1px solid var(--auth-hover-bg);
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--auth-text);
+  transition: all 0.12s;
+  white-space: nowrap;
+  width: auto;
+}
+.company-chip:hover { background: var(--auth-hover-bg); border-color: rgba(59,130,246,0.4); }
+.company-chip.active {
+  background: rgba(59,130,246,0.12);
+  border-color: #3b82f6;
+  color: #60a5fa;
+}
+.company-chip .chip-label { font-size: 0.78rem; }
+.company-chip .chip-count {
+  font-size: 0.64rem;
+  font-weight: 700;
+  background: rgba(59,130,246,0.18);
+  color: #60a5fa;
+  padding: 1px 5px;
+  border-radius: 9999px;
+}
+.company-chip.active .chip-count { background: rgba(59,130,246,0.3); }
+.company-no-results {
+  font-size: 0.78rem;
+  color: var(--auth-text-muted);
+  padding: 1rem 0;
+  width: 100%;
+}
+
+/* Frequency note */
+.company-freq-note {
+  font-size: 0.68rem;
+  color: var(--auth-text-muted);
+  border-top: 1px solid var(--auth-hover-bg);
+  padding-top: 0.5rem;
+  line-height: 1.4;
+  font-style: italic;
+}

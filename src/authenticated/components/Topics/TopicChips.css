@@ -1,0 +1,118 @@
+/* ── Topic Chips Container ── */
+.topic-chips-wrapper {
+  width: 100%;
+  position: relative; /* anchor for absolute expand button */
+}
+
+/* Collapsed: single scrollable row */
+.topic-chips-wrapper.collapsed .topic-chips-scroll-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+  padding-bottom: 4px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--auth-hover-bg) transparent;
+  flex-wrap: nowrap;
+}
+
+.topic-chips-wrapper.collapsed .topic-chips-scroll-container::-webkit-scrollbar {
+  height: 4px;
+}
+
+.topic-chips-wrapper.collapsed .topic-chips-scroll-container::-webkit-scrollbar-thumb {
+  background: var(--auth-hover-bg);
+  border-radius: 2px;
+}
+
+/* Expanded: all chips wrap */
+.topic-chips-wrapper.expanded .topic-chips-scroll-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: flex-start;
+}
+
+/* ── Individual Chip ── */
+.topic-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.3rem 0.55rem 0.3rem 0.65rem;
+  background: var(--auth-accent-bg);
+  border: 1px solid var(--auth-hover-bg);
+  border-radius: 9999px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--auth-text);
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.topic-chip:hover {
+  background: var(--auth-hover-bg);
+  border-color: rgba(59, 130, 246, 0.5);
+  color: var(--auth-text);
+}
+
+/* Count badge */
+.chip-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 22px;
+  height: 18px;
+  padding: 0 5px;
+  background: rgba(59, 130, 246, 0.18);
+  color: #60a5fa;
+  font-size: 0.68rem;
+  font-weight: 700;
+  border-radius: 9999px;
+  line-height: 1;
+}
+
+/* ── Expand / Collapse Button ── */
+.chips-expand-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.28rem 0.7rem;
+  background: var(--auth-accent-bg);
+  border: 1px solid var(--auth-hover-bg);
+  border-radius: 9999px;
+  font-family: inherit;
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: var(--auth-text-muted);
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: all 0.15s;
+}
+
+/* Absolute overlay on top-right of the collapsed row */
+.chips-expand-btn.expand-overlay {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 3;
+  /* Gradient fade so chips visually blend under button */
+  box-shadow: -28px 0 16px var(--auth-bg);
+}
+
+.chips-expand-btn:hover {
+  color: var(--auth-text);
+  border-color: #3b82f6;
+  background: rgba(59, 130, 246, 0.1);
+}
+
+.chips-collapse-row {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 0.6rem;
+}

@@ -2,7 +2,7 @@
 .practice-layout {
   display: grid;
   grid-template-columns: 220px 1fr 272px;
-  min-height: calc(100vh - 60px);
+  /* No min-height: footer now appears below this grid naturally */
 }
 
 /* Sidebar and streak expand when navbar hides */

@@ -1,0 +1,29 @@
+/* ── Section heading (centred between Row 1 and problems table) ── */
+.special-page-heading {
+  text-align: center;
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--auth-text);
+  padding: 0.4rem 0 0.2rem;
+  border-bottom: 1px solid var(--auth-hover-bg);
+}
+
+/* ── Table header with only 3 cols (no solution) ── */
+.special-table-header {
+  display: grid;
+  grid-template-columns: 32px 1fr 110px;
+  padding: 0.5rem 1rem;
+  border-bottom: 1px solid var(--auth-hover-bg);
+  font-size: 0.69rem;
+  font-weight: 800;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--auth-text-muted);
+}
+
+/* ── Problem row with only 3 cols ── */
+.special-problem-row {
+  display: grid !important;
+  grid-template-columns: 32px 1fr 110px !important;
+}

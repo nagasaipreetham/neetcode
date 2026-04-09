@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { Outlet } from 'react-router-dom';
 import AuthNavbar from './components/Navbar/AuthNavbar';
+import AuthFooter from './components/Footer/AuthFooter';
 import './AuthLayout.css';
 
 export default function AuthLayout() {
@@ -27,6 +28,8 @@ export default function AuthLayout() {
       <div className="auth-content">
         <Outlet />
       </div>
+      {/* Footer sits below the 3-column grid — sidebars scroll away naturally */}
+      <AuthFooter />
     </div>
   );
 }

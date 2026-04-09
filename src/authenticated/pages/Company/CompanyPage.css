@@ -1,0 +1,65 @@
+/* ── Company page ── */
+.company-main {
+  padding: 1.25rem 1.25rem 1.25rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  min-width: 0;
+  overflow-y: auto;
+}
+
+/* ── Row 1: 2-column layout ── */
+.company-row1 {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.25rem;
+}
+
+/* Right column stacks dashboard on top, title+filters on bottom */
+.company-row1-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+/* Title+stats+filters section at bottom of right col */
+.company-header-bottom {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.company-title-row h1 {
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: var(--auth-text);
+  margin: 0 0 0.15rem;
+}
+
+/* ── Interview heading ── */
+.company-interview-heading {
+  text-align: center;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--auth-text);
+  padding: 0.4rem 0 0.2rem;
+  border-bottom: 1px solid var(--auth-hover-bg);
+}
+
+/* ── Landing state ── */
+.company-landing {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 2rem;
+  text-align: center;
+  gap: 1rem;
+  border: 1px dashed var(--auth-hover-bg);
+  border-radius: 16px;
+}
+.company-landing-icon { font-size: 3rem; }
+.company-landing h2 { font-size: 1.3rem; font-weight: 700; color: var(--auth-text); margin: 0; }
+.company-landing p { font-size: 0.9rem; color: var(--auth-text-muted); max-width: 360px; line-height: 1.5; margin: 0; }

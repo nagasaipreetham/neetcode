@@ -1,0 +1,103 @@
+/* ── File Tree ── */
+.filetree-root {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  background: var(--auth-accent-bg);
+  border: 1px solid var(--auth-hover-bg);
+  border-radius: 12px;
+  padding: 0.5rem 0.75rem;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+/* Generic row */
+.filetree-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.25rem 0.4rem;
+  border-radius: 6px;
+  transition: background 0.12s;
+  min-height: 32px;
+}
+.filetree-row:hover { background: var(--auth-hover-bg); }
+
+/* Indented children */
+.filetree-row--indent { margin-left: 2.2rem; }
+
+/* Left group */
+.filetree-row-left {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  overflow: hidden;
+  min-width: 0;
+}
+
+/* File icon */
+.filetree-file-icon { color: var(--auth-text-muted); flex-shrink: 0; }
+
+/* Name */
+.filetree-name {
+  font-size: 0.82rem;
+  color: var(--auth-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.filetree-folder-name { font-weight: 700; color: #a78bfa; }
+
+/* Description (right-aligned) */
+.filetree-desc {
+  font-size: 0.72rem;
+  color: var(--auth-text-muted);
+  white-space: nowrap;
+  flex-shrink: 0;
+  font-style: italic;
+}
+
+/* Badge (auto-generated etc.) */
+.filetree-badge {
+  font-size: 0.62rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  background: rgba(99, 102, 241, 0.18);
+  color: #818cf8;
+  border: 1px solid rgba(99, 102, 241, 0.3);
+  border-radius: 9999px;
+  padding: 1px 7px;
+  flex-shrink: 0;
+}
+
+/* Folder row click cursor */
+.filetree-folder-row { cursor: pointer; }
+
+/* Chevron */
+.filetree-chevron { color: var(--auth-text-muted); flex-shrink: 0; }
+
+/* Folder icon container — clips the 100x80px Folder to a small icon */
+.filetree-folder-icon-wrap {
+  width: 32px;
+  height: 26px;
+  overflow: visible;
+  position: relative;
+  flex-shrink: 0;
+}
+
+/* Children container */
+.filetree-children {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  border-left: 2px solid var(--auth-hover-bg);
+  margin-left: 1rem;
+  padding-left: 0.5rem;
+}
+
+/* Folder block wrapper */
+.filetree-folder-block {
+  display: flex;
+  flex-direction: column;
+}
