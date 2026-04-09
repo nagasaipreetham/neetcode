@@ -90,7 +90,7 @@ export default function Navbar() {
             </button>
             <ul className="nav-links">
               <li><Link to="/courses?tab=courses" className="nav-link">courses</Link></li>
-              <li><a href="https://neetcode.io/practice/practice/neetcode250" target="_blank" rel="noreferrer" className="nav-link">practice</a></li>
+              <li><Link to="/practice/problems/neetcode150" className="nav-link">practice</Link></li>
               <li><a href="https://neetcode.io/roadmap" target="_blank" rel="noreferrer" className="nav-link">roadmap</a></li>
             </ul>
           </div>
@@ -124,7 +124,7 @@ export default function Navbar() {
         <div className="navbar-mobile-clip">
           <div ref={mobileMenuRef} className="navbar-mobile-menu">
             <Link to="/courses?tab=courses" className="nav-link mobile-nav-link" onClick={toggleMenu}>courses</Link>
-            <a href="https://neetcode.io/practice/practice/neetcode250" target="_blank" rel="noreferrer" className="nav-link mobile-nav-link" onClick={toggleMenu}>practice</a>
+            <Link to="/practice/problems/neetcode150" className="nav-link mobile-nav-link" onClick={toggleMenu}>practice</Link>
             <a href="https://neetcode.io/roadmap" target="_blank" rel="noreferrer" className="nav-link mobile-nav-link" onClick={toggleMenu}>roadmap</a>
           </div>
         </div>

@@ -13,6 +13,7 @@
   overflow-y: hidden;
   white-space: nowrap;
   padding-bottom: 4px;
+  margin-right: 90px;
   scrollbar-width: thin;
   scrollbar-color: var(--auth-hover-bg) transparent;
   flex-wrap: nowrap;
@@ -92,8 +93,10 @@
   cursor: pointer;
   white-space: nowrap;
   flex-shrink: 0;
-  transition: all 0.15s;
+  transition: none; /* Removed transition */
 }
+
+/* Removed hover effect */
 
 /* Absolute overlay on top-right of the collapsed row */
 .chips-expand-btn.expand-overlay {
@@ -103,12 +106,6 @@
   z-index: 3;
   /* Gradient fade so chips visually blend under button */
   box-shadow: -28px 0 16px var(--auth-bg);
-}
-
-.chips-expand-btn:hover {
-  color: var(--auth-text);
-  border-color: #3b82f6;
-  background: rgba(59, 130, 246, 0.1);
 }
 
 .chips-collapse-row {
