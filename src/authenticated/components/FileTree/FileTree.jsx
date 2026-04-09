@@ -24,7 +24,7 @@ function FolderRow({ name, children, color = '#5227FF' }) {
         <div className="filetree-row-left">
           {/* Mini folder icon wrapper */}
           <div className="filetree-folder-icon-wrap">
-            <Folder isOpen={open} size={0.32} color={color} />
+            <Folder isOpen={open} size={0.25} color={color} />
           </div>
           <span className="filetree-name filetree-folder-name">{name}/</span>
           {open

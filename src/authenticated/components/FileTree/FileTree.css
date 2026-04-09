@@ -3,11 +3,12 @@
   display: flex;
   flex-direction: column;
   gap: 2px;
-  background: var(--auth-accent-bg);
-  border: 1px solid var(--auth-hover-bg);
-  border-radius: 12px;
-  padding: 0.5rem 0.75rem;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.05), rgba(139, 92, 246, 0.05));
+  border: 1px solid rgba(99, 102, 241, 0.2);
+  border-radius: 16px;
+  padding: 1rem 1rem;
   font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 /* Generic row */

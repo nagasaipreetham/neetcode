@@ -32,68 +32,14 @@
   margin: 0 auto;
 }
 
-/* ── Problems Table ── */
-.ml-project-problems-box {
-  background: var(--auth-nav-bg);
-  border: 1px solid var(--auth-hover-bg);
-  border-radius: 12px;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
+/* ── Problems Table Section ── */
+.ml-project-problems-section {
+  width: 100%;
 }
 
-.ml-table-header {
-  display: grid;
-  grid-template-columns: 1fr 100px 100px;
-  padding: 0.75rem 1rem;
-  border-bottom: 1px solid var(--auth-hover-bg);
-  font-size: 0.75rem;
-  font-weight: 800;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  color: var(--auth-text-muted);
-  background: var(--auth-accent-bg);
-}
-
-.ml-problems-scroll {
-  max-height: 350px;
-  overflow-y: auto;
-  scrollbar-width: thin;
-  scrollbar-color: var(--auth-hover-bg) transparent;
-}
-.ml-problems-scroll::-webkit-scrollbar { width: 6px; }
-.ml-problems-scroll::-webkit-scrollbar-thumb { background: var(--auth-hover-bg); border-radius: 3px; }
-
-.ml-problem-row {
-  display: grid;
-  grid-template-columns: 1fr 100px 100px;
-  align-items: center;
-  padding: 0.6rem 1rem;
-  border-bottom: 1px solid var(--auth-hover-bg);
-  transition: background 0.15s;
-}
-.ml-problem-row:last-child {
-  border-bottom: none;
-}
-.ml-problem-row:hover {
-  background: var(--auth-hover-bg);
-}
-
-.ml-problem-name {
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: var(--auth-text);
-}
-.ml-problem-status {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 0.4rem;
-  font-size: 0.75rem;
-  color: var(--auth-text-muted);
-}
-.ml-status-text {
-  font-weight: 500;
+.ml-project-problems-section .practice-body-split {
+  height: 350px; /* Reduced from 300px */
+  min-height: 250px;
 }
 
 /* ── General Section ── */
@@ -129,37 +75,60 @@
 .ml-action-card {
   background: var(--auth-accent-bg);
   border: 1px solid var(--auth-hover-bg);
-  border-radius: 12px;
+  border-radius: 16px;
   padding: 1.5rem;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  gap: 0.5rem;
+  flex-direction: column; /* Changed back to column for proper button placement */
+  align-items: stretch;
+  gap: 1rem;
 }
+
+.ml-card-top-row {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 1.5rem;
+}
+
 .ml-card-icon {
-  width: 48px;
-  height: 48px;
-  border-radius: 12px;
-  background: var(--auth-nav-bg);
-  color: var(--auth-text);
+  width: 56px;
+  height: 56px;
+  min-width: 56px; /* Prevent shrinking */
+  min-height: 56px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.15), rgba(139, 92, 246, 0.15));
+  color: #818cf8;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 0.5rem;
+  flex-shrink: 0;
+  border: 1px solid rgba(99, 102, 241, 0.2);
 }
+
+.ml-card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  flex: 1;
+  min-width: 0; /* Allow text to wrap */
+}
+
 .ml-action-card h3 {
   font-size: 1.05rem;
   font-weight: 700;
   color: var(--auth-text);
   margin: 0;
+  text-align: left;
 }
+
 .ml-action-card p {
   font-size: 0.85rem;
   color: var(--auth-text-muted);
   margin: 0;
   line-height: 1.4;
+  text-align: left;
 }
+
 .ml-card-subtext {
   font-size: 0.7rem !important;
   opacity: 0.7;
@@ -177,8 +146,10 @@
   font-size: 0.85rem;
   cursor: pointer;
   transition: all 0.2s;
-  margin-top: 0.5rem;
+  margin-top: auto; /* Push to bottom */
+  align-self: center; /* Center horizontally */
 }
+
 .primary-btn {
   background: #3b82f6;
   color: white;
@@ -204,38 +175,45 @@
 .ml-journey-card {
   background: var(--auth-accent-bg);
   border: 1px solid var(--auth-hover-bg);
-  border-radius: 12px;
-  padding: 1.25rem;
+  border-radius: 16px;
+  padding: 1.5rem;
   display: flex;
-  align-items: flex-start;
-  gap: 1.25rem;
+  flex-direction: row; /* Explicitly set to row */
+  align-items: center;
+  gap: 1.5rem;
 }
 
 .ml-journey-icon {
-  width: 48px;
-  height: 48px;
-  border-radius: 12px;
-  background: var(--auth-nav-bg);
-  color: #6366f1; /* purple-ish to match image */
+  width: 56px;
+  height: 56px;
+  min-width: 56px; /* Prevent shrinking */
+  min-height: 56px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.15), rgba(139, 92, 246, 0.15));
+  color: #818cf8;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  border: 1px solid rgba(99, 102, 241, 0.2);
 }
 
 .ml-journey-content {
   display: flex;
   flex-direction: column;
-  gap: 0.4rem;
+  gap: 0.5rem;
+  flex: 1;
+  min-width: 0; /* Allow text to wrap */
 }
 
 .ml-journey-title-row {
   display: flex;
   align-items: center;
   gap: 0.75rem;
+  flex-wrap: wrap;
 }
 .ml-journey-title-row h3 {
-  font-size: 1rem;
+  font-size: 1.1rem;
   font-weight: 700;
   color: var(--auth-text);
   margin: 0;
@@ -244,18 +222,20 @@
 .ml-badge-coming-soon {
   font-size: 0.6rem;
   font-weight: 700;
-  background: rgba(255, 255, 255, 0.1);
-  color: var(--auth-text-muted);
-  padding: 2px 6px;
-  border-radius: 4px;
+  background: rgba(99, 102, 241, 0.15);
+  color: #818cf8;
+  padding: 3px 8px;
+  border-radius: 6px;
   letter-spacing: 0.05em;
+  border: 1px solid rgba(99, 102, 241, 0.25);
+  white-space: nowrap;
 }
 
 .ml-journey-content p {
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   color: var(--auth-text-muted);
   margin: 0;
-  line-height: 1.4;
+  line-height: 1.5;
 }
 
 .ml-problem-count {
