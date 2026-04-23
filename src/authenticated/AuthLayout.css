@@ -3,7 +3,7 @@
   --auth-nav-bg: #1a1a1a;
   --auth-text: #ffffff;
   --auth-text-muted: #a0a0a0;
-  --auth-hover-bg: rgba(255,255,255,0.08);
+  --auth-hover-bg: rgba(255, 255, 255, 0.08);
   --auth-accent-bg: #2a2a2a;
   --auth-accent-text: #ffffff;
   width: 100%;
@@ -18,9 +18,11 @@
   --auth-nav-bg: #ffffff;
   --auth-text: #111111;
   --auth-text-muted: #666666;
-  --auth-hover-bg: rgba(0,0,0,0.06);
+  --auth-hover-bg: rgba(0, 0, 0, 0.06);
   --auth-accent-bg: #e8e8e8;
   --auth-accent-text: #111111;
 }
 
-.auth-root * { box-sizing: border-box; }
+.auth-root * {
+  box-sizing: border-box;
+}

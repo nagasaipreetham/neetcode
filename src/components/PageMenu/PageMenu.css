@@ -3,7 +3,9 @@
    ═══════════════════════════════════════════════════ */
 
 /* Hide default browser scrollbar */
-body::-webkit-scrollbar { display: none; }
+body::-webkit-scrollbar {
+  display: none;
+}
 
 /* Container: fixed right side, 10vh from top and bottom */
 .scroll-indicator-container {
@@ -36,7 +38,8 @@ body::-webkit-scrollbar { display: none; }
   position: absolute;
   top: 0;
   left: 50%;
-  margin-left: -2px;           /* center the 4px thumb on the 2px line */
+  margin-left: -2px;
+  /* center the 4px thumb on the 2px line */
   width: 4px;
   height: 40px;
   background-color: #0562EF;
@@ -67,7 +70,8 @@ body::-webkit-scrollbar { display: none; }
   animation: fadeInText 0.8s ease-out forwards 1.2s;
   pointer-events: none;
   overflow: hidden;
-  height: 80px;                /* fixed height keeps layout stable */
+  height: 80px;
+  /* fixed height keeps layout stable */
   display: flex;
   align-items: flex-start;
   justify-content: center;
@@ -76,7 +80,8 @@ body::-webkit-scrollbar { display: none; }
 /* Inner wrapper — stacks letters top-to-bottom (vertical) */
 .scroll-text-inner {
   display: flex;
-  flex-direction: column;      /* one letter per row = vertical text */
+  flex-direction: column;
+  /* one letter per row = vertical text */
   align-items: center;
 }
 
@@ -89,13 +94,23 @@ body::-webkit-scrollbar { display: none; }
 
 /* ── Animations ── */
 @keyframes expandLine {
-  0%   { transform: scaleY(0); }
-  100% { transform: scaleY(1); }
+  0% {
+    transform: scaleY(0);
+  }
+
+  100% {
+    transform: scaleY(1);
+  }
 }
 
 @keyframes fadeInText {
-  0%   { opacity: 0; }
-  100% { opacity: 1; }
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
 }
 
 /* ── Mobile: hide indicator, show bottom bar ── */
@@ -123,7 +138,9 @@ body::-webkit-scrollbar { display: none; }
   scrollbar-width: none;
 }
 
-.page-menu-mobile::-webkit-scrollbar { display: none; }
+.page-menu-mobile::-webkit-scrollbar {
+  display: none;
+}
 
 .page-menu-mobile-item {
   background: none;
@@ -146,6 +163,11 @@ body::-webkit-scrollbar { display: none; }
 }
 
 @media (max-width: 768px) {
-  .scroll-indicator-container { display: none; }
-  .page-menu-mobile { display: flex; }
+  .scroll-indicator-container {
+    display: none;
+  }
+
+  .page-menu-mobile {
+    display: flex;
+  }
 }

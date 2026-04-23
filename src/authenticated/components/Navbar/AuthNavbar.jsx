@@ -6,7 +6,7 @@ import './AuthNavbar.css';
 export default function AuthNavbar({ theme, toggleTheme }) {
   const { pathname } = useLocation();
   const isPractice = pathname.startsWith('/practice');
-  const isCourse   = pathname.startsWith('/courses');
+  const isCourse   = pathname.startsWith('/course');
 
   return (
     <nav className="auth-navbar">
@@ -15,7 +15,7 @@ export default function AuthNavbar({ theme, toggleTheme }) {
           <img src={neetcodeLogo} className="auth-nav-logo" alt="NeetCode" />
         </Link>
         <div className="auth-nav-links">
-          <Link to="/courses?tab=courses" className={`auth-btn ${!isPractice && !isCourse ? '' : ''}`}>
+          <Link to="/course" className={`auth-btn ${isCourse ? 'active' : ''}`}>
             Course
           </Link>
           <Link to="/practice" className={`auth-btn ${isPractice ? 'active' : ''}`}>

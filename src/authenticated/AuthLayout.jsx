@@ -5,7 +5,7 @@ import AuthFooter from './components/Footer/AuthFooter';
 import './AuthLayout.css';
 
 export default function AuthLayout() {
-  const [theme,     setTheme]     = useState('dark');
+  const [theme, setTheme] = useState('dark');
   const [navHidden, setNavHidden] = useState(false);
   const lastY = useRef(0);
 
@@ -15,7 +15,7 @@ export default function AuthLayout() {
     const onScroll = () => {
       const y = window.scrollY;
       if (y > lastY.current && y > 64) setNavHidden(true);
-      else if (y < lastY.current)      setNavHidden(false);
+      else if (y < lastY.current) setNavHidden(false);
       lastY.current = y;
     };
     window.addEventListener('scroll', onScroll, { passive: true });

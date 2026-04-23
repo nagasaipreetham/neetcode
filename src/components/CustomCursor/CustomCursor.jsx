@@ -12,10 +12,10 @@ const CustomCursor = () => {
   const [isTouchDevice, setIsTouchDevice] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
 
-  // Disable cursor on /practice and /courses pages
+  // Disable cursor on /practice and /course pages
   const isPracticePage = location.pathname.startsWith('/practice');
-  const isCoursesPage = location.pathname.startsWith('/courses');
-  const shouldDisableCursor = isPracticePage || isCoursesPage;
+  const isCoursePage = location.pathname.startsWith('/course');
+  const shouldDisableCursor = isPracticePage || isCoursePage;
 
   // Add data attribute to body for CSS targeting
   useEffect(() => {

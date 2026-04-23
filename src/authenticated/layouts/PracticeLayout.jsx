@@ -16,7 +16,7 @@ export default function PracticeLayout() {
       <Outlet />
 
       {/* Right: streak panel — always visible */}
-      <aside className="streak-panel">
+      <aside className="streak-panel" data-lenis-prevent="true">
         <div className="streak-calendar-wrap">
           <StreakCalendar />
         </div>

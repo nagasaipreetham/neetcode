@@ -8,7 +8,7 @@
   --card-bg: #ffffff;
   --text-muted: #64748b;
   --text-secondary: #334155;
-  
+
   font-family: var(--font-sans);
   line-height: 1.5;
   font-weight: 400;
@@ -52,11 +52,15 @@ body {
   box-sizing: border-box;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   margin: 0;
 }
 
 button {
   font-family: inherit;
 }
-
