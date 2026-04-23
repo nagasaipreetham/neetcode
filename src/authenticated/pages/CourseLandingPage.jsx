@@ -24,7 +24,12 @@ export default function CourseLandingPage() {
               <div 
                 key={course.id} 
                 className="course-card"
-                onClick={() => navigate(`/course/${course.id}`)}
+                onClick={() => {
+                  const path = course.firstLessonId 
+                    ? `/course/${course.id}/${course.firstLessonId}` 
+                    : `/course/${course.id}`;
+                  navigate(path);
+                }}
               >
                 <div className="course-card-icon">{course.icon}</div>
                 <div className="course-card-content">

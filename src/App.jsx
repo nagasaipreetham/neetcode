@@ -18,6 +18,7 @@ import SpecialProblemsPage from './authenticated/pages/SpecialProblems/SpecialPr
 import MachineLearningPage from './authenticated/pages/MachineLearning/MachineLearningPage';
 import MachineLearningProjectPage from './authenticated/pages/MachineLearning/MachineLearningProjectPage';
 import CourseLandingPage from './authenticated/pages/CourseLandingPage';
+import LessonViewPage from './authenticated/pages/LessonViewPage';
 import useLenis from './hooks/useLenis';
 import {
   SYSTEM_DESIGN_PROBLEMS, SYSTEM_DESIGN_HEADING,
@@ -72,26 +73,25 @@ function App() {
             {/* Course Landing Page */}
             <Route path="/course" element={<CourseLandingPage />} />
 
-            {/* Courses - Data Structures & Algorithms */}
-            <Route path="/course/dsa/fundamentals"   element={<PlaceholderPage title="Data Structures & Algorithms" />} />
-            <Route path="/course/dsa/advanced"       element={<PlaceholderPage title="Advanced Algorithms" />} />
+            {/* Dynamic Course Lesson Route */}
+            <Route path="/course/:courseCategory/:courseName/:lessonId" element={<LessonViewPage />} />
+
+            {/* Legacy/Static Routes - Mapping to LessonViewPage */}
+            <Route path="/course/dsa/fundamentals"   element={<LessonViewPage title="Data Structures & Algorithms" />} />
+            <Route path="/course/dsa/advanced"       element={<LessonViewPage title="Advanced Algorithms" />} />
             
-            {/* Courses - System Design */}
-            <Route path="/course/system-design/beginners" element={<PlaceholderPage title="System Design for Beginners" />} />
-            <Route path="/course/system-design/interview" element={<PlaceholderPage title="System Design Interview" />} />
+            <Route path="/course/system-design/beginners" element={<LessonViewPage title="System Design for Beginners" />} />
+            <Route path="/course/system-design/interview" element={<LessonViewPage title="System Design Interview" />} />
             
-            {/* Courses - Python */}
-            <Route path="/course/python/beginners"          element={<PlaceholderPage title="Python for Beginners" />} />
-            <Route path="/course/python/coding-interviews"  element={<PlaceholderPage title="Python for Coding Interviews" />} />
-            <Route path="/course/python/oop"                element={<PlaceholderPage title="Python OOP" />} />
+            <Route path="/course/python/beginners"          element={<LessonViewPage title="Python for Beginners" />} />
+            <Route path="/course/python/coding-interviews"  element={<LessonViewPage title="Python for Coding Interviews" />} />
+            <Route path="/course/python/oop"                element={<LessonViewPage title="Python OOP" />} />
             
-            {/* Courses - Full Stack Development */}
-            <Route path="/course/fullstack/sql" element={<PlaceholderPage title="SQL for Beginners" />} />
-            <Route path="/course/fullstack/dev" element={<PlaceholderPage title="Full Stack Development" />} />
+            <Route path="/course/fullstack/sql" element={<LessonViewPage title="SQL for Beginners" />} />
+            <Route path="/course/fullstack/dev" element={<LessonViewPage title="Full Stack Development" />} />
             
-            {/* Courses - Object Oriented Design */}
-            <Route path="/course/ood/interviews" element={<PlaceholderPage title="Object Oriented Design Interviews" />} />
-            <Route path="/course/ood/patterns"   element={<PlaceholderPage title="Object Oriented Design Patterns" />} />
+            <Route path="/course/ood/interviews" element={<LessonViewPage title="Object Oriented Design Interviews" />} />
+            <Route path="/course/ood/patterns"   element={<LessonViewPage title="Object Oriented Design Patterns" />} />
           </Route>
 
         </Route>

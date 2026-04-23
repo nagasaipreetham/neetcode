@@ -304,8 +304,17 @@
   transition: background 0.15s;
 }
 
-.lesson-item:hover {
+.lesson-item:hover, .lesson-item--active {
   background: var(--auth-hover-bg);
+}
+
+.lesson-item--active .lesson-name {
+  color: var(--auth-text);
+  font-weight: 600;
+}
+
+.lesson-item--completed .lesson-name {
+  color: #22c55e !important;
 }
 
 .lesson-name {

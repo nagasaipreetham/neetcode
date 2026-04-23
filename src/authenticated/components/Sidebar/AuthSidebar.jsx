@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Code2, Server, Brain, Layers, Database, Globe, Box, ChevronRight, Terminal, GitBranch, Building2, ArrowLeft, Clock } from 'lucide-react';
-import { DSA_LESSONS } from '../../data/courseLessonsData';
+import { DSA_LESSONS, LESSON_DATA_MAP } from '../../data/courseLessonsData';
 import './AuthSidebar.css';
 
 const PRACTICE_TREE = [
@@ -30,37 +30,37 @@ const COURSES_TREE = [
   {
     id: 'course-dsa', label: 'Data Structures & Algorithms', icon: GitBranch,
     children: [
-      { label: 'Data Structures & Algorithms', path: '/course/dsa/fundamentals' },
-      { label: 'Advanced Algorithms',           path: '/course/dsa/advanced' },
+      { label: 'Data Structures & Algorithms', path: '/course/dsa/fundamentals/intro' },
+      { label: 'Advanced Algorithms',           path: '/course/dsa/advanced/intro' },
     ],
   },
   {
     id: 'course-sysdesign', label: 'System Design', icon: Server,
     children: [
-      { label: 'System Design for Beginners', path: '/course/system-design/beginners' },
-      { label: 'System Design Interview',     path: '/course/system-design/interview' },
+      { label: 'System Design for Beginners', path: '/course/system-design/beginners/intro' },
+      { label: 'System Design Interview',     path: '/course/system-design/interview/intro' },
     ],
   },
   {
     id: 'course-python', label: 'Python', icon: Terminal,
     children: [
-      { label: 'Python for Beginners',          path: '/course/python/beginners' },
-      { label: 'Python for Coding Interviews',  path: '/course/python/coding-interviews' },
-      { label: 'Python OOP',                    path: '/course/python/oop' },
+      { label: 'Python for Beginners',          path: '/course/python/beginners/intro' },
+      { label: 'Python for Coding Interviews',  path: '/course/python/coding-interviews/intro' },
+      { label: 'Python OOP',                    path: '/course/python/oop/intro' },
     ],
   },
   {
     id: 'course-fullstack', label: 'Full Stack Development', icon: Globe,
     children: [
-      { label: 'SQL for Beginners',       path: '/course/fullstack/sql' },
-      { label: 'Full Stack Development',  path: '/course/fullstack/dev' },
+      { label: 'SQL for Beginners',       path: '/course/fullstack/sql/intro' },
+      { label: 'Full Stack Development',  path: '/course/fullstack/dev/intro' },
     ],
   },
   {
     id: 'course-ood', label: 'Object Oriented Design', icon: Box,
     children: [
-      { label: 'Object Oriented Design Interviews', path: '/course/ood/interviews' },
-      { label: 'Object Oriented Design Patterns',   path: '/course/ood/patterns' },
+      { label: 'Object Oriented Design Interviews', path: '/course/ood/interviews/intro' },
+      { label: 'Object Oriented Design Patterns',   path: '/course/ood/patterns/intro' },
     ],
   },
 ];
@@ -69,18 +69,54 @@ export default function AuthSidebar() {
   const navigate = useNavigate();
   const { pathname } = useLocation();
 
-  const defaultTab = pathname.startsWith('/course') ? 'courses' : 'practice';
-  const [activeTab, setActiveTab] = useState(defaultTab);
+  const [activeTab, setActiveTab] = useState(pathname.startsWith('/course') ? 'courses' : 'practice');
+  const [completedLessons, setCompletedLessons] = useState([]);
+
+  // Parse path to find current course key (e.g. 'dsa/fundamentals')
+  const pathParts = pathname.split('/').filter(Boolean);
+  const isCoursePath = pathParts[0] === 'course' && pathParts.length >= 3;
+  const currentCourseKey = isCoursePath ? `${pathParts[1]}/${pathParts[2]}` : null;
+  const currentCourseData = LESSON_DATA_MAP[currentCourseKey];
+
+  // Sync tab and completion with URL/Storage
+  useEffect(() => {
+    if (pathname.startsWith('/course')) {
+      setActiveTab('courses');
+    } else if (pathname.startsWith('/practice')) {
+      setActiveTab('practice');
+    }
+
+    const syncCompleted = () => {
+      const completed = localStorage.getItem('completed_lessons');
+      setCompletedLessons(completed ? JSON.parse(completed) : []);
+    };
+    
+    syncCompleted();
+    window.addEventListener('storage', syncCompleted);
+    return () => window.removeEventListener('storage', syncCompleted);
+  }, [pathname]);
+
+  // Calculate progress for current course
+  const totalLessonsInCurrentCourse = currentCourseData 
+    ? currentCourseData.lessons.reduce((acc, sec) => acc + sec.lessons.length, 0)
+    : 36;
+  
+  const completedInCurrentCourse = currentCourseData
+    ? currentCourseData.lessons.flatMap(s => s.lessons).filter(l => completedLessons.includes(l.id)).length
+    : 0;
+
+  const progressPercent = Math.round((completedInCurrentCourse / totalLessonsInCurrentCourse) * 100) || 0;
+  const progressLabel = `${completedInCurrentCourse}/${totalLessonsInCurrentCourse}`;
 
   // Detect if we are inside a specific course lesson tree
-  const isDsaCourse = pathname.startsWith('/course/dsa');
-  const isCourseDetail = isDsaCourse; // For now only DSA has lessons data
+  const isCourseDetail = !!currentCourseData;
 
   // Auto-expand the active course section (or default practice section)
   const getInitialExpanded = () => {
     const base = { 'coding-interviews': true };
     // Expand all sections by default in lesson tree
-    DSA_LESSONS.forEach(sec => base[sec.title] = true);
+    const targetLessons = currentCourseData ? currentCourseData.lessons : DSA_LESSONS;
+    targetLessons.forEach(sec => base[sec.title] = true);
     
     if (pathname.startsWith('/course/dsa'))            return { ...base, 'course-dsa': true };
     if (pathname.startsWith('/course/system-design'))  return { ...base, 'course-sysdesign': true };
@@ -135,33 +171,40 @@ export default function AuthSidebar() {
               <button className="lesson-back-btn" onClick={() => navigate('/course')}>
                 <ArrowLeft size={18} />
               </button>
-              <ProgressCircle percent={0} label="0/36" />
-              <h3 className="lesson-course-title">Data Structures & Algorithms</h3>
+              <ProgressCircle percent={progressPercent} label={progressLabel} />
+              <h3 className="lesson-course-title">{currentCourseData?.title || 'Course'}</h3>
             </div>
 
             <div className="lesson-sections">
-              {DSA_LESSONS.map(section => {
+              {(currentCourseData?.lessons || []).map(section => {
                 const isOpen = !!expanded[section.title];
                 return (
-                  <div key={section.title} className="lesson-section-group">
+                   <div key={section.title} className="lesson-section-group">
                     <button className="lesson-section-toggle" onClick={() => toggle(section.title)}>
                       <span className="section-title">{section.title}</span>
                       <ChevronRight size={14} className={`section-chevron ${isOpen ? 'open' : ''}`} />
                     </button>
                     {isOpen && (
                       <div className="lesson-list">
-                        {section.lessons.map(lesson => (
-                          <div key={lesson.id} className="lesson-item">
-                            <span className="lesson-name">{lesson.name}</span>
-                            <div className="lesson-meta">
-                              {lesson.free && <span className="lesson-free-tag">FREE</span>}
-                              <div className="lesson-duration">
-                                <Clock size={11} />
-                                <span>{lesson.duration}</span>
+                        {section.lessons.map(lesson => {
+                          const isCompleted = completedLessons.includes(lesson.id);
+                          return (
+                            <div 
+                              key={lesson.id} 
+                              className={`lesson-item ${isActive(`/course/${currentCourseKey}/${lesson.id}`) ? 'lesson-item--active' : ''} ${isCompleted ? 'lesson-item--completed' : ''}`}
+                              onClick={() => navigate(`/course/${currentCourseKey}/${lesson.id}`)}
+                            >
+                              <span className="lesson-name">{lesson.name}</span>
+                              <div className="lesson-meta">
+                                {lesson.free && <span className="lesson-free-tag">FREE</span>}
+                                <div className="lesson-duration">
+                                  <Clock size={11} />
+                                  <span>{lesson.duration}</span>
+                                </div>
                               </div>
                             </div>
-                          </div>
-                        ))}
+                          );
+                        })}
                       </div>
                     )}
                   </div>
