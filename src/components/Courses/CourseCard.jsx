@@ -1,5 +1,3 @@
-import { a } from 'framer-motion/client';
-import BorderGlow from '../BorderGlow/BorderGlow';
 import './CourseCard.css';
 
 const difficultyClass = {
@@ -95,16 +93,6 @@ export default function CourseCard({ title, description, hours, difficulty, less
       className="course-card-link"
     >
       <div className="course-card">
-      <BorderGlow
-        borderRadius={16}
-        backgroundColor="rgba(0, 0, 0, 0.4)"
-        glowColor={difficultyGlow[difficulty]}
-        glowRadius={50}
-        glowIntensity={0.9}
-        coneSpread={12}
-        edgeSensitivity={0}
-        colors={['#c084fc', '#818cf8', '#38bdf8']}
-      >
         <div className={`course-card-inner course-card-inner--${variant}`}>
           <div className="course-card-top">
             {renderImages()}
@@ -119,8 +107,7 @@ export default function CourseCard({ title, description, hours, difficulty, less
             </div>
           </div>
         </div>
-      </BorderGlow>
-    </div>
+      </div>
     </a>
   );
 }

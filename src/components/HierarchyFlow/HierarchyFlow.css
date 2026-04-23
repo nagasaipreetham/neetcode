@@ -1,17 +1,25 @@
-.hierarchy-flow {
+/* ═══════════════════════════════════════════════════════
+   HierarchyFlow — DSA Roadmap Tree
+   Theme: landing page blue (#0562EF)
+════════════════════════════════════════════════════════ */
+
+/* ── Outer wrapper ─────────────────────────────────── */
+.hf-wrap {
   position: relative;
   width: 100%;
-  max-width: 580px;
+  max-width: 560px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 1rem 0;
+  gap: 0;
+  padding: 1.25rem 0.5rem 1rem;
+  user-select: none;
 }
 
-.hierarchy-svg {
+/* ── SVG connector overlay ─────────────────────────── */
+.hf-svg {
   position: absolute;
-  top: 0;
-  left: 0;
+  inset: 0;
   width: 100%;
   height: 100%;
   pointer-events: none;
@@ -19,97 +27,189 @@
   overflow: visible;
 }
 
-.hierarchy-level {
+.hf-line {
+  fill: none;
+  stroke: #cbd5e1;           /* slate-300 — matches light page borders */
+  stroke-width: 1.5;
+  stroke-dasharray: 5 4;
+  stroke-linecap: round;
+  transition: stroke 0.35s ease, filter 0.35s ease;
+}
+
+.hf-line--lit {
+  stroke: #0562EF;
+  stroke-dasharray: none;
+  filter: drop-shadow(0 0 4px rgba(5, 98, 239, 0.5));
+  animation: hf-beam 1.6s linear infinite;
+}
+
+@keyframes hf-beam {
+  from { stroke-dashoffset: 0; }
+  to   { stroke-dashoffset: -22; }
+}
+
+.hf-line--lit {
+  stroke-dasharray: 7 5;
+}
+
+/* ── Tier row ──────────────────────────────────────── */
+.hf-tier {
   position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 1.25rem;
-  width: 100%;
-  margin-bottom: 2.25rem;
   z-index: 1;
-}
-
-.hierarchy-node {
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  margin-bottom: 3.5rem;
 }
 
-/* ── Modern button ── */
-.h-node-btn {
+/* ── Node button — base ────────────────────────────── */
+.hf-node {
   position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 10px 20px;
+  gap: 0.4rem;
+  padding: 9px 18px;
   border-radius: 10px;
+  border: 1.5px solid #e2e8f0;
+  background: #ffffff;
+  cursor: pointer;
   overflow: hidden;
-  cursor: default;
+  white-space: nowrap;
+  transition:
+    border-color 0.22s ease,
+    background   0.22s ease,
+    box-shadow   0.22s ease,
+    transform    0.18s ease;
 
-  /* glass base */
-  background: rgba(109, 40, 217, 0.18);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-
-  /* thin purple border */
-  border: 1px solid rgba(139, 92, 246, 0.45);
-
-  /* subtle outer glow */
+  /* subtle depth */
   box-shadow:
-    0 0 0 1px rgba(109, 40, 217, 0.15),
-    0 4px 20px rgba(109, 40, 217, 0.25),
-    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    0 1px 3px rgba(15, 23, 42, 0.06),
+    0 1px 0 rgba(255,255,255,0.9) inset;
 }
 
-/* inner radial glow blob */
-.h-node-glow {
+/* ── Node — UNLOCKED ────────────────────────────────── */
+.hf-node--unlocked {
+  border-color: rgba(5, 98, 239, 0.28);
+  background: rgba(5, 98, 239, 0.04);
+  box-shadow:
+    0 0 0 1px rgba(5, 98, 239, 0.08),
+    0 2px 8px  rgba(5, 98, 239, 0.10),
+    0 1px 0 rgba(255,255,255,0.95) inset;
+}
+
+/* ── Node — ADJACENT (connected to active) ──────────── */
+.hf-node--adjacent {
+  border-color: rgba(5, 98, 239, 0.45);
+  background: rgba(5, 98, 239, 0.07);
+  box-shadow:
+    0 0 0 1px rgba(5, 98, 239, 0.12),
+    0 4px 14px rgba(5, 98, 239, 0.15);
+}
+
+/* ── Node — ACTIVE (clicked) ────────────────────────── */
+.hf-node--active {
+  border-color: #0562EF;
+  background: #0562EF;
+  box-shadow:
+    0 0 0 3px rgba(5, 98, 239, 0.18),
+    0 4px 18px rgba(5, 98, 239, 0.35),
+    0 1px 0 rgba(255,255,255,0.15) inset;
+  transform: scale(1.06);
+}
+
+/* ── Node — HOVER ────────────────────────────────────── */
+.hf-node:not(.hf-node--active):hover {
+  border-color: #0562EF;
+  background: rgba(5, 98, 239, 0.06);
+  box-shadow:
+    0 0 0 2px rgba(5, 98, 239, 0.14),
+    0 4px 16px rgba(5, 98, 239, 0.18);
+}
+
+/* ── Label text ─────────────────────────────────────── */
+.hf-label {
+  position: relative;
+  z-index: 1;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: #1e293b;
+  transition: color 0.22s ease;
+  line-height: 1.2;
+}
+
+/* Label color when active */
+.hf-node--active .hf-label {
+  color: #ffffff;
+}
+
+/* Label color when unlocked (blue tint) */
+.hf-node--unlocked:not(.hf-node--active) .hf-label {
+  color: #0450cc;
+}
+
+/* Label color when adjacent */
+.hf-node--adjacent:not(.hf-node--active) .hf-label {
+  color: #0562EF;
+}
+
+/* ── Lock icon ──────────────────────────────────────── */
+.hf-lock {
+  font-size: 0.65rem;
+  opacity: 0.55;
+  position: relative;
+  z-index: 1;
+  transition: opacity 0.2s;
+}
+
+.hf-node:hover .hf-lock {
+  opacity: 0.8;
+}
+
+/* ── Active glow blob (animated radial) ─────────────── */
+.hf-active-blob {
   position: absolute;
-  inset: 0;
-  border-radius: inherit;
+  inset: -40%;
+  border-radius: 50%;
   background: radial-gradient(
-    ellipse at 50% 0%,
-    rgba(139, 92, 246, 0.35) 0%,
+    ellipse at 50% 50%,
+    rgba(255,255,255,0.22) 0%,
     transparent 70%
   );
   pointer-events: none;
+  animation: hf-blob-pulse 2s ease-in-out infinite;
 }
 
-.h-node-label {
-  position: relative;
-  z-index: 1;
-  color: #e2d9ff;
-  font-size: 0.88rem;
-  font-weight: 600;
-  font-family: 'Outfit', sans-serif;
-  white-space: nowrap;
-  letter-spacing: 0.01em;
+@keyframes hf-blob-pulse {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50%       { opacity: 1;   transform: scale(1.12); }
 }
 
-/* ── Arrows ── */
-.hierarchy-arrow {
-  fill: none;
-  stroke: rgba(139, 92, 246, 0.55);
-  stroke-width: 1.5;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-.hierarchy-arrow-head {
-  fill: rgba(139, 92, 246, 0.55);
+/* ─────────────────────────────────────────────────────
+   Responsive
+───────────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .hf-wrap {
+    max-width: 100%;
+  }
 }
 
 @media (max-width: 768px) {
-  .hierarchy-level {
-    gap: 0.6rem;
+  .hf-tier {
+    gap: 0.5rem;
     flex-wrap: wrap;
+    margin-bottom: 2.5rem;
   }
 
-  .h-node-btn {
-    padding: 8px 14px;
+  .hf-node {
+    padding: 7px 13px;
   }
 
-  .h-node-label {
-    font-size: 0.78rem;
+  .hf-label {
+    font-size: 0.72rem;
   }
 }

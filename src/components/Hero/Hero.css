@@ -7,7 +7,7 @@
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 120px 2rem 4rem;
+  padding: 130px 2rem 10rem;
   gap: 4rem;
   min-height: 100vh;
 }
@@ -16,184 +16,204 @@
 .hero-left {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1rem;
   flex: 1;
-  max-width: 560px;
+  max-width: 580px;
 }
 
-.hero-brand {
-  font-size: clamp(3.5rem, 7vw, 6rem);
-  font-weight: 800;
-  line-height: 1;
-  letter-spacing: -0.02em;
-  background: linear-gradient(135deg, #7c3aed, #a855f7, #c084fc, #e879f9);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 0 40px rgba(168, 85, 247, 0.45));
+/* Badge pill above heading */
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 5px 14px;
+  border-radius: 100px;
+  border: 1px solid rgba(5, 98, 239, 0.25);
+  background: rgba(5, 98, 239, 0.06);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #0562EF;
+  width: fit-content;
+  letter-spacing: 0.01em;
 }
 
-.hero-caption {
-  font-size: clamp(1.5rem, 3vw, 2rem);
-  font-weight: 500;
-  color: #e2e8f0;
-  min-height: 2.5rem;
+.hero-badge-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #0562EF;
+  flex-shrink: 0;
+}
+
+/* Typing caption */
+.hero-caption-wrap {
+  min-height: 2rem;
   display: flex;
   align-items: center;
 }
 
+.hero-caption {
+  font-size: clamp(1rem, 1.8vw, 1.2rem);
+  font-weight: 500;
+  color: #64748b;
+  letter-spacing: -0.01em;
+  display: inline;
+}
+
+/* Blinking cursor */
+.hero-cursor {
+  color: #0562EF;
+  font-weight: 400;
+  margin-left: 1px;
+}
+
+.hero-brand {
+  font-size: clamp(2.8rem, 5.5vw, 4.5rem);
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  color: #0f172a;
+  margin: 0;
+}
+
+.hero-brand-accent {
+  color: #0562EF;
+}
+
+/* (hero-caption is now inside hero-caption-wrap above) */
+
 .hero-description {
-  font-size: clamp(1.05rem, 1.8vw, 1.2rem);
-  color: #94a3b8;
-  line-height: 1.7;
+  font-size: clamp(0.95rem, 1.5vw, 1.05rem);
+  color: #64748b;
+  line-height: 1.75;
   max-width: 480px;
 }
 
 /* BUTTONS */
 .hero-buttons {
   display: flex;
-  gap: 1rem;
+  gap: 0.75rem;
   align-items: center;
   flex-wrap: wrap;
 }
 
-/* Get Pro — uses StarBorder component */
+/* Primary CTA — solid blue, supermemory style */
 .hero-btn-pro {
-  border-radius: 100px;
-}
-
-.hero-btn-pro .star-border-glow::after {
-  background: linear-gradient(135deg, #6d28d9, #a855f7, #d946ef);
-}
-
-.hero-btn-pro .inner-content {
-  background: linear-gradient(135deg, #6d28d9, #a855f7, #d946ef);
-  padding: 10px 26px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 11px 24px;
   font-size: 0.95rem;
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   font-weight: 600;
-  border-radius: 100px;
-  color: #fff;
-}
-
-/* Start Free — fade bg via pseudo-element */
-.hero-btn-free {
-  position: relative;
-  padding: 12px 28px;
-  font-size: 0.95rem;
-  font-family: 'Outfit', sans-serif;
-  font-weight: 600;
-  border-radius: 100px;
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 8px;
+  border: none;
   cursor: pointer;
-  background: rgba(255, 255, 255, 0.07);
+  background: #0562EF;
+  color: #fff;
+  text-decoration: none;
+  transition: background 0.2s ease, transform 0.15s ease;
+  letter-spacing: -0.01em;
 }
 
-/* green gradient layer that fades in on hover */
-.hero-btn-free-bg {
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  background: linear-gradient(135deg, #16a34a, #22c55e, #4ade80);
-  opacity: 0;
-  transition: opacity 0.5s ease;
-  pointer-events: none;
-  z-index: 0;
+.hero-btn-pro:hover {
+  background: #0450cc;
+  transform: translateY(-1px);
 }
 
-.hero-btn-free:hover .hero-btn-free-bg {
-  opacity: 1;
+.hero-btn-pro-arrow {
+  font-size: 1rem;
+  transition: transform 0.2s ease;
+}
+
+.hero-btn-pro:hover .hero-btn-pro-arrow {
+  transform: translateX(3px);
+}
+
+/* Secondary CTA — outlined */
+.hero-btn-free {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 11px 24px;
+  font-size: 0.95rem;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  border-radius: 8px;
+  border: 1.5px solid #e2e8f0;
+  cursor: pointer;
+  background: #ffffff;
+  color: #1e293b;
+  text-decoration: none;
+  transition: border-color 0.2s ease, background 0.2s ease, transform 0.15s ease;
+  letter-spacing: -0.01em;
 }
 
 .hero-btn-free:hover {
-  border-color: transparent;
-}
-
-/* keep text above the bg layer */
-.hero-btn-free > span:last-child,
-.hero-btn-free > *:not(.hero-btn-free-bg) {
-  position: relative;
-  z-index: 1;
-}
-
-@keyframes star-border-rotate {
-  from { transform: rotate(0deg); }
-  to   { transform: rotate(360deg); }
+  border-color: #0562EF;
+  color: #0562EF;
+  transform: translateY(-1px);
+  text-decoration: none;
 }
 
 /* STATS */
 .hero-stats {
   display: flex;
-  gap: 2.5rem;
-  margin-top: 0.5rem;
+  gap: 2rem;
+  margin-top: 0.25rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #e2e8f0;
 }
 
 .hero-stat {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.3rem;
 }
 
 .hero-stat-number {
-  font-size: clamp(1.75rem, 3vw, 2.25rem);
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
   font-weight: 800;
   line-height: 1;
+  letter-spacing: -0.02em;
+  color: #0f172a;
 }
 
 .stat-complete {
-  animation: statPulse 0.6s ease-out;
+  animation: statPulse 0.5s ease-out;
 }
 
 @keyframes statPulse {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.1);
-    filter: drop-shadow(0 0 20px rgba(168, 85, 247, 0.8));
-  }
-  100% {
-    transform: scale(1);
-    filter: drop-shadow(0 0 0px rgba(168, 85, 247, 0));
-  }
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.08); }
+  100% { transform: scale(1); }
 }
 
-/* used only for CountUp (plain span, no color override conflict) */
 .gradient-stat-text {
-  background: linear-gradient(135deg, #a855f7, #e879f9, #c084fc);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  font-size: clamp(1.75rem, 3vw, 2.25rem);
+  color: #0562EF;
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
   font-weight: 800;
   display: inline-flex;
   align-items: center;
+  letter-spacing: -0.02em;
 }
 
-/* 1M+ uses BlurText — white, large, bold */
 .stat-blur-text {
-  font-size: clamp(1.75rem, 3vw, 2.25rem) !important;
+  font-size: clamp(1.5rem, 2.5vw, 2rem) !important;
   font-weight: 800 !important;
-  color: #fff;
+  color: #0f172a;
   line-height: 1;
+  letter-spacing: -0.02em;
 }
 
 .hero-stat-caption {
-  font-size: 0.78rem;
+  font-size: 0.75rem;
   color: #94a3b8;
   font-weight: 400;
-  letter-spacing: 0.02em;
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 100px;
-  padding: 3px 10px;
-  display: inline-block;
-  width: fit-content;
+  letter-spacing: 0.01em;
 }
 
-/* RIGHT placeholder */
+/* RIGHT */
 .hero-right {
   flex: 1;
   display: flex;
@@ -201,33 +221,8 @@
   justify-content: center;
 }
 
-.hero-right-link {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-/* Hierarchy node StarBorder overrides */
-.hierarchy-node .star-border-container {
-  border-radius: 12px;
-}
-
-.hierarchy-node .star-border-glow::after {
-  background: rgba(30, 27, 75, 0.55);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-}
-
-.hierarchy-node .inner-content {
-  background: rgba(30, 27, 75, 0.55);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  padding: 12px 20px;
-  border-radius: 12px;
-}
+/* hero-right-link and hierarchy-node overrides removed —
+   tree styling is now fully self-contained in HierarchyFlow.css */
 
 @media (max-width: 768px) {
   .hero-section {
@@ -239,5 +234,9 @@
 
   .hero-right {
     width: 100%;
+  }
+
+  .hero-stats {
+    gap: 1.5rem;
   }
 }

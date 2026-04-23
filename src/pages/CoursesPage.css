@@ -1,6 +1,6 @@
 .courses-page {
   min-height: 100vh;
-  background: #000;
+  background: #F5F9FF;
   display: flex;
   flex-direction: column;
 }
@@ -33,10 +33,9 @@
 .courses-page-toggle {
   display: inline-flex;
   position: relative;
-  border: 1px solid rgba(124, 58, 237, 0.5);
-  background: rgba(0, 0, 0, 0.3);
-  backdrop-filter: blur(8px);
-  border-radius: 100px;
+  border: 1.5px solid #e2e8f0;
+  background: #ffffff;
+  border-radius: 10px;
   padding: 4px;
   gap: 0;
   isolation: isolate;
@@ -48,8 +47,8 @@
   bottom: 4px;
   left: 4px;
   width: calc(50% - 4px);
-  background: linear-gradient(135deg, #6d28d9, #a855f7, #d946ef);
-  border-radius: 100px;
+  background: #0562EF;
+  border-radius: 7px;
   transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   z-index: 0;
 }
@@ -59,25 +58,25 @@
   z-index: 1;
   padding: 8px 0;
   min-width: 120px;
-  border-radius: 100px;
+  border-radius: 7px;
   border: none;
   cursor: pointer;
   font-size: 0.9rem;
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   font-weight: 600;
-  transition: color 0.3s ease;
+  transition: color 0.2s ease;
   background: transparent;
   outline: none;
   text-align: center;
 }
 
 .toggle-btn--active {
-  color: #fff;
+  color: #ffffff;
 }
 
 .toggle-btn--inactive {
   background: transparent;
-  color: rgba(255, 255, 255, 0.5);
+  color: #64748b;
 }
 
 /* ── Tab content ── */
@@ -92,7 +91,7 @@
   min-height: 300px;
   color: #475569;
   font-size: 1rem;
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
 }
 
 /* Ensure footer above bg */

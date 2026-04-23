@@ -1,32 +1,27 @@
 import Navbar from '../components/Navbar/Navbar';
 import Footer from '../components/Footer/Footer';
+import PageMenu from '../components/PageMenu/PageMenu';
 import SpotlightCard from '../components/SpotlightCard/SpotlightCard';
 import GradientText from '../components/GradientText/GradientText';
-import PixelSnowBg from '../components/PixelSnow/PixelSnowBg';
 import './PrivacyPolicy.css';
+
+const TERMS_SECTIONS = [
+  { id: 'terms-content', label: 'Terms' },
+];
 
 export default function Terms() {
   return (
     <div className="policy-page">
-      {/* Background */}
-      <div className="policy-bg">
-        <PixelSnowBg />
-      </div>
 
       <Navbar />
+      <PageMenu sections={TERMS_SECTIONS} />
 
-      <div className="policy-content">
-        <h1 className="policy-main-heading">
-          <GradientText
-            colors={["#7c3aed", "#a855f7", "#c084fc", "#e879f9"]}
-            animationSpeed={8}
-            style={{ fontSize: 'inherit', fontWeight: 'inherit', letterSpacing: 'inherit' }}
-          >
-            Terms of Service
-          </GradientText>
+      <div className="policy-content" id="terms-content">
+        <h1 className="policy-main-heading" style={{ color: '#0562EF' }}>
+          Terms of Service
         </h1>
 
-        <SpotlightCard spotlightColor="rgba(139, 92, 246, 0.2)" className="policy-card">
+        <SpotlightCard spotlightColor="rgba(5, 98, 239, 0.1)" className="policy-card">
           <div className="policy-section">
             <h2 className="policy-subheading">Terms</h2>
             <p className="policy-text">

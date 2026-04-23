@@ -2,7 +2,7 @@
   position: relative;
   z-index: 1;
   width: 100%;
-  padding: 2rem 2rem 2rem;
+  padding: 3rem 2rem 2rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -11,13 +11,14 @@
 }
 
 .orbit-heading {
-  font-size: clamp(1.5rem, 3vw, 2rem);
-  font-weight: 500;
-  color: #fff;
+  font-size: clamp(0.8rem, 1.5vw, 0.9rem);
+  font-weight: 600;
+  color: #94a3b8;
   text-align: center;
-  max-width: 700px;
+  max-width: 600px;
   line-height: 1.4;
-  letter-spacing: -0.01em;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
 }
 
 .orbit-container {
@@ -59,15 +60,13 @@
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  background: rgba(55, 55, 65, 0.75);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.4);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
   text-decoration: none;
   color: inherit;
   position: relative;
@@ -76,25 +75,25 @@
 .company-logo-btn::after {
   content: '';
   position: absolute;
-  bottom: -12px;
+  bottom: -10px;
   left: 50%;
   transform: translateX(-50%);
-  width: 80%;
-  height: 8px;
-  background: radial-gradient(ellipse at center, rgba(168, 85, 247, 0.3) 0%, transparent 70%);
+  width: 70%;
+  height: 6px;
+  background: radial-gradient(ellipse at center, rgba(5, 98, 239, 0.2) 0%, transparent 70%);
   border-radius: 50%;
-  opacity: 0.6;
-  transition: opacity 0.25s ease, transform 0.25s ease;
+  opacity: 0.5;
+  transition: opacity 0.25s ease;
 }
 
 .company-logo-btn:hover {
-  transform: scale(1.18);
-  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.55);
+  transform: scale(1.15);
+  box-shadow: 0 6px 24px rgba(5, 98, 239, 0.15);
+  border-color: rgba(5, 98, 239, 0.3);
 }
 
 .company-logo-btn:hover::after {
-  opacity: 0.9;
-  transform: translateX(-50%) scale(1.2);
+  opacity: 0.8;
 }
 
 .company-logo-btn img {

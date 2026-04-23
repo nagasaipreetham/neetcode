@@ -8,6 +8,15 @@
   align-items: center;
 }
 
+.reviews-heading {
+  font-size: clamp(2.2rem, 5vw, 3.2rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  text-align: center;
+  margin: 0 0 3rem 0;
+  color: #0f172a;
+}
+
 .reviews-grid {
   display: flex;
   flex-direction: column;

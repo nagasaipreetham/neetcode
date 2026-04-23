@@ -1,60 +1,97 @@
+import React, { memo } from 'react';
 import useScrollReveal from '../../hooks/useScrollReveal';
 import Navbar from '../Navbar/Navbar';
 import Hero from '../Hero/Hero';
 import CompanyOrbit from '../CompanyOrbit/CompanyOrbit';
 import Reviews from '../Reviews/Reviews';
-import Courses from '../Courses/Courses';
+import CoursesLanding from '../Courses/CoursesLanding';
+import FeaturesGrid from '../FeaturesGrid/FeaturesGrid';
 import PracticeSection from '../PracticeSection/PracticeSection';
 import AboutSection from '../AboutSection/AboutSection';
 import Footer from '../Footer/Footer';
-import PixelSnowBg from '../PixelSnow/PixelSnowBg';
 import PageMenu from '../PageMenu/PageMenu';
 import './LandingPage.css';
 
+/**
+ * Section Configuration for Navigation
+ */
 const LANDING_SECTIONS = [
-  { id: 'hero',     label: 'Home'     },
-  { id: 'results',  label: 'Results'  },
-  { id: 'courses',  label: 'Courses'  },
-  { id: 'practice', label: 'Practice' },
-  { id: 'story',    label: 'Story'    },
+  { id: 'home',        label: 'Home'       },
+  { id: 'companies',   label: 'Companies'  },
+  { id: 'features',    label: 'Features'   },
+  { id: 'courses',     label: 'Courses'    },
+  { id: 'practice',    label: 'Practice'   },
+  { id: 'testimonials',label: 'Testimonials' },
+  { id: 'story',       label: 'Story'      },
 ];
 
-function RevealSection({ children, threshold }) {
-  const ref = useScrollReveal(threshold ? { threshold } : {});
-  return <div ref={ref} className="scroll-reveal">{children}</div>;
-}
+/**
+ * Standardized Section Wrapper
+ * Handles ID assignment and optional scroll-reveal animation.
+ */
+const Section = memo(({ id, children, reveal = true, threshold = 0.12 }) => {
+  const revealRef = useScrollReveal({ threshold });
+  
+  return (
+    <div 
+      id={id} 
+      ref={reveal ? revealRef : null} 
+      className={`landing-section ${reveal ? 'scroll-reveal' : ''}`}
+    >
+      {children}
+    </div>
+  );
+});
 
+Section.displayName = 'Section';
+
+/**
+ * Landing Page Component
+ * Orchestrates all main sections of the website.
+ */
 export default function LandingPage() {
   return (
     <div className="landing-page">
-      <div className="background-container">
-        <PixelSnowBg />
-      </div>
       <Navbar />
       <PageMenu sections={LANDING_SECTIONS} />
 
-      <div id="hero">
+      {/* Hero Section - No reveal as it's above the fold */}
+      <Section id="home" reveal={false}>
         <Hero />
-      </div>
+      </Section>
 
-      <div id="results">
-        <RevealSection><CompanyOrbit /></RevealSection>
-        <RevealSection><Reviews /></RevealSection>
-      </div>
+      {/* Trust & Companies */}
+      <Section id="companies">
+        <CompanyOrbit />
+      </Section>
 
-      <div id="courses">
-        <RevealSection threshold={0.01}><Courses /></RevealSection>
-      </div>
+      {/* Features Grid - Stats */}
+      <Section id="features">
+        <FeaturesGrid />
+      </Section>
 
-      <div id="practice">
-        <RevealSection><PracticeSection /></RevealSection>
-      </div>
+      {/* Interactive Courses - Handles its own scroll/animations */}
+      <Section id="courses" reveal={false}>
+        <CoursesLanding />
+      </Section>
 
-      <div id="story">
-        <RevealSection><AboutSection /></RevealSection>
-      </div>
+      {/* Practice & Ecosystem */}
+      <Section id="practice">
+        <PracticeSection />
+      </Section>
+
+      {/* Social Proof / Reviews */}
+      <Section id="testimonials">
+        <Reviews />
+      </Section>
+
+      {/* Founder's Story */}
+      <Section id="story">
+        <AboutSection />
+      </Section>
 
       <Footer />
     </div>
   );
 }
+

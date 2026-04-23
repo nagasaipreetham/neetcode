@@ -1,4 +1,3 @@
-import SpotlightCard from '../SpotlightCard/SpotlightCard';
 import navneetImg from '../../assets/navneet.png';
 import googleImg from '../../assets/google.png';
 import amazonImg from '../../assets/amazon.png';
@@ -19,9 +18,9 @@ export default function AboutSection() {
           </div>
         </div>
 
-        {/* RIGHT — spotlight card */}
+        {/* RIGHT — clean white card */}
         <div className="about-right">
-          <SpotlightCard spotlightColor="rgba(139, 92, 246, 0.25)" className="about-spotlight">
+          <div className="about-card">
             <div className="about-content">
               <h2 className="about-heading">Hi, I'm Navi</h2>
 
@@ -73,7 +72,7 @@ export default function AboutSection() {
               </div>
 
             </div>
-          </SpotlightCard>
+          </div>
         </div>
 
       </div>

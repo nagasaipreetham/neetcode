@@ -3,7 +3,7 @@ import { useEffect, useRef } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import Navbar from '../components/Navbar/Navbar';
 import Footer from '../components/Footer/Footer';
-import PixelSnowBg from '../components/PixelSnow/PixelSnowBg';
+import PageMenu from '../components/PageMenu/PageMenu';
 import Courses from '../components/Courses/Courses';
 import Lessons from '../components/Lessons/Lessons';
 import './CoursesPage.css';
@@ -43,6 +43,14 @@ const tabVariants = {
   })
 };
 
+const COURSES_SECTIONS = [
+  { id: 'courses-tab', label: 'Courses' },
+];
+
+const LESSONS_SECTIONS = [
+  { id: 'lessons-tab', label: 'Lessons' },
+];
+
 export default function CoursesPage() {
   const [searchParams, setSearchParams] = useSearchParams();
   const tab = searchParams.get('tab') || 'courses';
@@ -54,13 +62,19 @@ export default function CoursesPage() {
     setSearchParams({ tab: t });
   };
 
+  // Update sections based on current tab
+  const sections = tab === 'lessons' ? LESSONS_SECTIONS : COURSES_SECTIONS;
+
+  // Force PageMenu to re-render when tab changes
+  useEffect(() => {
+    // This ensures the PageMenu updates when tab changes
+  }, [tab]);
+
   return (
     <div className="courses-page">
-      <div className="courses-page-bg">
-        <PixelSnowBg />
-      </div>
 
       <Navbar />
+      <PageMenu key={tab} sections={sections} />
 
       <div className="courses-page-content">
         {/* Toggle */}
@@ -96,9 +110,11 @@ export default function CoursesPage() {
                 exit="exit"
                 transition={{ duration: 0.3, ease: 'easeInOut' }}
               >
-                <RevealSection>
-                  <Courses showHeading={false} gradientTitles layout="page" />
-                </RevealSection>
+                <div id="courses-tab">
+                  <RevealSection>
+                    <Courses showHeading={false} gradientTitles layout="page" />
+                  </RevealSection>
+                </div>
               </motion.div>
             )}
             {tab === 'lessons' && (
@@ -111,9 +127,11 @@ export default function CoursesPage() {
                 exit="exit"
                 transition={{ duration: 0.3, ease: 'easeInOut' }}
               >
-                <RevealSection>
-                  <Lessons />
-                </RevealSection>
+                <div id="lessons-tab">
+                  <RevealSection>
+                    <Lessons />
+                  </RevealSection>
+                </div>
               </motion.div>
             )}
           </AnimatePresence>

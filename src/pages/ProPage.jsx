@@ -2,13 +2,11 @@ import { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import Navbar from '../components/Navbar/Navbar';
 import Footer from '../components/Footer/Footer';
-import ShapeGrid from '../components/ShapeGrid/ShapeGrid';
-import GradientText from '../components/GradientText/GradientText';
 import SpotlightCard from '../components/SpotlightCard/SpotlightCard';
 import MagicBento from '../components/MagicBento/MagicBento';
+import ShapeGrid from '../components/ShapeGrid/ShapeGrid';
 import PageMenu from '../components/PageMenu/PageMenu';
 import globeIcon from '../assets/globe.svg';
-import giftIcon from '../assets/gift.svg';
 import googleLogo from '../assets/google.png';
 import amazonLogo from '../assets/amazon.png';
 import microsoftLogo from '../assets/microsoft.png';
@@ -186,50 +184,24 @@ function LifetimeCard() {
     <div className="pricing-card pricing-card--lifetime">
       <div className="pricing-card-inner">
         <div className="pricing-header">
-          {/* Infinity — bigger, purple gradient via SVG */}
           <svg className="pricing-infinity" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <linearGradient id="infGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stopColor="#7c3aed"/>
-                <stop offset="50%" stopColor="#a855f7"/>
-                <stop offset="100%" stopColor="#e879f9"/>
-              </linearGradient>
-            </defs>
             <path d="M12 12c-2-2.5-4-4-6-4a4 4 0 000 8c2 0 4-1.5 6-4zm0 0c2 2.5 4 4 6 4a4 4 0 000-8c-2 0-4 1.5-6 4z"
-              stroke="url(#infGrad)" strokeWidth="2" strokeLinecap="round"/>
+              stroke="#0562EF" strokeWidth="2" strokeLinecap="round"/>
           </svg>
-          <span className="pricing-label">
-            <GradientText colors={["#7c3aed","#a855f7","#e879f9"]} animationSpeed={8}
-              style={{ fontSize: 'inherit', fontWeight: 'inherit' }}>
-              Lifetime
-            </GradientText>
-          </span>
+          <span className="pricing-label" style={{ color: '#0562EF' }}>Lifetime</span>
           <div className="best-value-badge">
-            <GradientText colors={["#7c3aed","#a855f7","#e879f9"]} animationSpeed={8}
-              style={{ fontSize: 'inherit', fontWeight: 'inherit' }}>
-              Best Value
-            </GradientText>
+            <span style={{ color: '#0562EF' }}>Best Value</span>
           </div>
         </div>
 
         {/* Price */}
         <div className="pricing-price-row">
-          <span className="pricing-price">
-            <GradientText colors={["#7c3aed","#a855f7","#e879f9"]} animationSpeed={8}
-              style={{ fontSize: 'inherit', fontWeight: 'inherit', letterSpacing: 'inherit' }}>
-              $297
-            </GradientText>
-          </span>
+          <span className="pricing-price" style={{ color: '#0562EF' }}>$297</span>
           <span className="pricing-original">$599</span>
         </div>
 
         {/* Caption */}
-        <div className="pricing-caption">
-          <GradientText colors={["#7c3aed","#a855f7","#e879f9"]} animationSpeed={8}
-            style={{ fontSize: 'inherit', fontWeight: 'inherit' }}>
-            One-time Payment
-          </GradientText>
-        </div>
+        <div className="pricing-caption" style={{ color: '#0562EF' }}>One-time Payment</div>
 
         {/* Divider */}
         <div className="pricing-divider pricing-divider--gradient">— — — — — — — —</div>
@@ -253,8 +225,8 @@ function YearCard() {
 
         {/* Header */}
         <div className="pricing-header">
-          <img src={globeIcon} alt="One Year" className="pricing-icon" style={{ filter: 'invert(1)' }} />
-          <span className="pricing-label" style={{ color: '#fff' }}>One-Year Access</span>
+          <img src={globeIcon} alt="One Year" className="pricing-icon" style={{ filter: 'invert(35%) sepia(80%) saturate(500%) hue-rotate(190deg)' }} />
+          <span className="pricing-label" style={{ color: '#1e293b' }}>One-Year Access</span>
         </div>
 
         {/* Price */}
@@ -309,31 +281,14 @@ export default function ProPage() {
   
   return (
     <div className="pro-page">
-      <div className="pro-page-bg">
-        <ShapeGrid
-          direction="diagonal"
-          speed={0.26}
-          squareSize={40}
-          borderColor="#271E37"
-          hoverFillColor="#222222"
-          shape="square"
-          hoverTrailAmount={0}
-        />
-      </div>
 
       <Navbar />
       <PageMenu sections={PRO_SECTIONS} />
 
       <div className="pro-page-content">
         <div id="pro-plans">
-          <h1 className="pro-page-heading">
-            <GradientText
-              colors={["#7c3aed","#a855f7","#c084fc","#e879f9"]}
-              animationSpeed={8}
-              style={{ fontSize: 'inherit', fontWeight: 'inherit', letterSpacing: 'inherit' }}
-            >
+          <h1 className="pro-page-heading" style={{ color: '#0f172a' }}>
               Choose Your Plan
-            </GradientText>
           </h1>
 
           {/* Pricing cards */}
@@ -346,16 +301,9 @@ export default function ProPage() {
           <div style={{ display: 'flex', justifyContent: 'center', marginTop: '1.5rem' }}>
             <Link to="/gift" className="pricing-gift-link">
               <svg className="pricing-gift-icon" viewBox="0 0 24 24" fill="none">
-                <defs>
-                  <linearGradient id="giftGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="80%" stopColor="#7c3aed"/>
-                    <stop offset="90%" stopColor="#a855f7"/>
-                    <stop offset="100%" stopColor="#e879f9"/>
-                  </linearGradient>
-                </defs>
                 <path
                   d="M20 12v8H4v-8M2 7h20v5H2zM12 7v13M7 7c-1.5 0-2.5-1-2.5-2.5S5.5 2 7 2c2 0 5 5 5 5s3-5 5-5c1.5 0 2.5 1 2.5 2.5S18.5 7 17 7"
-                  stroke="url(#giftGrad)"
+                  stroke="#0562EF"
                   strokeWidth="2"
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -366,27 +314,29 @@ export default function ProPage() {
           </div>
         </div>
 
-        {/* Everything You Need section */}
-        <div id="pro-features" style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '2rem', marginTop: '2rem' }}>
-          <h2 className="pro-page-heading">
-            <GradientText
-              colors={["#7c3aed","#a855f7","#c084fc","#e879f9"]}
-              animationSpeed={8}
-              style={{ fontSize: 'inherit', fontWeight: 'inherit', letterSpacing: 'inherit' }}
-            >
+        {/* Everything You Need section - Dark with ShapeGrid */}
+        <div id="pro-features" className="pro-features-dark-section">
+          <ShapeGrid
+            direction="diagonal"
+            speed={0.5}
+            borderColor="rgba(255,255,255,0.1)"
+            squareSize={40}
+            hoverFillColor="rgba(5, 98, 239, 0.3)"
+            shape="square"
+            hoverTrailAmount={3}
+          />
+          <div className="pro-features-content">
+            <h2 className="pro-page-heading" style={{ color: '#ffffff' }}>
               Everything You Need To Succeed
-            </GradientText>
-          </h2>
-          <MagicBento glowColor="132, 0, 255" disableAnimations={false} />
+            </h2>
+            <MagicBento glowColor="32, 120, 207" disableAnimations={false} />
+          </div>
         </div>
 
         {/* Success Stories */}
         <div className="success-section" id="pro-stories" ref={successSectionRef}>
-          <h2 className="pro-page-heading">
-            <GradientText colors={["#7c3aed","#a855f7","#c084fc","#e879f9"]} animationSpeed={8}
-              style={{ fontSize: 'inherit', fontWeight: 'inherit', letterSpacing: 'inherit' }}>
-              Success Stories
-            </GradientText>
+          <h2 className="pro-page-heading" style={{ color: '#0f172a' }}>
+            Success Stories
           </h2>
           <div className="success-grid">
             {visible.map((s, i) => (
@@ -411,21 +361,15 @@ export default function ProPage() {
               </div>
             ))}
           </div>
-          <button className="success-toggle-btn" onClick={handleToggle}>
-            <GradientText colors={["#7c3aed","#a855f7","#e879f9"]} animationSpeed={8}
-              style={{ fontSize: 'inherit', fontWeight: 'inherit' }}>
-              {showAll ? 'Show Less ↑' : 'Show More ↓'}
-            </GradientText>
+          <button className="success-toggle-btn" onClick={handleToggle} style={{ color: '#0562EF' }}>
+            {showAll ? 'Show Less ↑' : 'Show More ↓'}
           </button>
         </div>
 
         {/* Common Questions */}
         <div className="faq-section" id="pro-faq">
-          <h2 className="faq-heading">
-            <GradientText colors={["#7c3aed","#a855f7","#c084fc","#e879f9"]} animationSpeed={8}
-              style={{ fontSize: 'inherit', fontWeight: 'inherit', letterSpacing: 'inherit' }}>
-              Common Questions
-            </GradientText>
+          <h2 className="faq-heading" style={{ color: '#0562EF' }}>
+            Common Questions
           </h2>
           <div className="faq-list">
             {faqItems.map((item, i) => (
@@ -469,10 +413,9 @@ function FaqItem({ item }) {
     <div className={`faq-item${open ? ' faq-item--open' : ''}`} onClick={() => setOpen(v => !v)}>
       <div className="faq-question">
         {open ? (
-          <GradientText colors={["#7c3aed","#a855f7","#e879f9"]} animationSpeed={8}
-            style={{ fontSize: 'inherit', fontWeight: 'inherit' }}>
+          <span style={{ color: '#0562EF', fontSize: 'inherit', fontWeight: 'inherit' }}>
             {item.q}
-          </GradientText>
+          </span>
         ) : item.q}
         <span className="faq-chevron">{open ? '↑' : '↓'}</span>
       </div>

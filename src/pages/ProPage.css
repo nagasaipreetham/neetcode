@@ -1,19 +1,11 @@
 .pro-page {
   min-height: 100vh;
-  background: #060010;
+  background: #F5F9FF;
   display: flex;
   flex-direction: column;
 }
 
-.pro-page-bg {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
-  pointer-events: none;
-}
+.pro-page-bg { display: none; }
 
 .pro-page-content {
   flex: 1;
@@ -56,17 +48,14 @@
 .pricing-card--lifetime {
   width: 350px;
   flex-shrink: 0;
-  /* gradient border */
   padding: 2px;
-  background: linear-gradient(135deg, #7c3aed, #a855f7, #e879f9);
-  border-radius: 22px;
+  background: #0562EF;
+  border-radius: 14px;
 }
 
 .pricing-card--lifetime .pricing-card-inner {
-  border-radius: 20px;
-  background: rgba(6, 0, 16, 0.92);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  border-radius: 12px;
+  background: #ffffff;
   padding: 2rem;
   display: flex;
   flex-direction: column;
@@ -80,11 +69,9 @@
 }
 
 .pricing-card--year .pricing-card-inner {
-  border-radius: 20px;
-  background: rgba(255, 255, 255, 0.04);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 12px;
+  background: #ffffff;
+  border: 1.5px solid #e2e8f0;
   padding: 1.75rem;
   display: flex;
   flex-direction: column;
@@ -118,11 +105,11 @@
 /* Best Value Badge */
 .best-value-badge {
   margin-left: auto;
-  padding: 4px 12px;
-  border-radius: 20px;
-  background: linear-gradient(135deg, rgba(124, 58, 237, 0.15), rgba(168, 85, 247, 0.15), rgba(232, 121, 249, 0.15));
-  border: 1px solid rgba(168, 85, 247, 0.4);
-  font-size: 0.75rem;
+  padding: 3px 10px;
+  border-radius: 100px;
+  background: rgba(5, 98, 239, 0.08);
+  border: 1px solid rgba(5, 98, 239, 0.2);
+  font-size: 0.72rem;
   font-weight: 600;
   white-space: nowrap;
 }
@@ -141,7 +128,7 @@
   letter-spacing: -0.03em;
 }
 
-.pricing-price--white { color: #fff; }
+.pricing-price--white { color: #1e293b; }
 
 .pricing-original {
   font-size: 1.1rem;
@@ -157,21 +144,18 @@
 }
 
 .pricing-caption--muted {
-  color: rgba(255, 255, 255, 0.6);
+  color: #64748b;
 }
 
 /* ── Divider ── */
 .pricing-divider {
   font-size: 0.75rem;
   letter-spacing: 0.15em;
-  color: rgba(255, 255, 255, 0.2);
+  color: #cbd5e1;
 }
 
 .pricing-divider--gradient {
-  background: linear-gradient(90deg, #7c3aed, #a855f7, #e879f9);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: #0562EF;
 }
 
 /* ── Features list ── */
@@ -186,7 +170,7 @@
   align-items: center;
   gap: 0.5rem;
   font-size: 0.88rem;
-  color: #e2e8f0;
+  color: #334155;
 }
 
 .pricing-tick--blue  { color: #38bdf8; font-size: 0.9rem; }
@@ -201,10 +185,7 @@
   font-size: 0.92rem;
   font-weight: 600;
   justify-content: center;
-  background: linear-gradient(135deg, #7c3aed, #a855f7, #e879f9);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: #0562EF;
   transition: opacity 0.2s ease;
 }
 
@@ -213,20 +194,16 @@
 .pricing-gift-icon {
   width: 20px;
   height: 20px;
-  /* purple tint */
-  filter: invert(40%) sepia(80%) saturate(600%) hue-rotate(240deg) brightness(1.1);
+  filter: invert(35%) sepia(80%) saturate(500%) hue-rotate(190deg) brightness(1.0);
 }
 
-/* Lifetime hover glow */
+/* Lifetime hover — subtle only */
 .pricing-card--lifetime {
-  transition: box-shadow 0.35s ease;
+  transition: transform 0.2s ease;
 }
 
 .pricing-card--lifetime:hover {
-  box-shadow:
-    0 0 40px rgba(168, 85, 247, 0.45),
-    0 0 80px rgba(124, 58, 237, 0.25),
-    0 20px 60px rgba(232, 121, 249, 0.2);
+  transform: translateY(-2px);
 }
 
 /* Infinity icon — bigger, gradient via SVG filter trick */
@@ -234,6 +211,38 @@
   width: 48px;
   height: 48px;
   flex-shrink: 0;
+}
+
+/* ── Dark Features Section with ShapeGrid ── */
+.pro-features-dark-section {
+  position: relative;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  margin-right: calc(-50vw + 50%);
+  background: #0a0a0f;
+  padding: 6rem 2rem;
+  overflow: hidden;
+}
+
+.pro-features-dark-section .shape-grid-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.pro-features-content {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
 }
 
 /* ── Success Stories ── */
@@ -250,6 +259,12 @@
   grid-template-columns: repeat(3, 1fr);
   gap: 1.25rem;
   width: 100%;
+  grid-auto-rows: auto;
+}
+
+.success-card-wrapper {
+  display: flex;
+  transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 .success-card-inner {
@@ -257,6 +272,7 @@
   flex-direction: column;
   gap: 1rem;
   height: 100%;
+  min-height: fit-content;
 }
 
 .success-card-top {
@@ -270,7 +286,7 @@
   height: 48px;
   border-radius: 10px;
   object-fit: contain;
-  background: rgba(255,255,255,0.05);
+  background: #f1f5f9;
   padding: 6px;
   flex-shrink: 0;
 }
@@ -284,18 +300,18 @@
 .success-card-company {
   font-size: 0.9rem;
   font-weight: 700;
-  color: #fff;
+  color: #1e293b;
 }
 
 .success-card-position {
   font-size: 0.78rem;
-  color: rgba(255,255,255,0.5);
+  color: #64748b;
 }
 
 .success-card-desc {
   font-size: 0.83rem;
   padding-top: 10px;
-  color: rgba(255,255,255,0.7);
+  color: #475569;
   line-height: 1.65;
   margin: 0;
 }
@@ -342,11 +358,12 @@
   .pro-page-content { padding: 7rem 1.25rem 4rem; }
 }
 
-/* Success cards height follows content */
+/* Success cards */
 .success-grid .spotlight-card {
   display: flex;
   width: 100%;
-  border: 2px solid rgba(132, 0, 255, 0.3);
+  border: 1px solid #e2e8f0;
+  background: #ffffff;
 }
 
 /* Success card wrapper for animations */
@@ -357,29 +374,24 @@
 
 .success-card-wrapper--extra {
   opacity: 0;
-  transform: scale(0.95);
+  transform: scale(0.97);
 }
 
 .success-card-wrapper--hiding {
   opacity: 0;
-  transform: scale(0.95);
+  transform: scale(0.97);
 }
 
 @keyframes fadeInScale {
-  from {
-    opacity: 0;
-    transform: scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
+  from { opacity: 0; transform: scale(0.97); }
+  to   { opacity: 1; transform: scale(1); }
 }
 
 .success-card-wrapper .spotlight-card {
   display: flex;
   width: 100%;
-  border: 2px solid rgba(132, 0, 255, 0.3);
+  border: 1px solid #e2e8f0;
+  background: #ffffff;
 }
 
 /* ── Show more/less toggle ── */
@@ -389,7 +401,7 @@
   cursor: pointer;
   font-size: 0.95rem;
   font-weight: 600;
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
 }
 
 /* ── FAQ / Common Questions ── */
@@ -418,14 +430,14 @@
 }
 
 .faq-item {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  border-bottom: 1px solid #e2e8f0;
   padding: 1.1rem 0;
   cursor: pointer;
   user-select: none;
 }
 
 .faq-item:first-child {
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: 1px solid #e2e8f0;
 }
 
 .faq-question {
@@ -435,27 +447,24 @@
   gap: 1rem;
   font-size: 1.2rem;
   font-weight: 600;
-  color: #ffffff;
+  color: #1e293b;
   line-height: 1.4;
   transition: color 0.2s ease;
 }
 
 .faq-item--open .faq-question {
-  color: transparent; /* gradient text takes over */
+  color: #0562EF;
 }
 
 .faq-chevron {
   font-size: 0.85rem;
   flex-shrink: 0;
-  background: linear-gradient(135deg, #7c3aed, #a855f7, #e879f9);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: #0562EF;
 }
 
 .faq-answer {
   font-size: 0.88rem;
-  color: #fff;
+  color: #475569;
   line-height: 1.7;
   margin-top: 0.75rem;
   padding-right: 2rem;

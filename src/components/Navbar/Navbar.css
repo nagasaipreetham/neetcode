@@ -1,91 +1,66 @@
 .navbar-container {
   position: fixed;
-  top: 2rem;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 90%;
-  max-width: 1200px;
+  top: 0;
+  left: 0;
+  right: 0;
   z-index: 1000;
   display: flex;
   justify-content: center;
+  padding: 0 2rem;
+  border-bottom: 1px solid #e2e8f0;
+  background: rgba(245, 249, 255, 0.94);
+  backdrop-filter: saturate(180%) blur(16px);
+  -webkit-backdrop-filter: saturate(180%) blur(16px);
 }
 
 .navbar-glass {
   display: flex;
   flex-direction: column;
   width: 100%;
-  padding: 0.75rem 1.5rem;
-  background: rgba(0, 0, 0, 0.45);
-  -webkit-backdrop-filter: saturate(180%) blur(20px);
-  backdrop-filter: saturate(180%) blur(20px);
-  border-radius: 100px;
-  border: 0.5px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 
-    0 8px 32px rgba(0, 0, 0, 0.5),
-    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  max-width: 1200px;
+  padding: 0.75rem 0;
   position: relative;
-  isolation: isolate;
 }
 
-.navbar-glint-clip {
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  overflow: hidden;
-  pointer-events: none;
-  z-index: 2; /* Still above content but below popup */
-}
-
-.navbar-glint-clip::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.15),
-    transparent
-  );
-  z-index: 2;
-  border-radius: inherit;
-}
-
-.navbar-glint-clip::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 1px;
-  height: 100%;
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.15),
-    transparent,
-    rgba(255, 255, 255, 0.05)
-  );
-  z-index: 2;
-  border-radius: inherit;
-}
+/* Remove old glint */
+.navbar-glint-clip { display: none; }
 
 .navbar-top-bar {
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 100%;
+  gap: 1.5rem;
 }
 
-.navbar-left {
+/* ── Brand: logo + name ── */
+.navbar-brand {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 0.55rem;
+  text-decoration: none;
+  flex-shrink: 0;
 }
 
 .logo {
-  height: 32px;
+  height: 26px;
   width: auto;
+  flex-shrink: 0;
+}
+
+.navbar-brand-name {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #0f172a;
+  letter-spacing: -0.02em;
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+/* ── Left side ── */
+.navbar-left {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
 }
 
 .nav-links {
@@ -93,37 +68,40 @@
   list-style: none;
   margin: 0;
   padding: 0;
-  gap: 1.5rem;
+  gap: 0.1rem;
 }
 
 .nav-link {
-  color: #fff;
+  color: #475569;
   text-decoration: none;
-  font-family: 'Outfit', sans-serif;
-  font-weight: 400;
-  font-size: 1rem;
-  text-transform: capitalize;
-  background: linear-gradient(to right, #5227FF, #FF9FFC, #B19EEF);
-  background-size: 200% 100%;
-  background-position: 100% 0;
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: white;
-  transition: background-position 0.4s ease, -webkit-text-fill-color 0.4s ease;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 500;
+  font-size: 0.88rem;
+  padding: 6px 11px;
+  border-radius: 6px;
+  transition: color 0.15s ease, background 0.15s ease;
+  -webkit-text-fill-color: unset;
+  background: none;
+  -webkit-background-clip: unset;
+  background-clip: unset;
+  display: block;
 }
 
 .nav-link:hover {
-  background-position: 0% 0;
-  -webkit-text-fill-color: transparent;
+  color: #0562EF;
+  background: rgba(5, 98, 239, 0.06);
+  -webkit-text-fill-color: unset;
 }
 
+/* ── Right side ── */
 .navbar-right {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 0.5rem;
+  flex-shrink: 0;
 }
 
-/* Hamburger — hidden on desktop, shows on mobile */
+/* ── Hamburger ── */
 .navbar-hamburger {
   display: none;
   flex-direction: column;
@@ -131,59 +109,80 @@
   background: none;
   border: none;
   cursor: pointer;
-  padding: 1px;
+  padding: 2px;
   outline: none;
   flex-shrink: 0;
 }
 
 .hamburger-line {
   display: block;
-  width: 22px;
+  width: 20px;
   height: 2px;
-  background: #fff;
+  background: #334155;
   border-radius: 2px;
-  transition: transform 0.3s ease;
+  transition: transform 0.25s ease;
   transform-origin: center;
 }
 
 .hamburger-line--top-open { transform: translateY(3.5px) rotate(45deg); }
 .hamburger-line--bot-open { transform: translateY(-3.5px) rotate(-45deg); }
 
-/* Mobile clip — contains the expanding menu without clipping the popup */
+/* ── Mobile clip ── */
 .navbar-mobile-clip {
   overflow: hidden;
 }
 
-/* Mobile expanded menu — single row */
 .navbar-mobile-menu {
   display: none;
   flex-direction: row;
-  gap: 1.5rem;
-  padding: 0.75rem 0.25rem 0.25rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-  margin-top: 0.75rem;
+  gap: 0.25rem;
+  padding: 0.6rem 0 0.25rem;
+  border-top: 1px solid #e2e8f0;
+  margin-top: 0.5rem;
   flex-wrap: wrap;
 }
 
 .mobile-nav-link {
-  font-size: 0.95rem;
-  padding: 0.2rem 0;
+  font-size: 0.88rem;
+  padding: 6px 11px;
 }
 
-/* StarBorder adjustments for navbar */
-.navbar-btn { border-radius: 100px; }
+/* ── Plain buttons ── */
+.navbar-plain-btn {
+  padding: 7px 15px;
+  font-size: 0.83rem;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  border-radius: 7px;
+  border: 1.5px solid #e2e8f0;
+  background: #ffffff;
+  color: #1e293b;
+  cursor: pointer;
+  transition: border-color 0.15s ease, color 0.15s ease, background 0.15s ease;
+  white-space: nowrap;
+}
 
-.navbar-btn .inner-content {
-  padding: 8px 18px;
-  font-size: 0.875rem;
-  font-family: 'Outfit', sans-serif;
-  font-weight: 500;
-  border-radius: 100px;
+.navbar-plain-btn:hover {
+  border-color: #0562EF;
+  color: #0562EF;
+}
+
+.navbar-plain-btn--primary {
+  background: #0562EF;
+  color: #ffffff;
+  border-color: #0562EF;
+}
+
+.navbar-plain-btn--primary:hover {
+  background: #0450cc;
+  border-color: #0450cc;
+  color: #ffffff;
 }
 
 @media (max-width: 768px) {
   .nav-links { display: none; }
   .navbar-hamburger { display: flex; }
+  .navbar-container { padding: 0 1.25rem; }
 }
 
 /* ── Sign In popup ── */
@@ -193,71 +192,54 @@
 
 .signin-popup {
   position: absolute;
-  top: calc(100% + 10px);
+  top: calc(100% + 8px);
   right: 0;
-  min-width: 180px;
-  background: rgba(10, 10, 20, 0.95);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 14px;
-  padding: 0.75rem;
+  min-width: 185px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 0.55rem;
   display: flex;
   flex-direction: column;
-  gap: 0.4rem;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  gap: 0.25rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
   z-index: 2000;
-  animation: popup-in 0.18s ease;
+  animation: popup-in 0.14s ease;
 }
 
 @keyframes popup-in {
-  from { opacity: 0; transform: translateY(-6px); }
+  from { opacity: 0; transform: translateY(-4px); }
   to   { opacity: 1; transform: translateY(0); }
 }
 
 .signin-popup-label {
-  font-size: 0.72rem;
-  color: rgba(255, 255, 255, 0.4);
-  font-weight: 500;
-  letter-spacing: 0.05em;
+  font-size: 0.68rem;
+  color: #94a3b8;
+  font-weight: 600;
+  letter-spacing: 0.07em;
   text-transform: uppercase;
-  margin: 0 0 0.2rem 0.25rem;
+  margin: 0 0 0.15rem 0.5rem;
 }
 
 .signin-option {
   display: flex;
   align-items: center;
-  gap: 0.65rem;
+  gap: 0.6rem;
   width: 100%;
-  padding: 0.6rem 0.75rem;
-  border-radius: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.07);
-  background: rgba(255, 255, 255, 0.04);
-  color: #fff;
-  font-size: 0.875rem;
-  font-family: 'Outfit', sans-serif;
+  padding: 0.5rem 0.65rem;
+  border-radius: 7px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: #1e293b;
+  font-size: 0.85rem;
+  font-family: 'Space Grotesk', sans-serif;
   font-weight: 500;
   cursor: pointer;
-  transition: background 0.2s ease, border-color 0.2s ease;
+  transition: background 0.12s ease, border-color 0.12s ease;
   text-align: left;
 }
 
 .signin-option:hover {
-  background: rgba(255, 255, 255, 0.09);
-  border-color: rgba(255, 255, 255, 0.18);
+  background: #F5F9FF;
+  border-color: #e2e8f0;
 }
-
-.navbar-signin-btn {
-  padding: 8px 18px;
-  font-size: 0.875rem;
-  font-family: 'Outfit', sans-serif;
-  font-weight: 500;
-  border-radius: 100px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  background: rgba(10, 10, 15, 0.85);
-  color: #fff;
-  cursor: pointer;
-  transition: border-color 0.2s ease;
-}
-
-.navbar-signin-btn:hover { border-color: rgba(255, 255, 255, 0.45); }

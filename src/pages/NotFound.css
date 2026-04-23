@@ -1,6 +1,6 @@
 .notfound-page {
   min-height: 100vh;
-  background: #000;
+  background: #F5F9FF;
   display: flex;
   flex-direction: column;
 }
@@ -19,18 +19,15 @@
   font-size: 1.1rem;
   color: #64748b;
   margin: 0;
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
 }
 
 .notfound-link {
   font-size: 0.95rem;
   font-weight: 600;
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   text-decoration: none;
-  background: linear-gradient(135deg, #7c3aed, #a855f7, #e879f9);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: #0562EF;
   transition: opacity 0.2s ease;
 }
 

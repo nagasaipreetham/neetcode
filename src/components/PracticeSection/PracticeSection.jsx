@@ -1,8 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import BorderGlow from '../BorderGlow/BorderGlow';
 import StarBorder from '../StarBorder/StarBorder';
-import GradientText from '../GradientText/GradientText';
 import discordIcon from '../../assets/discord.svg';
 import './PracticeSection.css';
 
@@ -65,16 +63,15 @@ export default function PracticeSection() {
       <div className="practice-inner">
 
         {/* LEFT */}
-        <div className="practice-left">
-          <h2 className="practice-heading">
-            <GradientText
-              colors={["#7c3aed", "#a855f7", "#c084fc", "#e879f9"]}
-              animationSpeed={8}
-              style={{ fontSize: 'inherit', fontWeight: 'inherit', lineHeight: 'inherit', letterSpacing: 'inherit' }}
-            >
-              Start Practicing for Free
-            </GradientText>
-          </h2>
+        <motion.div
+          className="practice-left"
+          initial={{ opacity: 0, x: -24 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+        >
+          <div className="practice-section-label">Practice</div>
+          <h2 className="practice-heading">Start Practicing for Free</h2>
           <p className="practice-caption">The best resources for coding interviews. Period.</p>
 
           <div className="practice-features">
@@ -88,7 +85,7 @@ export default function PracticeSection() {
 
           <div className="practice-buttons">
             <a href={NC150} target="_blank" rel="noreferrer" className="practice-link-wrap">
-              <StarBorder as="div" className="practice-btn-pro" color="#c084fc" speed="3s">
+              <StarBorder as="div" className="practice-btn-pro" color="#0562EF" speed="3s">
                 Start Practicing
               </StarBorder>
             </a>
@@ -105,37 +102,17 @@ export default function PracticeSection() {
               </button>
             </a>
           </div>
-        </div>
+        </motion.div>
 
         {/* RIGHT */}
         <div className="practice-right">
-          <div 
+          <motion.div
             className="practice-card"
-            onMouseMove={(e) => {
-              const card = e.currentTarget;
-              const rect = card.getBoundingClientRect();
-              const x = e.clientX - rect.left;
-              const y = e.clientY - rect.top;
-              const centerX = rect.width / 2;
-              const centerY = rect.height / 2;
-              const rotateX = ((y - centerY) / centerY) * -5;
-              const rotateY = ((x - centerX) / centerX) * 5;
-              card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
-            }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
           >
-            <BorderGlow
-              borderRadius={16}
-              backgroundColor="rgba(0, 0, 0, 0.4)"
-              glowColor="220 80 70"
-              glowRadius={55}
-              glowIntensity={1}
-              coneSpread={14}
-              edgeSensitivity={0}
-              colors={['#38bdf8', '#818cf8', '#60a5fa']}
-            >
               <div className="practice-card-inner">
                 {/* Header */}
                 <div className="practice-card-header">
@@ -173,8 +150,8 @@ export default function PracticeSection() {
                       onClick={() => toggle(t)}
                       className={`practice-topic-btn${selected.has(t) ? ' practice-topic-btn--active' : ''}${t.startsWith('+') ? ' practice-topic-btn--more' : ''}`}
                       whileTap={{ scale: 0.95 }}
-                      animate={selected.has(t) ? { scale: [1, 1.1, 1] } : {}}
-                      transition={{ duration: 0.3, ease: 'easeOut' }}
+                      animate={selected.has(t) ? { scale: [1, 1.08, 1] } : {}}
+                      transition={{ duration: 0.25, ease: 'easeOut' }}
                     >
                       {selected.has(t) && (
                         <motion.span
@@ -191,8 +168,7 @@ export default function PracticeSection() {
                   ))}
                 </div>
               </div>
-            </BorderGlow>
-          </div>
+          </motion.div>
         </div>
 
       </div>

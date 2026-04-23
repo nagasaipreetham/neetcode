@@ -7,6 +7,7 @@ import ProPage        from './pages/ProPage';
 import GiftPage       from './pages/GiftPage';
 import NotFound       from './pages/NotFound';
 import ScrollToTop    from './components/ScrollToTop/ScrollToTop';
+import CustomCursor   from './components/CustomCursor/CustomCursor';
 import AuthLayout     from './authenticated/AuthLayout';
 import PracticeLayout from './authenticated/layouts/PracticeLayout';
 import PracticePage   from './authenticated/pages/Practice/PracticePage';
@@ -16,6 +17,7 @@ import CompanyPage    from './authenticated/pages/Company/CompanyPage';
 import SpecialProblemsPage from './authenticated/pages/SpecialProblems/SpecialProblemsPage';
 import MachineLearningPage from './authenticated/pages/MachineLearning/MachineLearningPage';
 import MachineLearningProjectPage from './authenticated/pages/MachineLearning/MachineLearningProjectPage';
+import useLenis from './hooks/useLenis';
 import {
   SYSTEM_DESIGN_PROBLEMS, SYSTEM_DESIGN_HEADING,
   LLD_PROBLEMS, LLD_HEADING,
@@ -23,9 +25,16 @@ import {
 } from './authenticated/data/specialPagesData';
 import './App.css';
 
+function LenisProvider() {
+  useLenis();
+  return null;
+}
+
 function App() {
   return (
     <BrowserRouter>
+      <CustomCursor />
+      <LenisProvider />
       <ScrollToTop />
       <Routes>
         {/* ── Public pages ── */}

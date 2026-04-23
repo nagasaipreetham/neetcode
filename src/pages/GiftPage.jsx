@@ -1,8 +1,6 @@
 import { Link } from 'react-router-dom';
 import Navbar from '../components/Navbar/Navbar';
 import Footer from '../components/Footer/Footer';
-import ShapeGrid from '../components/ShapeGrid/ShapeGrid';
-import GradientText from '../components/GradientText/GradientText';
 import SpotlightCard from '../components/SpotlightCard/SpotlightCard';
 import globeIcon from '../assets/globe.svg';
 import giftIcon from '../assets/gift.svg';
@@ -17,46 +15,21 @@ function LifetimeCard() {
       <div className="pricing-card-inner">
         <div className="pricing-header">
           <svg className="pricing-infinity" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <linearGradient id="infGradG" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stopColor="#7c3aed"/>
-                <stop offset="50%" stopColor="#a855f7"/>
-                <stop offset="100%" stopColor="#e879f9"/>
-              </linearGradient>
-            </defs>
             <path d="M12 12c-2-2.5-4-4-6-4a4 4 0 000 8c2 0 4-1.5 6-4zm0 0c2 2.5 4 4 6 4a4 4 0 000-8c-2 0-4 1.5-6 4z"
-              stroke="url(#infGradG)" strokeWidth="2" strokeLinecap="round"/>
+              stroke="#0562EF" strokeWidth="2" strokeLinecap="round"/>
           </svg>
-          <span className="pricing-label">
-            <GradientText colors={["#7c3aed","#a855f7","#e879f9"]} animationSpeed={8}
-              style={{ fontSize: 'inherit', fontWeight: 'inherit' }}>
-              Lifetime
-            </GradientText>
-          </span>
+          <span className="pricing-label" style={{ color: '#0562EF' }}>Lifetime</span>
           <div className="best-value-badge">
-            <GradientText colors={["#7c3aed","#a855f7","#e879f9"]} animationSpeed={8}
-              style={{ fontSize: 'inherit', fontWeight: 'inherit' }}>
-              Best Value
-            </GradientText>
+            <span style={{ color: '#0562EF' }}>Best Value</span>
           </div>
         </div>
 
         <div className="pricing-price-row">
-          <span className="pricing-price">
-            <GradientText colors={["#7c3aed","#a855f7","#e879f9"]} animationSpeed={8}
-              style={{ fontSize: 'inherit', fontWeight: 'inherit', letterSpacing: 'inherit' }}>
-              $297
-            </GradientText>
-          </span>
+          <span className="pricing-price" style={{ color: '#0562EF' }}>$297</span>
           <span className="pricing-original">$599</span>
         </div>
 
-        <div className="pricing-caption">
-          <GradientText colors={["#7c3aed","#a855f7","#e879f9"]} animationSpeed={8}
-            style={{ fontSize: 'inherit', fontWeight: 'inherit' }}>
-            One-time Payment
-          </GradientText>
-        </div>
+        <div className="pricing-caption" style={{ color: '#0562EF' }}>One-time Payment</div>
 
         <div className="pricing-divider pricing-divider--gradient">— — — — — — — —</div>
 
@@ -73,10 +46,10 @@ function LifetimeCard() {
 function YearCard() {
   return (
     <div className="pricing-card pricing-card--year">
-      <SpotlightCard spotlightColor="rgba(255,255,255,0.06)" className="pricing-card-inner">
+      <SpotlightCard spotlightColor="rgba(32,120,207,0.06)" className="pricing-card-inner">
         <div className="pricing-header">
-          <img src={globeIcon} alt="One Year" className="pricing-icon" style={{ filter: 'invert(1)' }} />
-          <span className="pricing-label" style={{ color: '#fff' }}>One-Year Access</span>
+          <img src={globeIcon} alt="One Year" className="pricing-icon" style={{ filter: 'invert(35%) sepia(80%) saturate(500%) hue-rotate(190deg)' }} />
+          <span className="pricing-label" style={{ color: '#1e293b' }}>One-Year Access</span>
         </div>
 
         <div className="pricing-price-row">
@@ -101,17 +74,6 @@ function YearCard() {
 export default function GiftPage() {
   return (
     <div className="gift-page">
-      <div className="gift-page-bg">
-        <ShapeGrid
-          direction="diagonal"
-          speed={0.26}
-          squareSize={40}
-          borderColor="#271E37"
-          hoverFillColor="#222222"
-          shape="square"
-          hoverTrailAmount={0}
-        />
-      </div>
 
       <Navbar />
 
@@ -120,15 +82,9 @@ export default function GiftPage() {
         {/* Heading */}
         <div className="gift-heading-row">
           <img src={giftIcon} alt="Gift" className="gift-heading-icon" />
-          <h1 className="gift-main-heading">
-            <GradientText
-              colors={["#7c3aed","#a855f7","#c084fc","#e879f9"]}
-              animationSpeed={8}
-              style={{ fontSize: 'inherit', fontWeight: 'inherit', letterSpacing: 'inherit' }}
-            >
-              Gift NeetCode Pro
-            </GradientText>
-          </h1>
+          <h1 className="gift-main-heading" style={{ color: '#0f172a' }}>
+            Gift NeetCode Pro
+        </h1>
         </div>
 
         {/* Sub heading */}

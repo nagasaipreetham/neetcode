@@ -1,6 +1,6 @@
 .policy-page {
   min-height: 100vh;
-  background: #000;
+  background: #ffffff;
   display: flex;
   flex-direction: column;
 }
@@ -40,6 +40,8 @@
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
 }
 
 .policy-section {
@@ -51,13 +53,13 @@
 .policy-subheading {
   font-size: 1.5rem;
   font-weight: 600;
-  color: #a855f7;
+  color: #0562EF;
   margin: 0;
 }
 
 .policy-text {
   font-size: 0.95rem;
-  color: #fff;
+  color: #334155;
   line-height: 1.75;
   margin: 0;
 }
