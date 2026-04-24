@@ -12,10 +12,11 @@ const CustomCursor = () => {
   const [isTouchDevice, setIsTouchDevice] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
 
-  // Disable cursor on /practice and /course pages
+  // Disable cursor on /practice, /course, and /problems pages
   const isPracticePage = location.pathname.startsWith('/practice');
   const isCoursePage = location.pathname.startsWith('/course');
-  const shouldDisableCursor = isPracticePage || isCoursePage;
+  const isProblemSolvePage = location.pathname.startsWith('/problems');
+  const shouldDisableCursor = isPracticePage || isCoursePage || isProblemSolvePage;
 
   // Add data attribute to body for CSS targeting
   useEffect(() => {
@@ -24,7 +25,7 @@ const CustomCursor = () => {
     } else {
       document.body.removeAttribute('data-practice-page');
     }
-    
+
     return () => {
       document.body.removeAttribute('data-practice-page');
     };
@@ -134,9 +135,8 @@ const CustomCursor = () => {
 
   return (
     <div
-      className={`custom-cursor ${hoveringLink ? 'hovering-link' : ''} ${
-        hoveringText ? 'hovering-text' : ''
-      } ${hoveringDisabled ? 'hovering-disabled' : ''}`}
+      className={`custom-cursor ${hoveringLink ? 'hovering-link' : ''} ${hoveringText ? 'hovering-text' : ''
+        } ${hoveringDisabled ? 'hovering-disabled' : ''}`}
       style={{
         left: `${position.x}px`,
         top: `${position.y}px`

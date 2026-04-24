@@ -9,7 +9,7 @@ import '../SpecialProblems/SpecialProblemsPage.css';
 
 /* ── List options ── */
 const LIST_OPTIONS = [
-  { id: 'blind75',     label: 'Blind 75',    icon: '🧠' },
+  { id: 'blind75', label: 'Blind 75', icon: '🧠' },
   { id: 'neetcode150', label: 'NeetCode 150', icon: '🚀' },
   { id: 'neetcode250', label: 'NeetCode 250', icon: '🦄' },
   { id: 'neetcodeall', label: 'NeetCode All', icon: '🌐' },
@@ -17,71 +17,71 @@ const LIST_OPTIONS = [
 
 /* ── Categories ── */
 const CATEGORIES = [
-  { name: 'All',                   total: 150, solved: 62 },
-  { name: 'Arrays & Hashing',      total: 9,   solved: 9  },
-  { name: 'Two Pointers',          total: 5,   solved: 5  },
-  { name: 'Sliding Window',        total: 6,   solved: 4  },
-  { name: 'Stack',                 total: 7,   solved: 3  },
-  { name: 'Binary Search',         total: 7,   solved: 6  },
-  { name: 'Linked List',           total: 11,  solved: 7  },
-  { name: 'Trees',                 total: 15,  solved: 8  },
-  { name: 'Tries',                 total: 3,   solved: 1  },
-  { name: 'Heap / Priority Queue', total: 7,   solved: 2  },
-  { name: 'Backtracking',          total: 9,   solved: 4  },
-  { name: 'Graphs',                total: 13,  solved: 5  },
-  { name: 'Advanced Graphs',       total: 6,   solved: 2  },
-  { name: 'DP — 1D',              total: 12,  solved: 4  },
-  { name: 'DP — 2D',              total: 11,  solved: 2  },
-  { name: 'Greedy',                total: 8,   solved: 0  },
-  { name: 'Intervals',             total: 6,   solved: 0  },
-  { name: 'Math & Geometry',       total: 8,   solved: 0  },
-  { name: 'Bit Manipulation',      total: 7,   solved: 0  },
+  { name: 'All', total: 150, solved: 62 },
+  { name: 'Arrays & Hashing', total: 9, solved: 9 },
+  { name: 'Two Pointers', total: 5, solved: 5 },
+  { name: 'Sliding Window', total: 6, solved: 4 },
+  { name: 'Stack', total: 7, solved: 3 },
+  { name: 'Binary Search', total: 7, solved: 6 },
+  { name: 'Linked List', total: 11, solved: 7 },
+  { name: 'Trees', total: 15, solved: 8 },
+  { name: 'Tries', total: 3, solved: 1 },
+  { name: 'Heap / Priority Queue', total: 7, solved: 2 },
+  { name: 'Backtracking', total: 9, solved: 4 },
+  { name: 'Graphs', total: 13, solved: 5 },
+  { name: 'Advanced Graphs', total: 6, solved: 2 },
+  { name: 'DP — 1D', total: 12, solved: 4 },
+  { name: 'DP — 2D', total: 11, solved: 2 },
+  { name: 'Greedy', total: 8, solved: 0 },
+  { name: 'Intervals', total: 6, solved: 0 },
+  { name: 'Math & Geometry', total: 8, solved: 0 },
+  { name: 'Bit Manipulation', total: 7, solved: 0 },
 ];
 
 /* ── Problems ── */
 export const ALL_PROBLEMS = [
-  { id:1,  name:'Two Sum',                         category:'Arrays & Hashing',   difficulty:'Easy',   status:'Solved',      lists:['blind75','neetcode150','neetcode250','neetcodeall'], topics:['Array','Hash Table']},
-  { id:2,  name:'Valid Anagram',                   category:'Arrays & Hashing',   difficulty:'Easy',   status:'Solved',      lists:['blind75','neetcode150','neetcode250','neetcodeall'], topics:['String','Hash Table','Sorting']},
-  { id:3,  name:'Contains Duplicate',              category:'Arrays & Hashing',   difficulty:'Easy',   status:'Solved',      lists:['blind75','neetcode150','neetcode250','neetcodeall'], topics:['Array','Hash Table','Sorting']},
-  { id:4,  name:'Group Anagrams',                  category:'Arrays & Hashing',   difficulty:'Medium', status:'Solved',      lists:['blind75','neetcode150','neetcode250','neetcodeall'], topics:['Array','Hash Table','String','Sorting']},
-  { id:5,  name:'Top K Frequent Elements',         category:'Arrays & Hashing',   difficulty:'Medium', status:'Solved',      lists:['blind75','neetcode150','neetcode250','neetcodeall'], topics:['Array','Hash Table','Sorting']},
-  { id:6,  name:'Product of Array Except Self',    category:'Arrays & Hashing',   difficulty:'Medium', status:'Attempted',   lists:['blind75','neetcode150','neetcode250','neetcodeall'], topics:['Array','Prefix Sum']},
-  { id:7,  name:'Longest Consecutive Sequence',    category:'Arrays & Hashing',   difficulty:'Medium', status:'Attempted',   lists:['neetcode150','neetcode250','neetcodeall'],           topics:['Array','Hash Table']},
-  { id:8,  name:'Trapping Rain Water',             category:'Arrays & Hashing',   difficulty:'Hard',   status:'Not Started', lists:['blind75','neetcode150','neetcode250','neetcodeall'], topics:['Array','Two Pointers','Dynamic Programming']},
-  { id:9,  name:'Valid Palindrome',                category:'Two Pointers',       difficulty:'Easy',   status:'Solved',      lists:['blind75','neetcode150','neetcode250','neetcodeall'], topics:['Two Pointers','String']},
-  { id:10, name:'3Sum',                            category:'Two Pointers',       difficulty:'Medium', status:'Solved',      lists:['blind75','neetcode150','neetcode250','neetcodeall'], topics:['Array','Two Pointers','Sorting']},
-  { id:11, name:'Container With Most Water',       category:'Two Pointers',       difficulty:'Medium', status:'Solved',      lists:['blind75','neetcode150','neetcode250','neetcodeall'], topics:['Array','Two Pointers','Greedy']},
-  { id:12, name:'Best Time to Buy and Sell Stock', category:'Sliding Window',     difficulty:'Easy',   status:'Solved',      lists:['blind75','neetcode150','neetcode250','neetcodeall'], topics:['Array','Dynamic Programming']},
-  { id:13, name:'Longest Substring Without Repeating',category:'Sliding Window',  difficulty:'Medium', status:'Solved',      lists:['blind75','neetcode150','neetcode250','neetcodeall'], topics:['Hash Table','String','Sliding Window']},
-  { id:14, name:'Minimum Window Substring',        category:'Sliding Window',     difficulty:'Hard',   status:'Attempted',   lists:['blind75','neetcode150','neetcode250','neetcodeall'], topics:['Hash Table','String','Sliding Window']},
-  { id:15, name:'Valid Parentheses',               category:'Stack',              difficulty:'Easy',   status:'Solved',      lists:['blind75','neetcode150','neetcode250','neetcodeall'], topics:['String','Stack']},
-  { id:16, name:'Min Stack',                       category:'Stack',              difficulty:'Medium', status:'Not Started', lists:['neetcode150','neetcode250','neetcodeall'],           topics:['Stack','Design']},
-  { id:17, name:'Evaluate Reverse Polish Notation',category:'Stack',              difficulty:'Medium', status:'Not Started', lists:['neetcode150','neetcode250','neetcodeall'],           topics:['Array','Math','Stack']},
-  { id:18, name:'Binary Search',                   category:'Binary Search',      difficulty:'Easy',   status:'Solved',      lists:['neetcode150','neetcode250','neetcodeall'],           topics:['Array','Binary Search']},
-  { id:19, name:'Koko Eating Bananas',             category:'Binary Search',      difficulty:'Medium', status:'Attempted',   lists:['neetcode150','neetcode250','neetcodeall'],           topics:['Array','Binary Search']},
-  { id:20, name:'Find Minimum in Rotated Array',   category:'Binary Search',      difficulty:'Medium', status:'Not Started', lists:['neetcode150','neetcode250','neetcodeall'],           topics:['Array','Binary Search']},
-  { id:21, name:'Reverse Linked List',             category:'Linked List',        difficulty:'Easy',   status:'Solved',      lists:['blind75','neetcode150','neetcode250','neetcodeall'], topics:['Linked List']},
-  { id:22, name:'Merge Two Sorted Lists',          category:'Linked List',        difficulty:'Easy',   status:'Solved',      lists:['blind75','neetcode150','neetcode250','neetcodeall'], topics:['Linked List','Recursion']},
-  { id:23, name:'Reorder List',                    category:'Linked List',        difficulty:'Medium', status:'Not Started', lists:['neetcode150','neetcode250','neetcodeall'],           topics:['Linked List','Two Pointers','Stack','Recursion']},
-  { id:24, name:'LRU Cache',                       category:'Linked List',        difficulty:'Medium', status:'Not Started', lists:['neetcode150','neetcode250','neetcodeall'],           topics:['Hash Table','Linked List','Design','Doubly-Linked List']},
-  { id:25, name:'Invert Binary Tree',              category:'Trees',              difficulty:'Easy',   status:'Solved',      lists:['blind75','neetcode150','neetcode250','neetcodeall'], topics:['Tree','Depth-First Search','Breadth-First Search','Binary Tree']},
-  { id:26, name:'Maximum Depth of Binary Tree',    category:'Trees',              difficulty:'Easy',   status:'Solved',      lists:['blind75','neetcode150','neetcode250','neetcodeall'], topics:['Tree','Depth-First Search','Breadth-First Search','Binary Tree']},
-  { id:27, name:'Level Order Traversal',           category:'Trees',              difficulty:'Medium', status:'Attempted',   lists:['neetcode150','neetcode250','neetcodeall'],           topics:['Tree','Breadth-First Search','Binary Tree']},
-  { id:28, name:'Binary Tree Right Side View',     category:'Trees',              difficulty:'Medium', status:'Not Started', lists:['neetcode150','neetcode250','neetcodeall'],           topics:['Tree','Depth-First Search','Breadth-First Search','Binary Tree']},
-  { id:29, name:'Construct Binary Tree from Preorder',category:'Trees',           difficulty:'Medium', status:'Not Started', lists:['blind75','neetcode150','neetcode250','neetcodeall'], topics:['Array','Hash Table','Divide and Conquer','Tree','Binary Tree']},
-  { id:30, name:'Binary Tree Maximum Path Sum',    category:'Trees',              difficulty:'Hard',   status:'Not Started', lists:['blind75','neetcode150','neetcode250','neetcodeall'], topics:['Dynamic Programming','Tree','Depth-First Search','Binary Tree']},
-  { id:31, name:'Climbing Stairs',                 category:'DP — 1D',           difficulty:'Easy',   status:'Solved',      lists:['blind75','neetcode150','neetcode250','neetcodeall'], topics:['Math','Dynamic Programming','Memoization']},
-  { id:32, name:'House Robber',                    category:'DP — 1D',           difficulty:'Medium', status:'Attempted',   lists:['blind75','neetcode150','neetcode250','neetcodeall'], topics:['Array','Dynamic Programming']},
-  { id:33, name:'Longest Palindromic Substring',   category:'DP — 1D',           difficulty:'Medium', status:'Not Started', lists:['blind75','neetcode150','neetcode250','neetcodeall'], topics:['Two Pointers','String','Dynamic Programming']},
+  { id: 1, name: 'Two Sum', category: 'Arrays & Hashing', difficulty: 'Easy', status: 'Solved', lists: ['blind75', 'neetcode150', 'neetcode250', 'neetcodeall'], topics: ['Array', 'Hash Table'] },
+  { id: 2, name: 'Valid Anagram', category: 'Arrays & Hashing', difficulty: 'Easy', status: 'Solved', lists: ['blind75', 'neetcode150', 'neetcode250', 'neetcodeall'], topics: ['String', 'Hash Table', 'Sorting'] },
+  { id: 3, name: 'Contains Duplicate', category: 'Arrays & Hashing', difficulty: 'Easy', status: 'Solved', lists: ['blind75', 'neetcode150', 'neetcode250', 'neetcodeall'], topics: ['Array', 'Hash Table', 'Sorting'] },
+  { id: 4, name: 'Group Anagrams', category: 'Arrays & Hashing', difficulty: 'Medium', status: 'Solved', lists: ['blind75', 'neetcode150', 'neetcode250', 'neetcodeall'], topics: ['Array', 'Hash Table', 'String', 'Sorting'] },
+  { id: 5, name: 'Top K Frequent Elements', category: 'Arrays & Hashing', difficulty: 'Medium', status: 'Solved', lists: ['blind75', 'neetcode150', 'neetcode250', 'neetcodeall'], topics: ['Array', 'Hash Table', 'Sorting'] },
+  { id: 6, name: 'Product of Array Except Self', category: 'Arrays & Hashing', difficulty: 'Medium', status: 'Attempted', lists: ['blind75', 'neetcode150', 'neetcode250', 'neetcodeall'], topics: ['Array', 'Prefix Sum'] },
+  { id: 7, name: 'Longest Consecutive Sequence', category: 'Arrays & Hashing', difficulty: 'Medium', status: 'Attempted', lists: ['neetcode150', 'neetcode250', 'neetcodeall'], topics: ['Array', 'Hash Table'] },
+  { id: 8, name: 'Trapping Rain Water', category: 'Arrays & Hashing', difficulty: 'Hard', status: 'Not Started', lists: ['blind75', 'neetcode150', 'neetcode250', 'neetcodeall'], topics: ['Array', 'Two Pointers', 'Dynamic Programming'] },
+  { id: 9, name: 'Valid Palindrome', category: 'Two Pointers', difficulty: 'Easy', status: 'Solved', lists: ['blind75', 'neetcode150', 'neetcode250', 'neetcodeall'], topics: ['Two Pointers', 'String'] },
+  { id: 10, name: '3Sum', category: 'Two Pointers', difficulty: 'Medium', status: 'Solved', lists: ['blind75', 'neetcode150', 'neetcode250', 'neetcodeall'], topics: ['Array', 'Two Pointers', 'Sorting'] },
+  { id: 11, name: 'Container With Most Water', category: 'Two Pointers', difficulty: 'Medium', status: 'Solved', lists: ['blind75', 'neetcode150', 'neetcode250', 'neetcodeall'], topics: ['Array', 'Two Pointers', 'Greedy'] },
+  { id: 12, name: 'Best Time to Buy and Sell Stock', category: 'Sliding Window', difficulty: 'Easy', status: 'Solved', lists: ['blind75', 'neetcode150', 'neetcode250', 'neetcodeall'], topics: ['Array', 'Dynamic Programming'] },
+  { id: 13, name: 'Longest Substring Without Repeating', category: 'Sliding Window', difficulty: 'Medium', status: 'Solved', lists: ['blind75', 'neetcode150', 'neetcode250', 'neetcodeall'], topics: ['Hash Table', 'String', 'Sliding Window'] },
+  { id: 14, name: 'Minimum Window Substring', category: 'Sliding Window', difficulty: 'Hard', status: 'Attempted', lists: ['blind75', 'neetcode150', 'neetcode250', 'neetcodeall'], topics: ['Hash Table', 'String', 'Sliding Window'] },
+  { id: 15, name: 'Valid Parentheses', category: 'Stack', difficulty: 'Easy', status: 'Solved', lists: ['blind75', 'neetcode150', 'neetcode250', 'neetcodeall'], topics: ['String', 'Stack'] },
+  { id: 16, name: 'Min Stack', category: 'Stack', difficulty: 'Medium', status: 'Not Started', lists: ['neetcode150', 'neetcode250', 'neetcodeall'], topics: ['Stack', 'Design'] },
+  { id: 17, name: 'Evaluate Reverse Polish Notation', category: 'Stack', difficulty: 'Medium', status: 'Not Started', lists: ['neetcode150', 'neetcode250', 'neetcodeall'], topics: ['Array', 'Math', 'Stack'] },
+  { id: 18, name: 'Binary Search', category: 'Binary Search', difficulty: 'Easy', status: 'Solved', lists: ['neetcode150', 'neetcode250', 'neetcodeall'], topics: ['Array', 'Binary Search'] },
+  { id: 19, name: 'Koko Eating Bananas', category: 'Binary Search', difficulty: 'Medium', status: 'Attempted', lists: ['neetcode150', 'neetcode250', 'neetcodeall'], topics: ['Array', 'Binary Search'] },
+  { id: 20, name: 'Find Minimum in Rotated Array', category: 'Binary Search', difficulty: 'Medium', status: 'Not Started', lists: ['neetcode150', 'neetcode250', 'neetcodeall'], topics: ['Array', 'Binary Search'] },
+  { id: 21, name: 'Reverse Linked List', category: 'Linked List', difficulty: 'Easy', status: 'Solved', lists: ['blind75', 'neetcode150', 'neetcode250', 'neetcodeall'], topics: ['Linked List'] },
+  { id: 22, name: 'Merge Two Sorted Lists', category: 'Linked List', difficulty: 'Easy', status: 'Solved', lists: ['blind75', 'neetcode150', 'neetcode250', 'neetcodeall'], topics: ['Linked List', 'Recursion'] },
+  { id: 23, name: 'Reorder List', category: 'Linked List', difficulty: 'Medium', status: 'Not Started', lists: ['neetcode150', 'neetcode250', 'neetcodeall'], topics: ['Linked List', 'Two Pointers', 'Stack', 'Recursion'] },
+  { id: 24, name: 'LRU Cache', category: 'Linked List', difficulty: 'Medium', status: 'Not Started', lists: ['neetcode150', 'neetcode250', 'neetcodeall'], topics: ['Hash Table', 'Linked List', 'Design', 'Doubly-Linked List'] },
+  { id: 25, name: 'Invert Binary Tree', category: 'Trees', difficulty: 'Easy', status: 'Solved', lists: ['blind75', 'neetcode150', 'neetcode250', 'neetcodeall'], topics: ['Tree', 'Depth-First Search', 'Breadth-First Search', 'Binary Tree'] },
+  { id: 26, name: 'Maximum Depth of Binary Tree', category: 'Trees', difficulty: 'Easy', status: 'Solved', lists: ['blind75', 'neetcode150', 'neetcode250', 'neetcodeall'], topics: ['Tree', 'Depth-First Search', 'Breadth-First Search', 'Binary Tree'] },
+  { id: 27, name: 'Level Order Traversal', category: 'Trees', difficulty: 'Medium', status: 'Attempted', lists: ['neetcode150', 'neetcode250', 'neetcodeall'], topics: ['Tree', 'Breadth-First Search', 'Binary Tree'] },
+  { id: 28, name: 'Binary Tree Right Side View', category: 'Trees', difficulty: 'Medium', status: 'Not Started', lists: ['neetcode150', 'neetcode250', 'neetcodeall'], topics: ['Tree', 'Depth-First Search', 'Breadth-First Search', 'Binary Tree'] },
+  { id: 29, name: 'Construct Binary Tree from Preorder', category: 'Trees', difficulty: 'Medium', status: 'Not Started', lists: ['blind75', 'neetcode150', 'neetcode250', 'neetcodeall'], topics: ['Array', 'Hash Table', 'Divide and Conquer', 'Tree', 'Binary Tree'] },
+  { id: 30, name: 'Binary Tree Maximum Path Sum', category: 'Trees', difficulty: 'Hard', status: 'Not Started', lists: ['blind75', 'neetcode150', 'neetcode250', 'neetcodeall'], topics: ['Dynamic Programming', 'Tree', 'Depth-First Search', 'Binary Tree'] },
+  { id: 31, name: 'Climbing Stairs', category: 'DP — 1D', difficulty: 'Easy', status: 'Solved', lists: ['blind75', 'neetcode150', 'neetcode250', 'neetcodeall'], topics: ['Math', 'Dynamic Programming', 'Memoization'] },
+  { id: 32, name: 'House Robber', category: 'DP — 1D', difficulty: 'Medium', status: 'Attempted', lists: ['blind75', 'neetcode150', 'neetcode250', 'neetcodeall'], topics: ['Array', 'Dynamic Programming'] },
+  { id: 33, name: 'Longest Palindromic Substring', category: 'DP — 1D', difficulty: 'Medium', status: 'Not Started', lists: ['blind75', 'neetcode150', 'neetcode250', 'neetcodeall'], topics: ['Two Pointers', 'String', 'Dynamic Programming'] },
 ];
 
-const DIFF_FILTERS   = ['All','Easy','Medium','Hard'];
-const STATUS_FILTERS = ['All','Solved','Attempted','Not Started'];
+const DIFF_FILTERS = ['All', 'Easy', 'Medium', 'Hard'];
+const STATUS_FILTERS = ['All', 'Solved', 'Attempted', 'Not Started'];
 
 function StatusIcon({ status }) {
-  if (status === 'Solved')    return <CheckCircle2 size={14} className="status-icon solved" />;
-  if (status === 'Attempted') return <Circle       size={14} className="status-icon attempted" />;
-  return                             <Circle       size={14} className="status-icon not-started" />;
+  if (status === 'Solved') return <CheckCircle2 size={14} className="status-icon solved" />;
+  if (status === 'Attempted') return <Circle size={14} className="status-icon attempted" />;
+  return <Circle size={14} className="status-icon not-started" />;
 }
 
 export default function PracticePage() {
@@ -90,17 +90,19 @@ export default function PracticePage() {
 
   const isCoreSkills = listId === 'coreskills';
 
+  const getProblemSlug = (name) => name.toLowerCase().replace(/\s+/g, '-');
+
   // ── Normal list state ──
   const [activeCategory, setActiveCategory] = useState('All');
-  const [search,   setSearch]   = useState('');
+  const [search, setSearch] = useState('');
   const [diffFilt, setDiffFilt] = useState('All');
   const [statFilt, setStatFilt] = useState('All');
   const [dropOpen, setDropOpen] = useState(false);
   const dropRef = useRef(null);
 
   // ── Core Skills state ──
-  const [coreSection, setCoreSection]    = useState('dataStructures'); // 'dataStructures' | 'algorithms'
-  const [coreTopic,   setCoreTopic]      = useState(null); // null = show all topics in section
+  const [coreSection, setCoreSection] = useState('dataStructures'); // 'dataStructures' | 'algorithms'
+  const [coreTopic, setCoreTopic] = useState(null); // null = show all topics in section
 
   useEffect(() => {
     const h = e => { if (dropRef.current && !dropRef.current.contains(e.target)) setDropOpen(false); };
@@ -145,12 +147,12 @@ export default function PracticePage() {
     return base.filter(p => {
       const srchOk = p.name.toLowerCase().includes(search.toLowerCase());
       const diffOk = diffFilt === 'All' || p.difficulty === diffFilt;
-      const statOk = statFilt === 'All' || p.status    === statFilt;
+      const statOk = statFilt === 'All' || p.status === statFilt;
       return srchOk && diffOk && statOk;
     });
   }, [isCoreSkills, coreProblems, listProblems, activeCategory, search, diffFilt, statFilt]);
 
-  const solved    = filtered.filter(p => p.status === 'Solved').length;
+  const solved = filtered.filter(p => p.status === 'Solved').length;
   const attempted = filtered.filter(p => p.status === 'Attempted').length;
 
   // ── Page title ──
@@ -175,13 +177,13 @@ export default function PracticePage() {
             <div className="filter-group">
               <span className="filter-label">Difficulty</span>
               {DIFF_FILTERS.map(f => (
-                <button key={f} className={`filter-chip ${diffFilt===f ? 'filter-chip--active diff--'+f.toLowerCase() : ''}`} onClick={() => setDiffFilt(f)}>{f}</button>
+                <button key={f} className={`filter-chip ${diffFilt === f ? 'filter-chip--active diff--' + f.toLowerCase() : ''}`} onClick={() => setDiffFilt(f)}>{f}</button>
               ))}
             </div>
             <div className="filter-group">
               <span className="filter-label">Status</span>
               {STATUS_FILTERS.map(f => (
-                <button key={f} className={`filter-chip ${statFilt===f ? 'filter-chip--active' : ''}`} onClick={() => setStatFilt(f)}>{f}</button>
+                <button key={f} className={`filter-chip ${statFilt === f ? 'filter-chip--active' : ''}`} onClick={() => setStatFilt(f)}>{f}</button>
               ))}
             </div>
             <div className="practice-search-bar">
@@ -300,12 +302,12 @@ export default function PracticePage() {
                 {filtered.length === 0
                   ? <div className="practice-empty">No problems match your filters.</div>
                   : filtered.map(p => (
-                      <div key={p.id} className="practice-problem-row special-problem-row">
-                        <span className="problem-status-icon"><StatusIcon status={p.status} /></span>
-                        <span className="problem-name">{p.name}<ChevronRight size={11} className="problem-chevron"/></span>
-                        <span className={`problem-difficulty difficulty--${p.difficulty.toLowerCase()}`}>{p.difficulty}</span>
-                      </div>
-                    ))
+                    <div key={p.id} className="practice-problem-row special-problem-row" onClick={() => navigate(`/problems/${getProblemSlug(p.name)}`)}>
+                      <span className="problem-status-icon"><StatusIcon status={p.status} /></span>
+                      <span className="problem-name">{p.name}<ChevronRight size={11} className="problem-chevron" /></span>
+                      <span className={`problem-difficulty difficulty--${p.difficulty.toLowerCase()}`}>{p.difficulty}</span>
+                    </div>
+                  ))
                 }
               </div>
             </>
@@ -319,13 +321,13 @@ export default function PracticePage() {
                 {filtered.length === 0
                   ? <div className="practice-empty">No problems match your filters.</div>
                   : filtered.map(p => (
-                      <div key={p.id} className="practice-problem-row">
-                        <span className="problem-status-icon"><StatusIcon status={p.status} /></span>
-                        <span className="problem-name">{p.name}<ChevronRight size={11} className="problem-chevron"/></span>
-                        <span className={`problem-difficulty difficulty--${p.difficulty.toLowerCase()}`}>{p.difficulty}</span>
-                        <span className="problem-solution centered"><FileText size={14}/></span>
-                      </div>
-                    ))
+                    <div key={p.id} className="practice-problem-row" onClick={() => navigate(`/problems/${getProblemSlug(p.name)}`)}>
+                      <span className="problem-status-icon"><StatusIcon status={p.status} /></span>
+                      <span className="problem-name">{p.name}<ChevronRight size={11} className="problem-chevron" /></span>
+                      <span className={`problem-difficulty difficulty--${p.difficulty.toLowerCase()}`}>{p.difficulty}</span>
+                      <span className="problem-solution centered"><FileText size={14} /></span>
+                    </div>
+                  ))
                 }
               </div>
             </>

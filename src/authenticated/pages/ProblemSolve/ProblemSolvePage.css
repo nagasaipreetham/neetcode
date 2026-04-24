@@ -1,0 +1,354 @@
+.problem-solve-root {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--auth-bg);
+  overflow: hidden;
+  /* Disable custom cursor on this page */
+  cursor: default !important;
+}
+
+.problem-solve-root * {
+  cursor: default !important;
+}
+
+/* Allow specific interactive elements to have pointer cursor */
+.problem-solve-root button,
+.problem-solve-root a,
+.problem-solve-root .tab,
+.problem-solve-root select {
+  cursor: pointer !important;
+}
+
+/* Allow text cursor in editor and inputs */
+.problem-solve-root .monaco-editor,
+.problem-solve-root input,
+.problem-solve-root textarea {
+  cursor: text !important;
+}
+
+.problem-solve-layout {
+  flex: 1;
+  display: flex;
+  gap: 0;
+  padding: 0;
+  overflow: hidden;
+  background: var(--auth-accent-bg);
+  position: relative;
+}
+
+/* Resize handles */
+.resize-handle {
+  background: var(--auth-hover-bg);
+  z-index: 10;
+  position: relative;
+  user-select: none;
+}
+
+.resize-handle.horizontal {
+  width: 4px;
+  cursor: col-resize !important;
+  transition: background 0.2s;
+}
+
+.resize-handle.horizontal:hover {
+  background: var(--auth-accent, #22c55e);
+}
+
+.resize-handle.vertical {
+  height: 4px;
+  cursor: row-resize !important;
+  transition: background 0.2s;
+}
+
+.resize-handle.vertical:hover {
+  background: var(--auth-accent, #22c55e);
+}
+
+.problem-section {
+  background: var(--auth-bg);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: none;
+}
+
+.question-pane {
+  flex-shrink: 0;
+}
+
+.editor-console-stack {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.pane-header {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  padding: 0 1rem;
+  background: var(--auth-nav-bg);
+  border-bottom: 1px solid var(--auth-hover-bg);
+  gap: 0;
+  flex-shrink: 0;
+}
+
+.tab {
+  padding: 0 0.75rem;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--auth-text-muted);
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s;
+}
+
+.tab:hover {
+  color: var(--auth-text);
+}
+
+.tab-icon {
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.tab-divider {
+  width: 1px;
+  height: 20px;
+  background: var(--auth-hover-bg);
+  margin: 0 0.25rem;
+}
+
+.tab.active {
+  color: var(--auth-text);
+}
+
+.tab.active::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--auth-accent, #22c55e);
+}
+
+/* Tab colors */
+.tab:nth-child(1) .tab-icon { color: #fbbf24; } /* Description - yellow */
+.tab:nth-child(3) .tab-icon { color: #3b82f6; } /* Solutions - blue */
+.tab:nth-child(5) .tab-icon { color: #22c55e; } /* Submissions - green */
+.tab:nth-child(7) .tab-icon { color: #3b82f6; } /* Discuss - blue */
+
+.pane-content {
+  flex: 1;
+  padding: 1.5rem;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.console-content {
+  padding: 1rem 1.5rem;
+}
+
+/* Question Pane Specifics */
+.problem-h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.problem-tags {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.tag-difficulty {
+  padding: 0.2rem 0.6rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.tag-difficulty.easy {
+  color: #22c55e;
+  background: rgba(34, 197, 94, 0.1);
+}
+
+.tag-topic {
+  color: var(--auth-text-muted);
+  background: var(--auth-hover-bg);
+  padding: 0.2rem 0.6rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+}
+
+.problem-description p {
+  margin-bottom: 1rem;
+  line-height: 1.6;
+  color: var(--auth-text);
+}
+
+.example-block {
+  background: var(--auth-hover-bg);
+  padding: 1rem;
+  border-radius: 8px;
+  margin: 1.5rem 0;
+}
+
+.example-block h4 {
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+
+.example-block pre {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  white-space: pre-wrap;
+}
+
+/* Editor & Console Stack */
+.editor-pane {
+  flex-shrink: 0;
+}
+
+.editor-container {
+  flex: 1;
+  overflow: hidden;
+}
+
+.console-pane {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.editor-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.editor-controls-left,
+.editor-controls-right {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.lang-select {
+  background: var(--auth-hover-bg);
+  border: none;
+  color: var(--auth-text);
+  font-size: 0.85rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.editor-action-btn {
+  background: transparent;
+  border: none;
+  color: var(--auth-text-muted);
+  cursor: pointer;
+  padding: 0.4rem;
+  border-radius: 4px;
+}
+
+.editor-action-btn:hover {
+  background: var(--auth-hover-bg);
+  color: var(--auth-text);
+}
+
+.testcase-item {
+  margin-bottom: 1rem;
+}
+
+.testcase-item label {
+  font-size: 0.8rem;
+  color: var(--auth-text-muted);
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.testcase-input {
+  background: var(--auth-hover-bg);
+  padding: 0.6rem 0.8rem;
+  border-radius: 6px;
+  font-family: monospace;
+  font-size: 0.9rem;
+}
+
+.console-footer {
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 1rem;
+  gap: 0.75rem;
+  background: var(--auth-nav-bg);
+  border-top: 1px solid var(--auth-hover-bg);
+}
+
+.run-btn,
+.submit-btn {
+  padding: 0.5rem 1.25rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.run-btn {
+  background: var(--auth-hover-bg);
+  border: none;
+  color: var(--auth-text);
+}
+
+.submit-btn {
+  background: var(--auth-accent, #22c55e);
+  border: none;
+  color: white;
+}
+
+.run-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.submit-btn:hover {
+  background: #16a34a;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .problem-solve-layout {
+    grid-template-columns: 1fr;
+    overflow-y: auto;
+  }
+
+  .problem-solve-root {
+    overflow-y: auto;
+    height: auto;
+  }
+
+  .editor-console-stack {
+    overflow: visible;
+    height: auto;
+  }
+
+  .editor-pane {
+    height: 500px;
+  }
+
+  .console-pane {
+    height: auto;
+  }
+}

@@ -9,19 +9,19 @@ import './TopicProblemListPage.css';
 
 /* re-use list options */
 const LIST_OPTIONS = [
-  { id: 'blind75',     label: 'Blind 75',    icon: '🧠' },
+  { id: 'blind75', label: 'Blind 75', icon: '🧠' },
   { id: 'neetcode150', label: 'NeetCode 150', icon: '🚀' },
   { id: 'neetcode250', label: 'NeetCode 250', icon: '🦄' },
   { id: 'neetcodeall', label: 'NeetCode All', icon: '🌐' },
 ];
 
-const DIFF_FILTERS   = ['All','Easy','Medium','Hard'];
-const STATUS_FILTERS = ['All','Solved','Attempted','Not Started'];
+const DIFF_FILTERS = ['All', 'Easy', 'Medium', 'Hard'];
+const STATUS_FILTERS = ['All', 'Solved', 'Attempted', 'Not Started'];
 
 function StatusIcon({ status }) {
-  if (status === 'Solved')    return <CheckCircle2 size={14} className="status-icon solved" />;
-  if (status === 'Attempted') return <Circle       size={14} className="status-icon attempted" />;
-  return                             <Circle       size={14} className="status-icon not-started" />;
+  if (status === 'Solved') return <CheckCircle2 size={14} className="status-icon solved" />;
+  if (status === 'Attempted') return <Circle size={14} className="status-icon attempted" />;
+  return <Circle size={14} className="status-icon not-started" />;
 }
 
 /* Convert slug back to display name */
@@ -32,9 +32,9 @@ function slugToTopic(slug) {
 
 export default function TopicProblemListPage() {
   const { topicId } = useParams();
-  const navigate    = useNavigate();
+  const navigate = useNavigate();
 
-  const [search,   setSearch]   = useState('');
+  const [search, setSearch] = useState('');
   const [diffFilt, setDiffFilt] = useState('All');
   const [statFilt, setStatFilt] = useState('All');
   const [dropOpen, setDropOpen] = useState(false);
@@ -51,11 +51,11 @@ export default function TopicProblemListPage() {
   const filtered = useMemo(() => topicProblems.filter(p => {
     const srchOk = p.name.toLowerCase().includes(search.toLowerCase());
     const diffOk = diffFilt === 'All' || p.difficulty === diffFilt;
-    const statOk = statFilt === 'All' || p.status    === statFilt;
+    const statOk = statFilt === 'All' || p.status === statFilt;
     return srchOk && diffOk && statOk;
   }), [topicProblems, search, diffFilt, statFilt]);
 
-  const solved    = filtered.filter(p => p.status === 'Solved').length;
+  const solved = filtered.filter(p => p.status === 'Solved').length;
   const attempted = filtered.filter(p => p.status === 'Attempted').length;
 
   return (
@@ -75,13 +75,13 @@ export default function TopicProblemListPage() {
             <div className="filter-group">
               <span className="filter-label">Difficulty</span>
               {DIFF_FILTERS.map(f => (
-                <button key={f} className={`filter-chip ${diffFilt===f ? 'filter-chip--active diff--'+f.toLowerCase() : ''}`} onClick={() => setDiffFilt(f)}>{f}</button>
+                <button key={f} className={`filter-chip ${diffFilt === f ? 'filter-chip--active diff--' + f.toLowerCase() : ''}`} onClick={() => setDiffFilt(f)}>{f}</button>
               ))}
             </div>
             <div className="filter-group">
               <span className="filter-label">Status</span>
               {STATUS_FILTERS.map(f => (
-                <button key={f} className={`filter-chip ${statFilt===f ? 'filter-chip--active' : ''}`} onClick={() => setStatFilt(f)}>{f}</button>
+                <button key={f} className={`filter-chip ${statFilt === f ? 'filter-chip--active' : ''}`} onClick={() => setStatFilt(f)}>{f}</button>
               ))}
             </div>
             <div className="practice-search-bar">
@@ -137,13 +137,13 @@ export default function TopicProblemListPage() {
           {filtered.length === 0
             ? <div className="practice-empty">No problems found for "{topicDisplay}".</div>
             : filtered.map(p => (
-                <div key={p.id} className="practice-problem-row">
-                  <span className="problem-status-icon"><StatusIcon status={p.status} /></span>
-                  <span className="problem-name">{p.name}<ChevronRight size={11} className="problem-chevron"/></span>
-                  <span className={`problem-difficulty difficulty--${p.difficulty.toLowerCase()}`}>{p.difficulty}</span>
-                  <span className="problem-solution centered"><FileText size={14}/></span>
-                </div>
-              ))
+              <div key={p.id} className="practice-problem-row" onClick={() => navigate(`/problems/${getProblemSlug(p.name)}`)}>
+                <span className="problem-status-icon"><StatusIcon status={p.status} /></span>
+                <span className="problem-name">{p.name}<ChevronRight size={11} className="problem-chevron" /></span>
+                <span className={`problem-difficulty difficulty--${p.difficulty.toLowerCase()}`}>{p.difficulty}</span>
+                <span className="problem-solution centered"><FileText size={14} /></span>
+              </div>
+            ))
           }
         </div>
       </div>

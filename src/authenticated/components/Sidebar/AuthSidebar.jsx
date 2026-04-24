@@ -31,36 +31,36 @@ const COURSES_TREE = [
     id: 'course-dsa', label: 'Data Structures & Algorithms', icon: GitBranch,
     children: [
       { label: 'Data Structures & Algorithms', path: '/course/dsa/fundamentals/intro' },
-      { label: 'Advanced Algorithms',           path: '/course/dsa/advanced/intro' },
+      { label: 'Advanced Algorithms', path: '/course/dsa/advanced/intro' },
     ],
   },
   {
     id: 'course-sysdesign', label: 'System Design', icon: Server,
     children: [
       { label: 'System Design for Beginners', path: '/course/system-design/beginners/intro' },
-      { label: 'System Design Interview',     path: '/course/system-design/interview/intro' },
+      { label: 'System Design Interview', path: '/course/system-design/interview/intro' },
     ],
   },
   {
     id: 'course-python', label: 'Python', icon: Terminal,
     children: [
-      { label: 'Python for Beginners',          path: '/course/python/beginners/intro' },
-      { label: 'Python for Coding Interviews',  path: '/course/python/coding-interviews/intro' },
-      { label: 'Python OOP',                    path: '/course/python/oop/intro' },
+      { label: 'Python for Beginners', path: '/course/python/beginners/intro' },
+      { label: 'Python for Coding Interviews', path: '/course/python/coding-interviews/intro' },
+      { label: 'Python OOP', path: '/course/python/oop/intro' },
     ],
   },
   {
     id: 'course-fullstack', label: 'Full Stack Development', icon: Globe,
     children: [
-      { label: 'SQL for Beginners',       path: '/course/fullstack/sql/intro' },
-      { label: 'Full Stack Development',  path: '/course/fullstack/dev/intro' },
+      { label: 'SQL for Beginners', path: '/course/fullstack/sql/intro' },
+      { label: 'Full Stack Development', path: '/course/fullstack/dev/intro' },
     ],
   },
   {
     id: 'course-ood', label: 'Object Oriented Design', icon: Box,
     children: [
       { label: 'Object Oriented Design Interviews', path: '/course/ood/interviews/intro' },
-      { label: 'Object Oriented Design Patterns',   path: '/course/ood/patterns/intro' },
+      { label: 'Object Oriented Design Patterns', path: '/course/ood/patterns/intro' },
     ],
   },
 ];
@@ -90,17 +90,17 @@ export default function AuthSidebar() {
       const completed = localStorage.getItem('completed_lessons');
       setCompletedLessons(completed ? JSON.parse(completed) : []);
     };
-    
+
     syncCompleted();
     window.addEventListener('storage', syncCompleted);
     return () => window.removeEventListener('storage', syncCompleted);
   }, [pathname]);
 
   // Calculate progress for current course
-  const totalLessonsInCurrentCourse = currentCourseData 
+  const totalLessonsInCurrentCourse = currentCourseData
     ? currentCourseData.lessons.reduce((acc, sec) => acc + sec.lessons.length, 0)
     : 36;
-  
+
   const completedInCurrentCourse = currentCourseData
     ? currentCourseData.lessons.flatMap(s => s.lessons).filter(l => completedLessons.includes(l.id)).length
     : 0;
@@ -117,12 +117,12 @@ export default function AuthSidebar() {
     // Expand all sections by default in lesson tree
     const targetLessons = currentCourseData ? currentCourseData.lessons : DSA_LESSONS;
     targetLessons.forEach(sec => base[sec.title] = true);
-    
-    if (pathname.startsWith('/course/dsa'))            return { ...base, 'course-dsa': true };
-    if (pathname.startsWith('/course/system-design'))  return { ...base, 'course-sysdesign': true };
-    if (pathname.startsWith('/course/python'))         return { ...base, 'course-python': true };
-    if (pathname.startsWith('/course/fullstack'))      return { ...base, 'course-fullstack': true };
-    if (pathname.startsWith('/course/ood'))            return { ...base, 'course-ood': true };
+
+    if (pathname.startsWith('/course/dsa')) return { ...base, 'course-dsa': true };
+    if (pathname.startsWith('/course/system-design')) return { ...base, 'course-sysdesign': true };
+    if (pathname.startsWith('/course/python')) return { ...base, 'course-python': true };
+    if (pathname.startsWith('/course/fullstack')) return { ...base, 'course-fullstack': true };
+    if (pathname.startsWith('/course/ood')) return { ...base, 'course-ood': true };
     return base;
   };
   const [expanded, setExpanded] = useState(getInitialExpanded);
@@ -149,7 +149,7 @@ export default function AuthSidebar() {
     <div className="sidebar-progress-circle">
       <svg width="32" height="32" viewBox="0 0 32 32">
         <circle cx="16" cy="16" r="14" className="progress-bg" />
-        <circle cx="16" cy="16" r="14" className="progress-fg" 
+        <circle cx="16" cy="16" r="14" className="progress-fg"
           style={{ strokeDasharray: `${percent * 0.88} 100` }} />
       </svg>
       <span className="progress-label">{label}</span>
@@ -179,7 +179,7 @@ export default function AuthSidebar() {
               {(currentCourseData?.lessons || []).map(section => {
                 const isOpen = !!expanded[section.title];
                 return (
-                   <div key={section.title} className="lesson-section-group">
+                  <div key={section.title} className="lesson-section-group">
                     <button className="lesson-section-toggle" onClick={() => toggle(section.title)}>
                       <span className="section-title">{section.title}</span>
                       <ChevronRight size={14} className={`section-chevron ${isOpen ? 'open' : ''}`} />
@@ -189,8 +189,8 @@ export default function AuthSidebar() {
                         {section.lessons.map(lesson => {
                           const isCompleted = completedLessons.includes(lesson.id);
                           return (
-                            <div 
-                              key={lesson.id} 
+                            <div
+                              key={lesson.id}
                               className={`lesson-item ${isActive(`/course/${currentCourseKey}/${lesson.id}`) ? 'lesson-item--active' : ''} ${isCompleted ? 'lesson-item--completed' : ''}`}
                               onClick={() => navigate(`/course/${currentCourseKey}/${lesson.id}`)}
                             >
