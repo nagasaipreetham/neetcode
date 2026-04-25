@@ -10,8 +10,8 @@ export default function useLenis() {
   const { pathname } = useLocation();
 
   useEffect(() => {
-    // Disable Lenis on all /practice routes
-    if (pathname.startsWith('/practice')) return;
+    // Disable Lenis on all /practice and /problems routes
+    if (pathname.startsWith('/practice') || pathname.startsWith('/problems')) return;
 
     const lenis = new Lenis({
       duration: 1.2,

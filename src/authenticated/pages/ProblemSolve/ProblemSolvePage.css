@@ -6,11 +6,7 @@
   background: var(--auth-bg);
   overflow: hidden;
   /* Disable custom cursor on this page */
-  cursor: default !important;
-}
-
-.problem-solve-root * {
-  cursor: default !important;
+  cursor: default;
 }
 
 /* Allow specific interactive elements to have pointer cursor */
@@ -37,17 +33,27 @@
   overflow: hidden;
   background: var(--auth-accent-bg);
   position: relative;
-  min-height: 0; /* Fix for mouse wheel scrolling in flex children */
+  min-height: 0;
+  /* Fix for mouse wheel scrolling in flex children */
 }
 
 /* Panel sections */
 .problem-section {
-  flex-shrink: 0;
+  flex: 1;
   display: flex;
   flex-direction: column;
   overflow: hidden;
   background: var(--auth-bg);
-  min-height: 0; /* Critical fix for mouse wheel scrolling in nested flex layouts */
+  min-height: 0;
+  /* Critical fix for mouse wheel scrolling in nested flex layouts */
+}
+
+.panel-wrapper {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  flex-shrink: 0;
 }
 
 /* Left Panel - Description (default 35%) */
@@ -85,6 +91,20 @@
   background: #22c55e;
 }
 
+.resize-handle.vertical {
+  height: 4px;
+  cursor: row-resize !important;
+  flex-shrink: 0;
+  background: var(--auth-hover-bg);
+  z-index: 10;
+  position: relative;
+  transition: background 0.2s ease;
+}
+
+.resize-handle.vertical:hover {
+  background: #22c55e;
+}
+
 /* Panel header */
 .pane-header {
   height: 40px;
@@ -118,10 +138,12 @@
 .pane-content::-webkit-scrollbar-thumb {
   background: var(--auth-hover-bg);
   border-radius: 4px;
+  border: 2px solid var(--auth-bg);
+  /* Padding effect */
 }
 
 .pane-content::-webkit-scrollbar-thumb:hover {
-  background: var(--auth-text-muted);
+  background: #3f3f3f;
 }
 
 /* Task 5.2: Tab navigation styling */
@@ -354,6 +376,7 @@
     opacity: 0;
     transform: translateY(-10px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -411,60 +434,213 @@
 }
 
 /* Task 7.3: Language selector styling */
-.lang-select {
-  padding: 0.375rem 0.75rem;
-  font-size: 0.875rem;
-  font-weight: 500;
+.lang-selector-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.lang-selector-wrapper:hover {
+  background: var(--auth-hover-bg);
+}
+
+.lang-name {
+  font-size: 0.85rem;
+  font-weight: 600;
   color: var(--auth-text);
-  background: var(--auth-bg);
-  border: 1px solid var(--auth-hover-bg);
-  border-radius: 6px;
-  outline: none;
-  transition: border-color 0.2s ease;
 }
 
-.lang-select:hover {
-  border-color: var(--auth-text-muted);
-}
-
-.lang-select:focus {
-  border-color: #22c55e;
-}
-
-/* Task 7.4, 7.5: Editor action buttons (reset, settings) */
-.editor-action-btn {
+.icon-btn-ghost {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 32px;
-  height: 32px;
-  padding: 0;
-  background: var(--auth-bg);
-  border: 1px solid var(--auth-hover-bg);
-  border-radius: 6px;
+  width: 28px;
+  height: 28px;
+  background: none;
+  border: none;
+  border-radius: 4px;
   color: var(--auth-text-muted);
   transition: all 0.2s ease;
 }
 
-.editor-action-btn:hover {
+.icon-btn-ghost:hover {
   background: var(--auth-hover-bg);
   color: var(--auth-text);
-  border-color: var(--auth-text-muted);
 }
 
-.editor-action-btn:active {
-  transform: scale(0.95);
+.auto-status {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  color: var(--auth-text-muted);
+  margin-left: 0.5rem;
 }
 
-/* Task 8.3: Editor container - fills remaining height */
-/* Requirements: 3.7, 8.5 */
-.editor-container {
-  flex: 1;
-  overflow: hidden;
+.dot-indicator {
+  width: 6px;
+  height: 6px;
+  background: #94a3b8;
+  border-radius: 50%;
+}
+
+/* Sub-header styling */
+.editor-sub-header {
+  height: 36px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 0.75rem;
   background: var(--auth-bg);
+  border-bottom: 1px solid var(--auth-hover-bg);
+  flex-shrink: 0;
 }
+
+.tabs-container {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  height: 100%;
+}
+
+.solution-tab {
+  display: flex;
+  align-items: center;
+  height: 28px;
+  padding: 0 0.75rem;
+  background: var(--auth-hover-bg);
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--auth-text);
+  cursor: pointer;
+}
+
+.solution-tab.active {
+  background: #2d2d2d;
+}
+
+.add-tab-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  background: none;
+  border: none;
+  color: var(--auth-text-muted);
+  cursor: pointer;
+}
+
+.sub-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.action-pill {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.25rem 0.6rem;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  border: 1px solid var(--auth-hover-bg);
+  background: none;
+  color: var(--auth-text-muted);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.action-pill:hover {
+  background: var(--auth-hover-bg);
+  color: var(--auth-text);
+}
+
+.neetbot-btn {
+  color: #60a5fa;
+}
+
+.hint-btn {
+  color: #fbbf24;
+}
+
+.action-divider {
+  width: 1px;
+  height: 14px;
+  background: var(--auth-hover-bg);
+}
+
+.editor-status-info {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--auth-text-muted);
+  font-size: 0.7rem;
+}
+
+.cursor-pos {
+  white-space: nowrap;
+}
+
+/* Split Layout Styles */
+.split-layout-container {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  height: 100%;
+}
+
+.testcase-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.testcase-tabs {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.layout-toggle-btn {
+  margin-left: auto;
+}
+
+/* Tab Close Icon */
+.tab-close-icon {
+  margin-left: 0.5rem;
+  padding: 2px;
+  border-radius: 4px;
+  opacity: 0.5;
+  transition: all 0.2s ease;
+}
+
+.tab-close-icon:hover {
+  opacity: 1;
+  background: rgba(239, 68, 68, 0.2);
+  color: #ef4444;
+}
+
+/* Tooltip Polish (Optional - Browser native title is used) */
+[title] {
+  cursor: help;
+}
+
 
 /* Ensure Monaco editor fills container */
+.editor-container {
+  flex: 1;
+  min-height: 0;
+  width: 100%;
+}
+
 .editor-container .monaco-editor {
   height: 100% !important;
 }

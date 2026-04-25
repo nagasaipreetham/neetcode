@@ -1,0 +1,269 @@
+.neetbot-panel {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: #1a1a1a;
+  border-left: 1px solid var(--auth-hover-bg);
+  color: var(--auth-text);
+  font-family: inherit;
+}
+
+/* Header */
+.neetbot-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  background: #1f1f1f;
+  border-bottom: 1px solid var(--auth-hover-bg);
+  flex-shrink: 0;
+}
+
+.neetbot-header-left {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.neetbot-title {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 0.3rem 0.6rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #fff;
+}
+
+.neetbot-badge {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 0.25rem 0.6rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  color: var(--auth-text-muted);
+}
+
+.neetbot-header-right {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.neetbot-header-right .icon-btn {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  color: var(--auth-text-muted);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.neetbot-header-right .icon-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+.close-btn:hover {
+  background: rgba(239, 68, 68, 0.2) !important;
+  color: #ef4444 !important;
+}
+
+/* Main Content */
+.neetbot-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+  overflow-y: auto;
+}
+
+.neetbot-hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.neetbot-logo-lg {
+  width: 64px;
+  height: 64px;
+  background: #2a2a35;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #60a5fa;
+  margin-bottom: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.neetbot-hero h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #fff;
+}
+
+.neetbot-hero p {
+  font-size: 0.85rem;
+  color: var(--auth-text-muted);
+  margin: 0;
+}
+
+.neetbot-presets {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  width: 100%;
+  max-width: 320px;
+}
+
+.preset-btn {
+  display: flex;
+  align-items: center;
+  padding: 1rem 1.25rem;
+  background: #252525;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: left;
+}
+
+.preset-btn:hover {
+  background: #2a2a2a;
+  transform: translateY(-1px);
+}
+
+.explain-btn {
+  border-left: 3px solid #3b82f6;
+}
+
+.approach-btn {
+  border-left: 3px solid #a855f7;
+}
+
+.complexity-btn {
+  border-left: 3px solid #f59e0b;
+}
+
+/* Footer / Input */
+.neetbot-footer {
+  padding: 1rem;
+  background: #1f1f23;
+  border-top: 1px solid var(--auth-hover-bg);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.neetbot-input-container {
+  display: flex;
+  align-items: flex-end;
+  background: #2a2a2f;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  padding: 0.5rem;
+  gap: 0.5rem;
+}
+
+.neetbot-input-container:focus-within {
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.neetbot-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 0.9rem;
+  padding: 0.25rem 0.5rem;
+  resize: none;
+  outline: none;
+  font-family: inherit;
+  max-height: 120px;
+}
+
+.neetbot-input::placeholder {
+  color: var(--auth-text-muted);
+}
+
+.neetbot-send-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: #4f46e5;
+  border: none;
+  border-radius: 6px;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.neetbot-send-btn:hover {
+  background: #4338ca;
+}
+
+.neetbot-models-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.model-chip {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.3rem 0.6rem;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  color: var(--auth-text-muted);
+  font-size: 0.75rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.model-chip:hover:not(.locked) {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.model-chip.active {
+  background: rgba(59, 130, 246, 0.1);
+  border-color: rgba(59, 130, 246, 0.5);
+  color: #60a5fa;
+}
+
+.model-chip.locked {
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.lock-icon {
+  margin-left: 0.1rem;
+  opacity: 0.7;
+}
+
+.neetbot-footer-hint {
+  text-align: right;
+  font-size: 0.7rem;
+  color: var(--auth-text-muted);
+  margin-top: 0.25rem;
+}

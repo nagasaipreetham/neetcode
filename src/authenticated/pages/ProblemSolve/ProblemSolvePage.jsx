@@ -1,8 +1,10 @@
 import { useState, useEffect, useRef } from 'react';
-import { FileText, Lightbulb, Users, Clock, RotateCcw, Settings, X, Plus, ChevronRight } from 'lucide-react';
-import Editor from '@monaco-editor/react';
 import ProblemNav from '../../components/ProblemNav/ProblemNav';
 import { useTheme } from '../../AuthLayout';
+import LeftPanel from './components/LeftPanel';
+import EditorPanel from './components/EditorPanel';
+import TestcasePanel from './components/TestcasePanel';
+import NeetBotPanel from './components/NeetBotPanel';
 import './ProblemSolvePage.css';
 
 export default function ProblemSolvePage() {
@@ -20,17 +22,54 @@ export default function ProblemSolvePage() {
 
   // Drag state - Requirements 9.4, 13.1
   const [isDragging, setIsDragging] = useState(false);
-  const [activeHandle, setActiveHandle] = useState(null); // 'left' | 'right' | null
+  const [activeHandle, setActiveHandle] = useState(null); // 'left' | 'right' | 'split' | null
+  const [isLayoutSplit, setIsLayoutSplit] = useState(false);
+  const [splitOffset, setSplitOffset] = useState(60); // Editor height % in split mode
+
+  // NeetBot state
+  const [isNeetBotOpen, setIsNeetBotOpen] = useState(false);
 
   // Editor state - Task 7.3, 7.4, 8.1 - Requirements 3.2, 3.3, 3.4, 3.5
   const [language, setLanguage] = useState('python3');
-  const [code, setCode] = useState('');
+  const [solutions, setSolutions] = useState([
+    {
+      id: 1, name: 'Solution 1', codes: {
+        python3: `def twoSum(nums, target):
+    """
+    :type nums: List[int]
+    :type target: int
+    :rtype: List[int]
+    """
+    pass`, java: `class Solution {
+    public int[] twoSum(int[] nums, int target) {
+        
+    }
+}`, cpp: `class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        
+    }
+};`, javascript: `/**
+ * @param {number[]} nums
+ * @param {number} target
+ * @return {number[]}
+ */
+var twoSum = function(nums, target) {
+    
+};` }
+    }
+  ]);
+  const [activeSolutionId, setActiveSolutionId] = useState(1);
 
   // Test case management state
   const [testCases, setTestCases] = useState([
     { id: 1, nums: [2, 7, 11, 15], target: 9 }
   ]);
   const [activeTestCase, setActiveTestCase] = useState(1);
+
+  // Local state for input fields to prevent parsing lock
+  const [localTestCase, setLocalTestCase] = useState({ nums: '[2, 7, 11, 15]', target: '9' });
+  const widthsRef = useRef({ left: 35, middle: 40, right: 25 });
 
   // Collapsible sections state
   const [expandedSections, setExpandedSections] = useState({
@@ -70,19 +109,63 @@ var twoSum = function(nums, target) {
 };`
   };
 
-  // Initialize code with default template - Task 8.1
+  // Sync local test case input when active test case changes
   useEffect(() => {
-    setCode(defaultCodeTemplates[language]);
-  }, [language]);
+    const tc = testCases.find(t => t.id === activeTestCase);
+    if (tc) {
+      setLocalTestCase({
+        nums: `[${tc.nums.join(', ')}]`,
+        target: tc.target.toString()
+      });
+    }
+  }, [activeTestCase, testCases]);
+
+  const activeSolution = solutions.find(s => s.id === activeSolutionId) || solutions[0];
+
+  const handleAddSolution = () => {
+    if (solutions.length >= 4) return;
+    const newId = Math.max(...solutions.map(s => s.id)) + 1;
+    const newSolution = {
+      id: newId,
+      name: `Solution ${newId}`,
+      codes: { ...defaultCodeTemplates }
+    };
+    setSolutions([...solutions, newSolution]);
+    setActiveSolutionId(newId);
+  };
+
+  const handleRemoveSolution = (id) => {
+    if (solutions.length <= 1) return;
+    const newSolutions = solutions.filter(s => s.id !== id);
+    setSolutions(newSolutions);
+    if (activeSolutionId === id) {
+      setActiveSolutionId(newSolutions[0].id);
+    }
+  };
+
+  const handleOpenNeetBot = () => {
+    if (!isLayoutSplit) {
+      setIsLayoutSplit(true);
+    }
+    setIsNeetBotOpen(true);
+  };
+
+  const updateActiveSolutionCode = (newCode) => {
+    setSolutions(prev => prev.map(s =>
+      s.id === activeSolutionId
+        ? { ...s, codes: { ...s.codes, [language]: newCode } }
+        : s
+    ));
+  };
 
   // Resize handlers - Requirements 5.4, 5.5, 5.6, 6.1-6.5, 8.2, 8.3, 13.1-13.5
-  
+
   // Task 2.2: mousedown handler - attach listeners, prevent text selection
   const handleResizeStart = (e, handle) => {
     e.preventDefault();
     setIsDragging(true);
     setActiveHandle(handle);
-    
+
     // Prevent text selection during drag - Requirement 8.2
     document.body.style.userSelect = 'none';
     document.body.style.cursor = 'col-resize';
@@ -91,29 +174,35 @@ var twoSum = function(nums, target) {
   // Task 2.3: mousemove handler - calculate widths with constraints
   const handleMouseMove = (e) => {
     if (!isDragging || !activeHandle || !containerRef.current) return;
-    
+
     const container = containerRef.current;
     const containerRect = container.getBoundingClientRect();
     const containerWidth = containerRect.width;
     const mouseX = e.clientX - containerRect.left;
     const mousePercent = (mouseX / containerWidth) * 100;
-    
-    // Minimum width constraints - Requirements 6.1, 6.2, 6.3
-    const MIN_LEFT = 20;
-    const MIN_MIDDLE = 30;
-    const MIN_RIGHT = 20;
-    
+
+    // Minimum width constraints in pixels - Requirement 3.2 improvement
+    const MIN_LEFT_PX = 300;
+    const MIN_MIDDLE_PX = 350;
+    const MIN_RIGHT_PX = 250;
+
+    const MIN_LEFT = (MIN_LEFT_PX / containerWidth) * 100;
+    const MIN_MIDDLE = (MIN_MIDDLE_PX / containerWidth) * 100;
+    const MIN_RIGHT = (MIN_RIGHT_PX / containerWidth) * 100;
+
+    const { left: currentLeft, middle: currentMiddle, right: currentRight } = widthsRef.current;
+
     if (activeHandle === 'left') {
       // Resizing between left and middle panels - Requirement 13.4
-      const newLeftWidth = Math.max(MIN_LEFT, Math.min(80, mousePercent));
+      const newLeftWidth = Math.max(MIN_LEFT, Math.min(100 - MIN_MIDDLE - MIN_RIGHT, mousePercent));
       const remainingWidth = 100 - newLeftWidth;
-      
+
       // Distribute remaining width proportionally between middle and right
-      const middleRatio = middleWidth / (middleWidth + rightWidth);
+      const middleRatio = currentMiddle / (currentMiddle + currentRight);
       let newMiddleWidth = remainingWidth * middleRatio;
       let newRightWidth = remainingWidth - newMiddleWidth;
-      
-      // Enforce minimum constraints - Requirements 6.4, 6.5
+
+      // Enforce minimum constraints
       if (newMiddleWidth < MIN_MIDDLE) {
         newMiddleWidth = MIN_MIDDLE;
         newRightWidth = remainingWidth - MIN_MIDDLE;
@@ -122,24 +211,24 @@ var twoSum = function(nums, target) {
         newRightWidth = MIN_RIGHT;
         newMiddleWidth = remainingWidth - MIN_RIGHT;
       }
-      
-      // Only update if all constraints are satisfied
+
       if (newMiddleWidth >= MIN_MIDDLE && newRightWidth >= MIN_RIGHT) {
         setLeftWidth(newLeftWidth);
         setMiddleWidth(newMiddleWidth);
         setRightWidth(newRightWidth);
+        widthsRef.current = { left: newLeftWidth, middle: newMiddleWidth, right: newRightWidth };
       }
-    } else if (activeHandle === 'right') {
+    } else if (activeHandle === 'right' && (!isLayoutSplit || isNeetBotOpen)) {
       // Resizing between middle and right panels - Requirement 13.4
-      const newRightWidth = Math.max(MIN_RIGHT, Math.min(80, 100 - mousePercent));
+      const newRightWidth = Math.max(MIN_RIGHT, Math.min(100 - MIN_LEFT - MIN_MIDDLE, 100 - mousePercent));
       const remainingWidth = 100 - newRightWidth;
-      
+
       // Distribute remaining width proportionally between left and middle
-      const leftRatio = leftWidth / (leftWidth + middleWidth);
+      const leftRatio = currentLeft / (currentLeft + currentMiddle);
       let newLeftWidth = remainingWidth * leftRatio;
       let newMiddleWidth = remainingWidth - newLeftWidth;
-      
-      // Enforce minimum constraints - Requirements 6.4, 6.5
+
+      // Enforce minimum constraints
       if (newLeftWidth < MIN_LEFT) {
         newLeftWidth = MIN_LEFT;
         newMiddleWidth = remainingWidth - MIN_LEFT;
@@ -148,13 +237,18 @@ var twoSum = function(nums, target) {
         newMiddleWidth = MIN_MIDDLE;
         newLeftWidth = remainingWidth - MIN_MIDDLE;
       }
-      
-      // Only update if all constraints are satisfied
+
       if (newLeftWidth >= MIN_LEFT && newMiddleWidth >= MIN_MIDDLE) {
         setLeftWidth(newLeftWidth);
         setMiddleWidth(newMiddleWidth);
         setRightWidth(newRightWidth);
+        widthsRef.current = { left: newLeftWidth, middle: newMiddleWidth, right: newRightWidth };
       }
+    } else if (activeHandle === 'split') {
+      const mouseY = e.clientY - containerRect.top;
+      const containerHeight = containerRect.height;
+      const newSplitOffset = Math.max(20, Math.min(80, (mouseY / containerHeight) * 100));
+      setSplitOffset(newSplitOffset);
     }
   };
 
@@ -162,7 +256,7 @@ var twoSum = function(nums, target) {
   const handleMouseUp = () => {
     setIsDragging(false);
     setActiveHandle(null);
-    
+
     // Restore default cursor and text selection - Requirements 5.6, 13.2, 13.5
     document.body.style.userSelect = '';
     document.body.style.cursor = '';
@@ -174,7 +268,7 @@ var twoSum = function(nums, target) {
       document.addEventListener('mousemove', handleMouseMove);
       document.addEventListener('mouseup', handleMouseUp);
     }
-    
+
     // Cleanup on unmount or when dragging stops - Requirement 13.5
     return () => {
       document.removeEventListener('mousemove', handleMouseMove);
@@ -182,7 +276,7 @@ var twoSum = function(nums, target) {
       document.body.style.userSelect = '';
       document.body.style.cursor = '';
     };
-  }, [isDragging, activeHandle, leftWidth, middleWidth, rightWidth]);
+  }, [isDragging, activeHandle]); // Removed width states to prevent listener churn
 
   // Placeholder handlers for ProblemNav
   const handleRun = () => {
@@ -200,7 +294,7 @@ var twoSum = function(nums, target) {
 
   // Task 7.4: Reset button handler - Requirement 3.5
   const handleReset = () => {
-    setCode(defaultCodeTemplates[language]);
+    updateActiveSolutionCode(defaultCodeTemplates[language]);
   };
 
   // Task 7.5: Settings button handler (placeholder) - Requirement 3.6
@@ -226,11 +320,34 @@ var twoSum = function(nums, target) {
   };
 
   const handleTestCaseChange = (field, value) => {
-    setTestCases(testCases.map(tc => 
-      tc.id === activeTestCase 
-        ? { ...tc, [field]: field === 'nums' ? JSON.parse(value) : parseInt(value) }
+    setTestCases(testCases.map(tc =>
+      tc.id === activeTestCase
+        ? { ...tc, [field]: field === 'nums' ? JSON.parse(value) : (typeof value === 'number' ? value : parseInt(value)) }
         : tc
     ));
+  };
+
+  const handleNumsBlur = () => {
+    try {
+      const tc = testCases.find(t => t.id === activeTestCase);
+      const parsed = JSON.parse(localTestCase.nums);
+      if (Array.isArray(parsed)) {
+        handleTestCaseChange('nums', JSON.stringify(parsed));
+      }
+    } catch (err) {
+      const tc = testCases.find(t => t.id === activeTestCase);
+      setLocalTestCase(prev => ({ ...prev, nums: `[${tc?.nums.join(', ')}]` }));
+    }
+  };
+
+  const handleTargetBlur = () => {
+    const tc = testCases.find(t => t.id === activeTestCase);
+    const parsed = parseInt(localTestCase.target);
+    if (!isNaN(parsed)) {
+      handleTestCaseChange('target', parsed);
+    } else {
+      setLocalTestCase(prev => ({ ...prev, target: tc?.target.toString() || '0' }));
+    }
   };
 
   // Collapsible section toggle
@@ -331,435 +448,152 @@ You can return the answer in any order.`,
     memory: '15.2 MB'
   };
 
-  // Task 6.1, 6.2: Render left panel content based on active tab
-  const renderLeftContent = () => {
-    switch (leftActiveTab) {
-      case 'description':
-        return (
-          <div className="description-content">
-            {/* Problem title and metadata */}
-            <div className="problem-header">
-              <h1 className="problem-title">{problemData.title}</h1>
-              <div className="problem-meta">
-                <span className={`difficulty-tag ${problemData.difficulty.toLowerCase()}`}>
-                  {problemData.difficulty}
-                </span>
-                <div className="topic-tags">
-                  {problemData.tags.map((tag, index) => (
-                    <span key={index} className="topic-tag">{tag}</span>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            {/* Problem statement */}
-            <div className="problem-section-content">
-              <p className="problem-statement">{problemData.statement}</p>
-            </div>
-
-            {/* Examples */}
-            <div className="problem-section-content">
-              <h3 className="section-title">Examples</h3>
-              {problemData.examples.map((example, index) => (
-                <div key={index} className="example-block">
-                  <p className="example-label">Example {index + 1}:</p>
-                  <div className="example-content">
-                    <p><strong>Input:</strong> {example.input}</p>
-                    <p><strong>Output:</strong> {example.output}</p>
-                    {example.explanation && (
-                      <p><strong>Explanation:</strong> {example.explanation}</p>
-                    )}
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            {/* Constraints */}
-            <div className="problem-section-content">
-              <h3 className="section-title">Constraints</h3>
-              <ul className="constraints-list">
-                {problemData.constraints.map((constraint, index) => (
-                  <li key={index}>{constraint}</li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Collapsible Sections */}
-            <div className="collapsible-sections">
-              {/* Hint 1 */}
-              <div className="collapsible-section">
-                <button 
-                  className="collapsible-header"
-                  onClick={() => toggleSection('hint1')}
-                >
-                  <ChevronRight 
-                    size={16} 
-                    className={`chevron-icon ${expandedSections.hint1 ? 'expanded' : ''}`}
-                  />
-                  <span>Hint 1</span>
-                </button>
-                {expandedSections.hint1 && (
-                  <div className="collapsible-content">
-                    <p>{problemData.hints[0]}</p>
-                  </div>
-                )}
-              </div>
-
-              {/* Hint 2 */}
-              <div className="collapsible-section">
-                <button 
-                  className="collapsible-header"
-                  onClick={() => toggleSection('hint2')}
-                >
-                  <ChevronRight 
-                    size={16} 
-                    className={`chevron-icon ${expandedSections.hint2 ? 'expanded' : ''}`}
-                  />
-                  <span>Hint 2</span>
-                </button>
-                {expandedSections.hint2 && (
-                  <div className="collapsible-content">
-                    <p>{problemData.hints[1]}</p>
-                  </div>
-                )}
-              </div>
-
-              {/* Hint 3 */}
-              <div className="collapsible-section">
-                <button 
-                  className="collapsible-header"
-                  onClick={() => toggleSection('hint3')}
-                >
-                  <ChevronRight 
-                    size={16} 
-                    className={`chevron-icon ${expandedSections.hint3 ? 'expanded' : ''}`}
-                  />
-                  <span>Hint 3</span>
-                </button>
-                {expandedSections.hint3 && (
-                  <div className="collapsible-content">
-                    <p>{problemData.hints[2]}</p>
-                  </div>
-                )}
-              </div>
-
-              {/* Company Tags */}
-              <div className="collapsible-section">
-                <button 
-                  className="collapsible-header company-tags-header"
-                  onClick={() => toggleSection('companyTags')}
-                >
-                  <ChevronRight 
-                    size={16} 
-                    className={`chevron-icon ${expandedSections.companyTags ? 'expanded' : ''}`}
-                  />
-                  <span>Company Tags</span>
-                </button>
-                {expandedSections.companyTags && (
-                  <div className="collapsible-content">
-                    <div className="company-tags-list">
-                      {problemData.companyTags.map((company, index) => (
-                        <span key={index} className="company-tag">{company}</span>
-                      ))}
-                    </div>
-                  </div>
-                )}
-              </div>
-            </div>
-          </div>
-        );
-      
-      case 'editorial':
-        return (
-          <div className="placeholder-content">
-            <h3>Editorial</h3>
-            <p>Official solution explanation will be available here.</p>
-          </div>
-        );
-      
-      case 'solutions':
-        return (
-          <div className="placeholder-content">
-            <h3>Solutions</h3>
-            <p>Community solutions will be displayed here.</p>
-          </div>
-        );
-      
-      case 'submissions':
-        return (
-          <div className="placeholder-content">
-            <h3>Submissions</h3>
-            <p>Your submission history will appear here.</p>
-          </div>
-        );
-      
-      default:
-        return null;
-    }
-  };
-
-  // Task 11.1, 11.2: Render right panel content based on active tab
-  const renderRightContent = () => {
-    const currentTestCase = testCases.find(tc => tc.id === activeTestCase);
-    
-    switch (rightActiveTab) {
-      case 'testcase':
-        return (
-          <div className="testcase-content">
-            {/* Test case selector buttons */}
-            <div className="test-case-selector">
-              {testCases.map((tc) => (
-                <button
-                  key={tc.id}
-                  className={`test-case-btn ${activeTestCase === tc.id ? 'active' : ''}`}
-                  onClick={() => setActiveTestCase(tc.id)}
-                >
-                  <span>Case {tc.id}</span>
-                  {testCases.length > 1 && (
-                    <X 
-                      size={14} 
-                      className="remove-icon"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleRemoveTestCase(tc.id);
-                      }}
-                    />
-                  )}
-                </button>
-              ))}
-              {testCases.length < 4 && (
-                <button 
-                  className="add-test-case-btn"
-                  onClick={handleAddTestCase}
-                >
-                  <Plus size={16} />
-                </button>
-              )}
-            </div>
-
-            {/* Test input fields */}
-            <div className="test-input-group">
-              <label className="test-input-label">nums =</label>
-              <input 
-                type="text" 
-                className="test-input-field" 
-                value={`[${currentTestCase?.nums.join(', ') || ''}]`}
-                onChange={(e) => {
-                  try {
-                    const value = e.target.value;
-                    handleTestCaseChange('nums', value);
-                  } catch (err) {
-                    // Invalid JSON, ignore
-                  }
-                }}
-              />
-            </div>
-            <div className="test-input-group">
-              <label className="test-input-label">target =</label>
-              <input 
-                type="text" 
-                className="test-input-field" 
-                value={currentTestCase?.target || 0}
-                onChange={(e) => handleTestCaseChange('target', e.target.value)}
-              />
-            </div>
-          </div>
-        );
-      
-      case 'result':
-        return (
-          <div className="test-result-content">
-            <div className={`result-status ${sampleTestResult.status}`}>
-              <span className="status-icon">{sampleTestResult.status === 'passed' ? '✓' : '✗'}</span>
-              <span className="status-text">{sampleTestResult.status === 'passed' ? 'Accepted' : 'Failed'}</span>
-            </div>
-            
-            <div className="result-section">
-              <h4 className="result-section-title">Input</h4>
-              <div className="result-code-block">
-                <p>nums = [{sampleTestResult.input.nums.join(', ')}]</p>
-                <p>target = {sampleTestResult.input.target}</p>
-              </div>
-            </div>
-            
-            <div className="result-section">
-              <h4 className="result-section-title">Output</h4>
-              <div className="result-code-block">
-                <p>[{sampleTestResult.output.join(', ')}]</p>
-              </div>
-            </div>
-            
-            <div className="result-section">
-              <h4 className="result-section-title">Expected</h4>
-              <div className="result-code-block">
-                <p>[{sampleTestResult.expected.join(', ')}]</p>
-              </div>
-            </div>
-            
-            <div className="result-metrics">
-              <div className="metric-item">
-                <span className="metric-label">Runtime:</span>
-                <span className="metric-value">{sampleTestResult.runtime}</span>
-              </div>
-              <div className="metric-item">
-                <span className="metric-label">Memory:</span>
-                <span className="metric-value">{sampleTestResult.memory}</span>
-              </div>
-            </div>
-          </div>
-        );
-      
-      default:
-        return null;
-    }
-  };
-
   return (
     <div className="problem-solve-root">
-      <ProblemNav 
-        theme={theme} 
-        toggleTheme={toggleTheme} 
+      <ProblemNav
+        theme={theme}
+        toggleTheme={toggleTheme}
         onRun={handleRun}
         onSubmit={handleSubmit}
         isRunning={false}
       />
 
-      <main className="problem-solve-layout" ref={containerRef}>
+      <main className={`problem-solve-layout ${isLayoutSplit ? 'split-mode' : ''}`} ref={containerRef}>
         {/* Left Panel - Description */}
-        <section 
-          className="problem-section left-panel" 
-          style={{ width: `${leftWidth}%` }}
-        >
-          {/* Task 5.1, 5.2: Tab navigation with icons and dividers */}
-          <div className="pane-header">
-            <button 
-              className={`tab ${leftActiveTab === 'description' ? 'active' : ''}`}
-              onClick={() => setLeftActiveTab('description')}
-            >
-              <FileText size={16} />
-              <span>Description</span>
-            </button>
-            <div className="tab-divider" />
-            <button 
-              className={`tab ${leftActiveTab === 'editorial' ? 'active' : ''}`}
-              onClick={() => setLeftActiveTab('editorial')}
-            >
-              <Lightbulb size={16} />
-              <span>Editorial</span>
-            </button>
-            <div className="tab-divider" />
-            <button 
-              className={`tab ${leftActiveTab === 'solutions' ? 'active' : ''}`}
-              onClick={() => setLeftActiveTab('solutions')}
-            >
-              <Users size={16} />
-              <span>Solutions</span>
-            </button>
-            <div className="tab-divider" />
-            <button 
-              className={`tab ${leftActiveTab === 'submissions' ? 'active' : ''}`}
-              onClick={() => setLeftActiveTab('submissions')}
-            >
-              <Clock size={16} />
-              <span>Submissions</span>
-            </button>
-          </div>
-          {/* Task 6.1, 6.2, 6.3: Content area with vertical scrolling */}
-          <div className="pane-content">
-            {renderLeftContent()}
-          </div>
-        </section>
+        <div style={{ width: `${leftWidth}%` }} className="panel-wrapper">
+          <LeftPanel
+            activeTab={leftActiveTab}
+            setActiveTab={setLeftActiveTab}
+            problemData={problemData}
+            expandedSections={expandedSections}
+            toggleSection={toggleSection}
+          />
+        </div>
 
         {/* Resize Handle - Left/Middle */}
-        <div 
-          className="resize-handle horizontal" 
+        <div
+          className="resize-handle horizontal"
           onMouseDown={(e) => handleResizeStart(e, 'left')}
         />
 
-        {/* Middle Panel - Code Editor */}
-        <section 
-          className="problem-section middle-panel" 
-          style={{ width: `${middleWidth}%` }}
-        >
-          {/* Task 7.1, 7.2: Editor header with language selector, reset, and settings buttons */}
-          <div className="pane-header editor-header">
-            <div className="editor-controls-left">
-              {/* Task 7.3: Language selector - Requirements 3.2, 3.3, 3.4 */}
-              <select 
-                className="lang-select" 
-                value={language} 
-                onChange={handleLanguageChange}
-              >
-                <option value="python3">Python3</option>
-                <option value="java">Java</option>
-                <option value="cpp">C++</option>
-                <option value="javascript">JavaScript</option>
-              </select>
-              {/* Task 7.4: Reset button - Requirement 3.5 */}
-              <button 
-                className="editor-action-btn" 
-                onClick={handleReset}
-                title="Reset to default code"
-              >
-                <RotateCcw size={14} />
-              </button>
+        {!isLayoutSplit ? (
+          <>
+            {/* Middle Panel - Code Editor */}
+            <div style={{ width: `${middleWidth}%` }} className="panel-wrapper">
+              <EditorPanel
+                language={language}
+                handleLanguageChange={handleLanguageChange}
+                handleReset={handleReset}
+                handleSettings={handleSettings}
+                code={activeSolution.codes[language]}
+                onCodeChange={updateActiveSolutionCode}
+                getMonacoLanguage={getMonacoLanguage}
+                getMonacoTheme={getMonacoTheme}
+                editorOptions={editorOptions}
+                solutions={solutions}
+                activeSolutionId={activeSolutionId}
+                setActiveSolutionId={setActiveSolutionId}
+                onAddSolution={handleAddSolution}
+                onRemoveSolution={handleRemoveSolution}
+                onOpenNeetBot={handleOpenNeetBot}
+              />
             </div>
-            <div className="editor-controls-right">
-              {/* Task 7.5: Settings button (placeholder) - Requirement 3.6 */}
-              <button 
-                className="editor-action-btn" 
-                onClick={handleSettings}
-                title="Editor settings"
-              >
-                <Settings size={14} />
-              </button>
-            </div>
-          </div>
-          {/* Task 8.1, 8.2, 8.3: Monaco Editor integration - Requirements 3.1, 3.4, 3.7, 8.5, 10.2 */}
-          <div className="editor-container">
-            <Editor
-              height="100%"
-              language={getMonacoLanguage(language)}
-              theme={getMonacoTheme()}
-              value={code}
-              onChange={(value) => setCode(value || '')}
-              options={editorOptions}
+
+            {/* Resize Handle - Middle/Right */}
+            <div
+              className="resize-handle horizontal"
+              onMouseDown={(e) => handleResizeStart(e, 'right')}
             />
-          </div>
-        </section>
 
-        {/* Resize Handle - Middle/Right */}
-        <div 
-          className="resize-handle horizontal" 
-          onMouseDown={(e) => handleResizeStart(e, 'right')}
-        />
+            {/* Right Panel - Test Cases */}
+            <div style={{ width: `${rightWidth}%` }} className="panel-wrapper">
+              <TestcasePanel
+                activeTab={rightActiveTab}
+                setActiveTab={setRightActiveTab}
+                testCases={testCases}
+                activeTestCase={activeTestCase}
+                setActiveTestCase={setActiveTestCase}
+                handleRemoveTestCase={handleRemoveTestCase}
+                handleAddTestCase={handleAddTestCase}
+                localTestCase={localTestCase}
+                setLocalTestCase={setLocalTestCase}
+                handleNumsBlur={handleNumsBlur}
+                handleTargetBlur={handleTargetBlur}
+                sampleTestResult={sampleTestResult}
+                isLayoutSplit={isLayoutSplit}
+                onToggleLayout={() => {
+                  setIsLayoutSplit(!isLayoutSplit);
+                  if (isNeetBotOpen) setIsNeetBotOpen(false);
+                }}
+              />
+            </div>
+          </>
+        ) : (
+          <>
+            <div style={{ width: `${isNeetBotOpen ? middleWidth : 100 - leftWidth}%` }} className="split-layout-container">
+              <div style={{ height: `${splitOffset}%` }} className="panel-wrapper">
+                <EditorPanel
+                  language={language}
+                  handleLanguageChange={handleLanguageChange}
+                  handleReset={handleReset}
+                  handleSettings={handleSettings}
+                  code={activeSolution.codes[language]}
+                  onCodeChange={updateActiveSolutionCode}
+                  getMonacoLanguage={getMonacoLanguage}
+                  getMonacoTheme={getMonacoTheme}
+                  editorOptions={editorOptions}
+                  solutions={solutions}
+                  activeSolutionId={activeSolutionId}
+                  setActiveSolutionId={setActiveSolutionId}
+                  onAddSolution={handleAddSolution}
+                  onRemoveSolution={handleRemoveSolution}
+                  onOpenNeetBot={handleOpenNeetBot}
+                />
+              </div>
 
-        {/* Right Panel - Test Cases */}
-        <section 
-          className="problem-section right-panel" 
-          style={{ width: `${rightWidth}%` }}
-        >
-          {/* Task 10.1, 10.2: Tab navigation with active indicators */}
-          <div className="pane-header">
-            <button 
-              className={`tab ${rightActiveTab === 'testcase' ? 'active' : ''}`}
-              onClick={() => setRightActiveTab('testcase')}
-            >
-              <span>Testcase</span>
-            </button>
-            <div className="tab-divider" />
-            <button 
-              className={`tab ${rightActiveTab === 'result' ? 'active' : ''}`}
-              onClick={() => setRightActiveTab('result')}
-            >
-              <span>Test Result</span>
-            </button>
-          </div>
-          {/* Task 11.1, 11.2, 11.3: Content area with vertical scrolling */}
-          <div className="pane-content">
-            {renderRightContent()}
-          </div>
-        </section>
+              <div
+                className="resize-handle vertical"
+                onMouseDown={(e) => handleResizeStart(e, 'split')}
+              />
+
+              <div style={{ height: `${100 - splitOffset}%` }} className="panel-wrapper">
+                <TestcasePanel
+                  activeTab={rightActiveTab}
+                  setActiveTab={setRightActiveTab}
+                  testCases={testCases}
+                  activeTestCase={activeTestCase}
+                  setActiveTestCase={setActiveTestCase}
+                  handleRemoveTestCase={handleRemoveTestCase}
+                  handleAddTestCase={handleAddTestCase}
+                  localTestCase={localTestCase}
+                  setLocalTestCase={setLocalTestCase}
+                  handleNumsBlur={handleNumsBlur}
+                  handleTargetBlur={handleTargetBlur}
+                  sampleTestResult={sampleTestResult}
+                  isLayoutSplit={isLayoutSplit}
+                  onToggleLayout={() => {
+                    setIsLayoutSplit(!isLayoutSplit);
+                    if (isNeetBotOpen) setIsNeetBotOpen(false);
+                  }}
+                />
+              </div>
+            </div>
+
+            {isNeetBotOpen && (
+              <>
+                {/* Resize Handle - Middle/Right */}
+                <div
+                  className="resize-handle horizontal"
+                  onMouseDown={(e) => handleResizeStart(e, 'right')}
+                />
+                {/* Right Panel - NeetBot */}
+                <div style={{ width: `${rightWidth}%` }} className="panel-wrapper">
+                  <NeetBotPanel onClose={() => setIsNeetBotOpen(false)} />
+                </div>
+              </>
+            )}
+          </>
+        )}
       </main>
     </div>
   );
